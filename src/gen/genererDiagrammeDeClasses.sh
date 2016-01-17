@@ -15,12 +15,6 @@ echo "!include liaisons.uml" >> Classes.uml
 nbFichier=$(ls ../Java/*.java | wc -l)
 indic=0
 
-constr=""
-meth=""
-getter=""
-setter=""
-attribut=""
-
 echo "Analyse des fichiers .java en cours"
 for javaFile in $(ls ../Java/*.java)
 do
@@ -78,18 +72,16 @@ do
                                 | sed "s/\t/ /g; s/ \+/ /g; s/^ //g; /^$/d"\
                                 | grep -v "class")
 
-        #constr=""
-        #meth=""
-        #getter=""
-        #setter=""
-        #attribut=""
+        constr=""
+        meth=""
+        getter=""
+        setter=""
+        attribut=""
 
         #TODO: move to the end
         #Ecriture fichier
-        echo "@startuml" > Classe$name.uml
-        echo "$type $name{" >> Classe$name.uml
 
-        echo "$myFile" | while read line
+        while read line
         do
             #echo "$line"
             isAFunction=$(echo "$line" | grep "(" | sed '/^$/d')
@@ -112,23 +104,23 @@ do
                 echo "    $state$attrName: $attrOut" >> Classe$name.uml
             else
                 state=$(echo $line |grep "//" | sed "s/.*\/\/\(.*\)/\1/g")
-                line=$(echo $line | sed "s/\/\/.*//g")
+                ligne=$(echo $line | sed "s/\/\/.*//g")
                 #Cas Cosntructeur
-                if [ "$(echo $line | egrep "^$name\(")" ]
+                if [ "$(echo $ligne | egrep "^$name\(")" ]
                 then
                     etat="+"
                     out=""
-                    fonction="$line"
+                    fonction="$ligne"
                     nomFonction="$name"
                 else
                     #Detection du type de sortie et du nom de fonction
                     etat="+"
-                    out=$(echo "$line"  | cut -d "(" -f 1 | tr ' ' '\n' | tail -n 2 | head -n 1)
-                    nomFonction=$(echo "$line"  | cut -d "(" -f 1 | tr ' ' '\n' | tail -n 1)
-                    fonction=$(echo "$line" | sed "s/.*$out \(.*\)/\1/1")
+                    out=$(echo "$ligne"  | cut -d "(" -f 1 | tr ' ' '\n' | tail -n 2 | head -n 1)
+                    nomFonction=$(echo "$ligne"  | cut -d "(" -f 1 | tr ' ' '\n' | tail -n 1)
+                    fonction=$(echo "$ligne" | sed "s/.*$out \(.*\)/\1/1")
 
                     # On rajoute le abstract
-                    if [[ $(echo "$line" | sed "s/$fonction//g" | grep abstract) != "" ]]
+                    if [[ $(echo "$ligne" | sed "s/$fonction//g" | grep abstract) != "" ]]
                     then
                         fonction="{abstract}$fonction"
                     fi
@@ -142,7 +134,7 @@ do
                 else
                     if [[ $state == "" ]]
                     then
-                        echo "  Pas de progres pour $line"
+                        echo "  Pas de progres pour $ligne"
                         fonction="<color:white>$fonction"
                         out="$out</color>"
                     else
@@ -159,7 +151,7 @@ do
                             fonction="<color:green>$fonction"
                             out="$out</color>"
                         else
-                            echo "    Erreur avec la méthode $line"
+                            echo "    Erreur avec la méthode $ligne"
                         fi
                     fi
                 fi
@@ -181,11 +173,13 @@ do
                     meth="$meth        $etat$fonction : $out\n"
                 fi
             fi
-        done
+        done <<< "$(echo "$myFile")"
 
 
 
 
+        echo "@startuml" > Classe$name.uml
+        echo "$type $name{" >> Classe$name.uml
 
         if [ "$attribut" != "" ]
         then
