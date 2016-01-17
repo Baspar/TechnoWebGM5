@@ -1,9 +1,9 @@
-Joueur o--Village
-Village o--Batiments
-Village o--Armee
-Batiments o--Batiment
+Joueur "1" o-- "*" Village
+Village "1" o-- "1" Batiments
+Village "1" o-- "1" Armee
+Batiments "1" o-- "1" Batiment
 
-Armee o-- Soldat
+Armee "1" o-- "*" Soldat
 Soldat <|--Archer
 Soldat <|--Trebuchet
 
@@ -17,4 +17,7 @@ Defense <|-- Mortier
 
 Ressource <|-- MineOr
 Ressource <|-- MineCharbon
+
+Batiments "1" ..* "1" HDV
+Armee "1" ..* "1" Caserne
 
