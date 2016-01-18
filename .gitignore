@@ -2,3 +2,5 @@ src/uml/Classe*.uml
 src/Classes.png
 CDC/src/graph/*.png
 CDC/doc/*.pdf
+CDCBeamer/src/graph/*.png
+CDCBeamer/doc/*.pdf
