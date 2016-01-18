@@ -1,4 +1,12 @@
 @startuml
+hide empty attributes
+hide empty methods
+
+{abstract} class Batiment{}
+{abstract} class Soldat{}
+{abstract} class Ressource{}
+{abstract} class Defense{}
+
 Joueur "1" o-- "*" Village
 Village "1" o-- "1" Batiments
 Village "1" o-- "1" Armee
