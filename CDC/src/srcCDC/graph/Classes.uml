@@ -1,0 +1,24 @@
+@startuml
+Joueur "1" o-- "*" Village
+Village "1" o-- "1" Batiments
+Village "1" o-- "1" Armee
+Batiments "1" o-- "1" Batiment
+
+Armee "1" o-- "*" Soldat
+Soldat <|--Archer
+Soldat <|--Trebuchet
+
+Batiment <|-- Caserne
+Batiment <|-- HDV
+Batiment <-- Defense
+Batiment <-- Ressource
+
+Defense <|-- Canon
+Defense <|-- Mortier
+
+Ressource <|-- MineOr
+Ressource <|-- MineCharbon
+
+Batiments "1" ..* "1" HDV
+Armee "1" ..* "1" Caserne
+@enduml
