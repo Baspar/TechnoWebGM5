@@ -1,0 +1,30 @@
+@startuml
+hide empty method 
+hide empty attribute 
+hide circle
+
+GererVillage -- GererBatiments
+GererVillage -- PlacerBatiment
+
+GererBatiments -- GererHDV
+GererBatiments -- GererCaserne
+GererBatiments -- GererRessources
+GererBatiments -- GererDefenses
+
+GererHDV -- AmeliorerHDV 
+GererHDV -- ConstruireBatiment
+
+GererCaserne -- AmeliorerCaserne
+GererCaserne -- ConstruireTroupe
+GererCaserne -- AmeliorerTroupe
+
+GererRessources -- AmeliorerMinesOr
+GererRessources -- AmeliorerMinesCharbon 
+
+GererDefenses -- AmeliorerCanon
+GererDefenses -- AmeliorerMortier
+
+AmeliorerTroupe -- AmeliorerArcher
+AmeliorerTroupe -- AmeliorerTrebuchet
+
+@enduml

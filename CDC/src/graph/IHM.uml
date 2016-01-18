@@ -1,0 +1,14 @@
+@startuml
+hide empty method 
+hide empty attribute 
+hide circle
+
+IHM -- Affichage
+IHM -- GestionInteraction
+Affichage -- AffichageRessource
+Affichage -- AffichageArmee
+Affichage -- AffichagePlanVille
+Affichage -- AffichageChoixAdversaire
+Affichage -- AffichageAttaque 
+
+@enduml
