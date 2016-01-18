@@ -1,7 +1,7 @@
 all: graphs texCDC mvdoc pseudoclean
 
 graphs:
-	for i in src/graph/*.uml; do echo $$i; plantuml $$i; done
+	for i in src/graph/*.uml; do echo $$i; java -jar src/graph/plantuml.jar $$i; done
 
 toggle:
 	sed -i 's/Rapport/Pré-Rapport/g; s/Pré-Pré-//g' src/ressources/vocabulaire/vocabulaire.sty
