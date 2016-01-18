@@ -1,3 +1,4 @@
+@startuml
 Joueur "1" o-- "*" Village
 Village "1" o-- "1" Batiments
 Village "1" o-- "1" Armee
@@ -20,4 +21,4 @@ Ressource <|-- MineCharbon
 
 Batiments "1" ..* "1" HDV
 Armee "1" ..* "1" Caserne
-
+@enduml
