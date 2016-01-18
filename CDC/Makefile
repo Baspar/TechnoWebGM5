@@ -1,4 +1,7 @@
-all: texCDC mvdoc pseudoclean
+all: graphs texCDC mvdoc pseudoclean
+
+graphs:
+	for i in src/graph/*.uml; do echo $$i; plantuml $$i; done
 
 toggle:
 	sed -i 's/Rapport/Pré-Rapport/g; s/Pré-Pré-//g' src/ressources/vocabulaire/vocabulaire.sty
@@ -9,8 +12,11 @@ texCDC:
 mvdoc:
 	mv src/*.pdf doc/
 
+cleangraph:
+	rm -rf src/graph/*.png
+
 pseudoclean:
 	rm -rf src/*.log src/*.aux src/*.toc src/*.out
 
-clean: pseudoclean
+clean: pseudoclean cleangraph
 	rm -rf doc/*.pdf
