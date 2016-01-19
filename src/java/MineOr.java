@@ -1,9 +1,11 @@
 import java.util.Date;
 
 public class MineOr extends Ressource{
-
+	Date dateDerniereLevee;
 
 	public MineOr(){//WIP
+		dateDerniereLevee=new Date();
+
 	    //Héritage de Batiment
 		pointsDeVie=360;
 		//On initialise au niveau 0 pour simplifier la gestion globale des batiments
@@ -13,7 +15,7 @@ public class MineOr extends Ressource{
 		ressourceNecessaire=TypeRessource.CHARBON;
 		tempsConstruction=7;
 		coutConstruction=75;
-		
+
 		//Héritage de Ressource
         typeRessource=TypeRessource.OR;
         tauxParHeure=100;
@@ -29,25 +31,25 @@ public class MineOr extends Ressource{
         tauxParHeure*=2;
         quantiteMaxStockee*=2;
 	}
-	
+
 	public int calculProduction(){//CHK
 	    Date dateActuelle=new Date();
 	    double diffMinute =dateActuelle.getMinutes()-dateDerniereLevee.getMinutes();
 	    double diffHeure = dateActuelle.getHours() - dateDerniereLevee.getHours();
 	    double diffJour = dateActuelle.getDay() - dateDerniereLevee.getDay();
 	    double diffMois = dateActuelle.getMonth() - dateActuelle.getMonth();
-	    
+
 	    //On considéreras que tous les mois ont 30 jours, en moyenne cela avantagera le joueur
 	    diffJour += diffMois*30.0;
 	    diffHeure+= diffJour*24.0;
         diffHeure+= diffMinute/60.0;
-        
+
         double prod=diffHeure*tauxParHeure;
         int production=(int) prod;
-        if (production>quantiteMaxStockee)	    
-	        return quantiteMaxStockee;  
+        if (production>quantiteMaxStockee)
+	        return quantiteMaxStockee;
 	    else
-	        return production;           
+	        return production;
 	}
 
 }
