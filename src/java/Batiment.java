@@ -54,5 +54,4 @@ abstract class Batiment{
         return this.ressourceNecessaire;
     }
 
-    abstract int calculerCoutUpgrade();
 }
