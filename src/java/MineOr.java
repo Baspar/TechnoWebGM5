@@ -9,6 +9,7 @@ public class MineOr extends Ressource{
 		y=-1;
 		ressourceNecessaire=TypeRessource.CHARBON;
 		tempsConstruction=7;
+		coutConstruction=75;
 		
 		//Héritage de Ressource
         typeRessource=TypeRessource.OR;
@@ -18,7 +19,9 @@ public class MineOr extends Ressource{
 	public void upgrade(){//WIP
 		pointsDeVie+=40;
 		niveau+=1;
-
+        tempsConstruction*=2;
+        coutConstruction*=2;
+        tauxParHeure*=2;
 	}
 
     
