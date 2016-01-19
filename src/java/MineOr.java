@@ -30,9 +30,24 @@ public class MineOr extends Ressource{
         quantiteMaxStockee*=2;
 	}
 	
-	public int calculProduction(){//WIP
+	public int calculProduction(){//CHK
 	    Date dateActuelle=new Date();
-	    return 0;
+	    double diffMinute =dateActuelle.getMinutes()-dateDerniereLevee.getMinutes();
+	    double diffHeure = dateActuelle.getHours() - dateDerniereLevee.getHours();
+	    double diffJour = dateActuelle.getDay() - dateDerniereLevee.getDay();
+	    double diffMois = dateActuelle.getMonth() - dateActuelle.getMonth();
+	    
+	    //On considéreras que tous les mois ont 30 jours, en moyenne cela avantagera le joueur
+	    diffJour += diffMois*30;
+	    diffHeure+= diffJour*24;
+        diffHeure+= diffMinute/60;
+        
+        double prod=diffHeure*tauxParHeure;
+        int production=prod.intValue();
+        if (production>quantiteMaxStockee)	    
+	        return quantiteMaxStockee;  
+	    else
+	        return production;           
 	}
 
 }
