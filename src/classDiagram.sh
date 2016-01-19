@@ -121,6 +121,9 @@ getFunctionColor() {
     elif [[ "$1" == "DONE" ]]
     then
         color="green"
+    elif [[ "$1" == "CHK" ]]
+    then
+        color="brown"
     else
         color="white"
         echoerr "    Error with method $2"
@@ -170,13 +173,13 @@ preprocessTxt() {
     #Main preprocess
     newFile="$(echo "$newFile"  | sed " s/.*<_NEWLINE_>\(.*\(class\|enum\)\)/\1/g
                                         s/\/\*.*\*\///g
-                                        s/){\(\/\/\(TODO\|WIP\|DONE\)\)[^}]*}/)\1\n/g
-                                        s/{\/\/\(TODO\|WIP\|DONE\)/\/\/\1{/g
+                                        s/){\(\/\/\(TODO\|WIP\|CHK\|DONE\)\)[^}]*}/)\1\n/g
+                                        s/{\/\/\(TODO\|WIP\|CHK\|DONE\)/\/\/\1{/g
                                         s/{\(<_NEWLINE_>\)\?}//g
                                         s/,\?<_NEWLINE_>/\n/g
                                         s/;[^$]/;\n/g
                                         s/;//g" \
-                                | sed " s/\/\/[^\(TODO\|WIP\|DONE\)].*//g;
+                                | sed " s/\/\/[^\(TODO\|CHK\|WIP\|DONE\)].*//g;
                                         /^ *\t*$/d" \
                                         )"
 
