@@ -1,0 +1,1 @@
+Il faudrait forcer à vider la mine avant de la monter en niveau sinon le calcul de la quantité n'est pas bon
