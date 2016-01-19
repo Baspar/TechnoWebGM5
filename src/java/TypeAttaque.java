@@ -1,4 +1,4 @@
 public enum TypeAttaque{
-	zone;
-	localise;
+    ZONE,
+    LOCALISE;
 }

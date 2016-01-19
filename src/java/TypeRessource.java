@@ -1,4 +1,4 @@
 public enum TypeRessource{
-	Or;
-	Charbon;
+    OR,
+    CHARBON;
 }
