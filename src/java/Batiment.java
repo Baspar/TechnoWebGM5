@@ -4,6 +4,7 @@ abstract class Batiment{
     protected int x;
     protected int y;
     protected int niveau;
+    protected int tempsConstruction;
 
     public void setPointsDeVie(int in){//DONE
         this.pointsDeVie = in;
@@ -35,6 +36,14 @@ abstract class Batiment{
 
     public int getNiveau(){//DONE
         return this.niveau;
+    }
+    
+    public void setTempsConstruction(int in){//DONE
+        this.tempsConstruction = in;
+    }
+
+    public int getTempsConstruction(){//DONE
+        return this.tempsConstruction;
     }
 
     public void setRessourceNecessaire(TypeRessource in){//DONE
