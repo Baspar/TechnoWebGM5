@@ -1,6 +1,6 @@
 public class MineOr extends Ressource{
 
-	public MineOr(){
+	public MineOr(){//WIP
 		pointsDeVie=360;
 		niveau=0;
 		x=-1;
@@ -9,7 +9,7 @@ public class MineOr extends Ressource{
 
 	}
 
-	public void upgrade(){
+	public void upgrade(){//WIP
 		pointsDeVie+=40;
 		niveau+=1;
 
