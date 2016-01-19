@@ -1,6 +1,6 @@
 abstract class Ressource extends Batiment{
-	private TypeRessource typeRessource;
-	private int tauxParHeure;
+    protected TypeRessource typeRessource;
+    protected int tauxParHeure;
 
     abstract int calculerCoutUpgrade();
 }
