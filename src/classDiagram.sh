@@ -168,8 +168,8 @@ preprocessTxt() {
     #Main preprocess
     newFile="$(echo "$newFile"  | sed " s/.*<_NEWLINE_>\(.*\(class\|enum\)\)/\1/g
                                         s/\/\*.*\*\///g
+                                        s/){\(\/\/\(TODO\|WIP\|DONE\)\)[^}]*}/)\1\n/g
                                         s/{\/\/\(TODO\|WIP\|DONE\)/\/\/\1{/g
-                                        s/\({.*{\).*\(}.*}\)/\1\2/g
                                         s/{\(<_NEWLINE_>\)\?}//g
                                         s/,\?<_NEWLINE_>/\n/g
                                         s/;[^$]/;\n/g
@@ -232,7 +232,7 @@ do
         #Get the file content, and get its header and its declarations
         myFile=$(preprocessTxt "$(cat "$javaFile")")
         header=$(cat "$javaFile" | grep "class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
-        myFile=$(echo "$myFile" | grep -v "class\|enum" | sed '/^}$/d' )
+        myFile=$(echo "$myFile" | grep -v "class"  | sed '/^}$/d' )
 
         #Is the class abstract/an interface ?
         classType=$(getClassType "$header")
