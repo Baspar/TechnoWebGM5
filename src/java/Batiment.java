@@ -5,45 +5,45 @@ abstract class Batiment{
     protected int y;
     protected int niveau;
 
-	public void setPointsDeVie(int in){
-		this.pointsDeVie = in;
-	}
+    public void setPointsDeVie(int in){//DONE
+        this.pointsDeVie = in;
+    }
 
-	public int getPointsDeVie(){
-		return this.pointsDeVie;
-	}
-	
-	public void setX(int in){
-		this.x = in;
-	}
+    public int getPointsDeVie(){//DONE
+        return this.pointsDeVie;
+    }
 
-	public int getX(){
-		return this.x;
-	}
+    public void setX(int in){//DONE
+        this.x = in;
+    }
 
-	public void setY(int in){
-		this.y = in;
-	}
-	
-	public int getY(){
-		return this.y;
-	}
+    public int getX(){//DONE
+        return this.x;
+    }
 
-	public void setNiveau(int in){
-		this.niveau = in;
-	}
+    public void setY(int in){//DONE
+        this.y = in;
+    }
 
-	public int getNiveau(){
-		return this.niveau;
-	}
+    public int getY(){//DONE
+        return this.y;
+    }
 
-	public void setRessourceNecessaire(TypeRessource in){
-		this.ressourceNecessaire = in;
-	}
+    public void setNiveau(int in){//DONE
+        this.niveau = in;
+    }
 
-	public TypeRessource getRessourceNecessaire(){
-		return this.ressourceNecessaire;
-	}
+    public int getNiveau(){//DONE
+        return this.niveau;
+    }
+
+    public void setRessourceNecessaire(TypeRessource in){//DONE
+        this.ressourceNecessaire = in;
+    }
+
+    public TypeRessource getRessourceNecessaire(){//DONE
+        return this.ressourceNecessaire;
+    }
 
     abstract int calculerCoutUpgrade();
 }
