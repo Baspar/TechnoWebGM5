@@ -38,7 +38,7 @@ abstract class Batiment{
     public int getNiveau(){//DONE
         return this.niveau;
     }
-    
+
     public void setTempsConstruction(int in){//DONE
         this.tempsConstruction = in;
     }
@@ -54,7 +54,7 @@ abstract class Batiment{
     public int getCoutConstruction(){//DONE
         return this.coutConstruction;
     }
-    
+
     public void setRessourceNecessaire(TypeRessource in){//DONE
         this.ressourceNecessaire = in;
     }
@@ -63,4 +63,5 @@ abstract class Batiment{
         return this.ressourceNecessaire;
     }
 
+    abstract void upgrade();
 }
