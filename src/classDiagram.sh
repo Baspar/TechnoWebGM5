@@ -40,21 +40,27 @@ compute() {
     fi
 }
 printFile() {
-    name="$1"
-    attribut="$2"
-    contr="$3"
-    setter="$4"
-    getter="$5"
-    meth="$6"
-    md5sumJava="$7"
+    classType="$1"
+    name="$2"
+    attribut="$3"
+    contr="$4"
+    setter="$5"
+    getter="$6"
+    meth="$7"
+    md5sumJava="$8"
 
     echo "@startuml" > uml/Classe$name.uml
     echo "$classType $name{" >> uml/Classe$name.uml
 
     if [ "$attribut" != "" ]
     then
-        echo "    ==<b>Attributes</b>==" >> uml/Classe$name.uml
-        echo -en "$attribut" | sed 's/\\\*/\*/g'|sort >> uml/Classe$name.uml
+        if [[ $classType != "enum" ]]
+        then
+            echo "    ==<b>Attributes</b>==" >> uml/Classe$name.uml
+            echo -en "$attribut" | sed 's/\\\*/\*/g'|sort >> uml/Classe$name.uml
+        else
+            echo -en "$attribut" | sed 's/\\\*/\*/g'>> uml/Classe$name.uml
+        fi
     fi
     if [ "$constr" != "" ]
     then
@@ -137,12 +143,16 @@ getAttrType() {
 getClassType() {
     isAbstract=$(echo "$1"| grep "abstract")
     isInterface=$(echo "$1" | grep "interface")
+    isEnum=$(echo "$1" | grep "enum")
     if [[ $isAbstract ]]
     then
         out="abstract"
     elif [[ $isInterface ]]
     then
         out="interface"
+    elif [[ $isEnum ]]
+    then
+        out="enum"
     else
         out="class"
     fi
@@ -156,12 +166,12 @@ preprocessTxt() {
     done <<< "$(echo "$1")"
 
     #Main preprocess
-    newFile="$(echo "$newFile"  | sed " s/.*<_NEWLINE_>\(.*class\)/\1/g
+    newFile="$(echo "$newFile"  | sed " s/.*<_NEWLINE_>\(.*\(class\|enum\)\)/\1/g
                                         s/\/\*.*\*\///g
                                         s/{\/\/\(TODO\|WIP\|DONE\)/\/\/\1{/g
                                         s/\({.*{\).*\(}.*}\)/\1\2/g
                                         s/{\(<_NEWLINE_>\)\?}//g
-                                        s/<_NEWLINE_>/\n/g
+                                        s/,\?<_NEWLINE_>/\n/g
                                         s/;[^$]/;\n/g
                                         s/;//g" \
                                 | sed " s/\/\/[^\(TODO\|WIP\|DONE\)].*//g;
@@ -221,8 +231,8 @@ do
 
         #Get the file content, and get its header and its declarations
         myFile=$(preprocessTxt "$(cat "$javaFile")")
-        header=$(cat "$javaFile" | grep "class \+$name" | sed "s/class \+$name.*//g")
-        myFile=$(echo "$myFile" | grep -v "class" | sed '/^}$/d' )
+        header=$(cat "$javaFile" | grep "class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
+        myFile=$(echo "$myFile" | grep -v "class\|enum" | sed '/^}$/d' )
 
         #Is the class abstract/an interface ?
         classType=$(getClassType "$header")
@@ -236,10 +246,15 @@ do
         [[ "$myFile" ]] && while read line
         do
             #Sort every line(=Attribute/Method) in its corresponding group
-            compute "$line"
+            if [[ $classType == "enum" ]]
+            then
+                attribut="$attribut        $line\n"
+            else
+                compute "$line"
+            fi
         done <<< "$(echo "$myFile")"
 
-        printFile "$name" "$attribut" "$contr" "$setter" "$getter" "$meth" "$md5sumJava"
+        printFile "$classType" "$name" "$attribut" "$contr" "$setter" "$getter" "$meth" "$md5sumJava"
     fi
 done
 
