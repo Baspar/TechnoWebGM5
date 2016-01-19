@@ -11,7 +11,7 @@ public class MineOr extends Ressource{
 		tempsConstruction=7;
 		
 		//Héritage de Ressource
-        typeRessource=TypeRessource.Or;
+        typeRessource=TypeRessource.OR;
         tauxParHeure=100;
 	}
 
