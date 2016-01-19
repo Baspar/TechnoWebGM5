@@ -1,8 +1,8 @@
 abstract class Soldat{
-    private String ressourceNecessaire;
-    private int pointsDeVie;
-    private int puissanceAttaque;
-    private TypeAttaque typeAttaque;
+    protected String ressourceNecessaire;
+    protected int pointsDeVie;
+    protected int puissanceAttaque;
+    protected TypeAttaque typeAttaque;
 
     abstract void update();
     abstract int calculerCoutUpgrade();
