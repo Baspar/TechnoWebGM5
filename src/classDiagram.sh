@@ -6,6 +6,7 @@ setter=""
 attribut=""
 
 compute() {
+    line="$1"
     isAFunction=$(echo "$line" | grep "(" | sed '/^$/d')
     if ! [[ "$isAFunction" ]]
     then
@@ -13,6 +14,7 @@ compute() {
 
         attrOut=$(echo "$line" | cut -d ' ' -f 2)
         attrName=$(echo "$line" | cut -d ' ' -f 3)
+
         attribut="$attribut        $attrType $attrName : $attrOut\n"
     else
         state=$(echo $line |grep "//" | sed "s/.*\/\/\(.*\)/\1/g")
@@ -131,7 +133,7 @@ getAttrType() {
     out=$(echo "$1" | cut -d ' ' -f 1)
     if [[ $out == "protected" ]]
     then
-        out='~'
+        out='#'
     elif [[ $out == "private" ]]
     then
         out='-'
@@ -168,8 +170,8 @@ preprocessTxt() {
     #Main preprocess
     newFile="$(echo "$newFile"  | sed " s/.*<_NEWLINE_>\(.*\(class\|enum\)\)/\1/g
                                         s/\/\*.*\*\///g
+                                        s/){\(\/\/\(TODO\|WIP\|DONE\)\)[^}]*}/)\1\n/g
                                         s/{\/\/\(TODO\|WIP\|DONE\)/\/\/\1{/g
-                                        s/\({.*{\).*\(}.*}\)/\1\2/g
                                         s/{\(<_NEWLINE_>\)\?}//g
                                         s/,\?<_NEWLINE_>/\n/g
                                         s/;[^$]/;\n/g
@@ -190,6 +192,7 @@ isAlreadyTested() {
     fi
     echo "$dejaFait"
 }
+
 
 rm -rf uml/Classes.uml Classes.png
 [ "$1" == "clean" ] && rm -f uml/Classe*.uml
@@ -232,7 +235,7 @@ do
         #Get the file content, and get its header and its declarations
         myFile=$(preprocessTxt "$(cat "$javaFile")")
         header=$(cat "$javaFile" | grep "class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
-        myFile=$(echo "$myFile" | grep -v "class\|enum" | sed '/^}$/d' )
+        myFile=$(echo "$myFile" | grep -v "class\|enum"  | sed '/^}$/d' )
 
         #Is the class abstract/an interface ?
         classType=$(getClassType "$header")

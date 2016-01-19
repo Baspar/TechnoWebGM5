@@ -1,5 +1,6 @@
 public class MineOr extends Ressource{
 
+
 	public MineOr(){//WIP
 	    //Héritage de Batiment
 		pointsDeVie=360;
@@ -24,5 +25,4 @@ public class MineOr extends Ressource{
         tauxParHeure*=2;
 	}
 
-    
 }
