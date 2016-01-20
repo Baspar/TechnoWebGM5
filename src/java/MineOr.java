@@ -1,10 +1,8 @@
 import java.util.Date;
 
 public class MineOr extends Ressource{
-	Date dateDerniereLevee;
 
 	public MineOr(){//WIP
-		dateDerniereLevee=new Date();
 
 	    //Héritage de Batiment
 		pointsDeVie=360;
@@ -34,7 +32,7 @@ public class MineOr extends Ressource{
 
 	public int calculProduction(){//CHK
 	    Date dateActuelle=new Date();
-	    double diffMinute =dateActuelle.getMinutes()-dateDerniereLevee.getMinutes();
+	   /* double diffMinute =dateActuelle.getMinutes()-dateDerniereLevee.getMinutes();
 	    double diffHeure = dateActuelle.getHours() - dateDerniereLevee.getHours();
 	    double diffJour = dateActuelle.getDay() - dateDerniereLevee.getDay();
 	    double diffMois = dateActuelle.getMonth() - dateActuelle.getMonth();
@@ -45,11 +43,16 @@ public class MineOr extends Ressource{
         diffHeure+= diffMinute/60.0;
 
         double prod=diffHeure*tauxParHeure;
-        int production=(int) prod;
+        int production=(int) prod;*/
+        
+        long date1= dateActuelle.getTime();
+        long date2 = dateDerniereLevee.getTime();
+        long diff = (date1-date2)/(1000*60*60);
+        long production = diff*tauxParHeure; 
         if (production>quantiteMaxStockee)
 	        return quantiteMaxStockee;
 	    else
-	        return production;
+	        return (int )production;
 	}
 
 }
