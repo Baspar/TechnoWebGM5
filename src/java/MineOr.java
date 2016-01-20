@@ -45,6 +45,8 @@ public class MineOr extends Ressource{
         double prod=diffHeure*tauxParHeure;
         int production=(int) prod;*/
         
+        
+        //Nouvelle version avec getTime
         long date1= dateActuelle.getTime();
         long date2 = dateDerniereLevee.getTime();
         long diff = (date1-date2)/(1000*60*60);
@@ -52,7 +54,7 @@ public class MineOr extends Ressource{
         if (production>quantiteMaxStockee)
 	        return quantiteMaxStockee;
 	    else
-	        return (int )production;
+	        return (int ) production;
 	}
 
 }
