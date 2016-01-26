@@ -1,11 +1,14 @@
-import java.util.Map;
+import java.util.Hashtable;
 import java.util.Set;
 import java.util.Vector;
 
 public class Batiments{
-    public Map<String,Vector<Batiment>> batiments;
-    public Map<String,Batiment> modeleBatiments;
+    public Hashtable<String,Vector<Batiment>> batiments;
+    public Hashtable<String,Batiment> modeleBatiments;
     public Batiments(){//DONE
+        modeleBatiments=new Hashtable<String, Batiment>();
+        batiments=new Hashtable<String, Vector<Batiment>>();
+
         modeleBatiments.put("HDV", new HDV());
         modeleBatiments.put("Caserne", new Caserne());
         modeleBatiments.put("Canon", new Canon());
@@ -18,6 +21,9 @@ public class Batiments{
     }
     public Set<String> getSetNomBatiment(){//DONE
         return modeleBatiments.keySet();
+    }
+    public Vector<Batiment> getBatiments(String type){//DONE
+        return batiments.get(type);
     }
     public void addNewBuilding(String type){//TODO
         if(getSetNomBatiment().contains(type)){

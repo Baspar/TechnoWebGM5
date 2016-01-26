@@ -3,9 +3,7 @@ public class MineCharbon extends Ressource{
         typeBatiment="MineCharbon";
     }
     public void upgrade(){//TODO
-    }
-    public int calculProduction(){//TODO
-        return 0;
+        super.upgrade();
     }
     public MineCharbon clone(){//DONE
         return new MineCharbon();
