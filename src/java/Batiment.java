@@ -1,5 +1,6 @@
 abstract class Batiment{
     protected TypeRessource ressourceNecessaire;
+    protected String typeBatiment;
     protected int pointsDeVie;
     protected int x;
     protected int y;
@@ -62,6 +63,8 @@ abstract class Batiment{
     public TypeRessource getRessourceNecessaire(){//DONE
         return this.ressourceNecessaire;
     }
+
+    public abstract Batiment clone();
 
     abstract void upgrade();
 }
