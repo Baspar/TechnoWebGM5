@@ -22,6 +22,7 @@ public class Batiments{
     public void addNewBuilding(String type){//TODO
         if(getSetNomBatiment().contains(type)){
             Batiment batiment = modeleBatiments.get(type).clone();
+            batiment.upgrade();// Le batiment recupere est niveau 0, on le monte d'un niveau
             batiments.get(type).add(batiment);
         }
     }
