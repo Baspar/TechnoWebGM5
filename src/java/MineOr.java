@@ -23,14 +23,16 @@ public class MineOr extends Ressource{
         quantiteMaxStockee=250;
     }
 
-    public void upgrade(){//CHK
+
+    public void upgrade(){//WIP
+        super.upgrade();
         pointsDeVie+=40;
-        niveau+=1;
         tempsConstruction*=2;
         coutConstruction*=2;
         tauxParHeure*=2;
         quantiteMaxStockee*=2;
     }
+
 
     public int calculProduction(){//CHK
         Date dateActuelle=new Date();

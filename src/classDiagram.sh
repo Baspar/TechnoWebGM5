@@ -207,11 +207,11 @@ echo "!include links.uml" >> uml/Classes.uml
 
 
 
-nbFichier=$(ls java/*.java | wc -l)
+nbFichier=$(ls java/*.java |grep -v "Main" | wc -l)
 indic=0
 
 echo "Java file analysis in progress"
-for javaFile in $(ls java/*.java)
+for javaFile in $(ls java/*.java | grep -v "Main")
 do
     name=$(basename -s .java $javaFile) # Nom du fichier sans extenstion
     md5sumJava=$(md5sum $javaFile)

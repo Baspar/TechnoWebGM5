@@ -3,6 +3,7 @@ public class Canon extends Defense{
         typeBatiment="Canon";
     }
     public void upgrade(){//TODO
+        super.upgrade();
     }
     public Canon clone(){//DONE
         return new Canon();

@@ -8,6 +8,9 @@ abstract class Batiment{
     protected int tempsConstruction;
     protected int coutConstruction;
 
+    public String getTypeBatiment(){//DONE
+        return this.typeBatiment;
+    }
     public void setPointsDeVie(int in){//DONE
         this.pointsDeVie = in;
     }
@@ -66,5 +69,7 @@ abstract class Batiment{
 
     public abstract Batiment clone();
 
-    abstract void upgrade();
+    public void upgrade(){//DONE
+        this.niveau++;
+    }
 }

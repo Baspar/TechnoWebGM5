@@ -4,6 +4,7 @@ public class HDV extends Batiment{
         typeBatiment="HDV";
     }
     public void upgrade(){//TODO
+        super.upgrade();
     }
     public HDV clone(){//DONE
         return new HDV();

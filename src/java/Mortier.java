@@ -3,6 +3,7 @@ public class Mortier extends Defense{
         typeBatiment="Mortier";
     }
     public void upgrade(){//TODO
+        super.upgrade();
     }
     public Mortier clone(){//DONE
         return new Mortier();

@@ -1,3 +1,4 @@
+*.class
 src/uml/Classe*.uml
 src/Classes.png
 CDC/src/graph/*.png
