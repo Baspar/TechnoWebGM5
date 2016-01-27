@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class MineOr extends Ressource{
 
-    public MineOr(){//WIP
+    public MineOr(){//CHK
 
         typeBatiment="MineOr";
 
@@ -18,12 +18,12 @@ public class MineOr extends Ressource{
 
         //Héritage de Ressource
         typeRessource=TypeRessource.OR;
-        tauxParHeure=100;
+        tauxParHeure=160;
         dateDerniereLevee=new Date();
         quantiteMaxStockee=250;
     }
 
-    public void upgrade(){//WIP
+    public void upgrade(){//CHK
         pointsDeVie+=40;
         niveau+=1;
         tempsConstruction*=2;
@@ -50,6 +50,7 @@ public class MineOr extends Ressource{
 
         //Nouvelle version avec getTime
         long date1= dateActuelle.getTime();
+        System.out.println(date1);
         long date2 = dateDerniereLevee.getTime();
         long diff = (date1-date2)/(1000*60*60);
         long production = diff*tauxParHeure;
