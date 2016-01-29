@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class MineOr extends Ressource{
 
-    public MineOr(){//CHK
+    public MineOr(){//DONE
 
         typeBatiment="MineOr";
 

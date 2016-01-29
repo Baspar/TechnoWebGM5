@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class MineCharbon extends Ressource{
 
-    public MineCharbon(){//WIP
+    public MineCharbon(){//DONE
         typeBatiment="MineCharbon";
 
         //Héritage de Batiment
