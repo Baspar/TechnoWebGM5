@@ -8,23 +8,9 @@ abstract class Ressource extends Batiment{
     //Represente la quantite a partir de laquelle on considére que la mine est pleine
     protected int quantiteMaxStockee;
 
-    public int calculProduction(){//CHK
+    public int calculProduction(){//DONE
         Date dateActuelle=new Date();
-        /* double diffMinute =dateActuelle.getMinutes()-dateDerniereLevee.getMinutes();
-           double diffHeure = dateActuelle.getHours() - dateDerniereLevee.getHours();
-           double diffJour = dateActuelle.getDay() - dateDerniereLevee.getDay();
-           double diffMois = dateActuelle.getMonth() - dateActuelle.getMonth();
-
-        //On considéreras que tous les mois ont 30 jours, en moyenne cela avantagera le joueur
-        diffJour += diffMois*30.0;
-        diffHeure+= diffJour*24.0;
-        diffHeure+= diffMinute/60.0;
-
-        double prod=diffHeure*tauxParHeure;
-        int production=(int) prod;*/
-
-
-        //Nouvelle version avec getTime
+        //Avec GetTime
         long date1= dateActuelle.getTime();
         long date2 = dateDerniereLevee.getTime();
         long diff = (date1-date2)/(1000*60*60);
@@ -33,6 +19,12 @@ abstract class Ressource extends Batiment{
             return quantiteMaxStockee;
         else
             return (int ) production;
+    }
+    
+     public void upgrade(){//DONE
+        super.upgrade();
+        tauxParHeure*=2;
+        quantiteMaxStockee*=2;
     }
 
     public void setTypeRessource(TypeRessource in){//DONE

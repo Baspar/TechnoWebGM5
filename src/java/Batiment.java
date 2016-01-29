@@ -70,6 +70,9 @@ abstract class Batiment{
     public abstract Batiment clone();
 
     public void upgrade(){//DONE
-        this.niveau++;
+        pointsDeVie+=40;
+        tempsConstruction*=2;
+        coutConstruction*=3;
+        niveau++;
     }
 }
