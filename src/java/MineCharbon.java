@@ -21,10 +21,8 @@ public class MineCharbon extends Ressource{
         dateDerniereLevee=new Date();
         quantiteMaxStockee=250;
     }
-    
-    
-    
-    public MineCharbon clone(){//CHK
+
+    public MineCharbon clone(){//DONE
         return new MineCharbon();
     }
 }

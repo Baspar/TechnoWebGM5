@@ -3,9 +3,6 @@ public class Caserne extends Batiment{
     public Caserne(){//WIP
         typeBatiment="Caserne";
     }
-    public int calculerCoutUpgrade(){//TODO
-        return 0;
-    }
     public void upgrade(){//TODO
         super.upgrade();
     }

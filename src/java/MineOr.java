@@ -24,7 +24,7 @@ public class MineOr extends Ressource{
     }
 
 
-    public MineOr clone(){//CHK
+    public MineOr clone(){//DONE
         return new MineOr();
     }
 

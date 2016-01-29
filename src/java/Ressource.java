@@ -20,7 +20,7 @@ abstract class Ressource extends Batiment{
         else
             return (int ) production;
     }
-    
+
      public void upgrade(){//DONE
         super.upgrade();
         tauxParHeure*=2;
