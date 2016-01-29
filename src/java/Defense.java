@@ -19,7 +19,13 @@ abstract class Defense extends Batiment{
         return puissanceDefense;
     }
     
+    public void setAttaqueParSeconde(float s){
+        attaqueParSeconde=s;
+    }
     
+    public float getAttaqueParSeconde(){
+        return attaqueParSeconde;
+    }
     
     public void upgrade(){//DONE
         puissanceDefense+=puissanceDefense/5;
