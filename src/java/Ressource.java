@@ -32,6 +32,10 @@ abstract class Ressource extends Batiment{
         tauxParHeure*=2;
         quantiteMaxStockee*=2;
     }
+    
+    public void prelever(){//TODO
+    
+    }
 
     public void setTypeRessource(TypeRessource in){//DONE
         this.typeRessource = in;
