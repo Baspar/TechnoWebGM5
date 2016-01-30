@@ -12,9 +12,15 @@ abstract class Ressource extends Batiment{
         Date dateActuelle=new Date();
         //Avec GetTime
         long date1= dateActuelle.getTime();
+      //  System.out.println(date1);
         long date2 = dateDerniereLevee.getTime();
-        long diff = (date1-date2)/(1000*60*60);
-        long production = diff*tauxParHeure;
+      //  System.out.println(date2);
+      //  System.out.println(date1-date2);
+      //  System.out.println(1000*60*60);
+        float unitetemps=1000*60*60;
+        float diff = (date1-date2)/unitetemps;
+     //   System.out.println(diff);
+        float production = diff*tauxParHeure;
         if (production>quantiteMaxStockee)
             return quantiteMaxStockee;
         else
