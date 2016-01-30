@@ -3,7 +3,7 @@ import java.util.Date;
 public class MineCharbon extends Ressource{
 
     public MineCharbon(){//DONE
-        typeBatiment="MineCharbon";
+        typeBatiment=TypeBatiment.MineCharbon;
 
         //Héritage de Batiment
         pointsDeVie=360;

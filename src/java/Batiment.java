@@ -1,6 +1,6 @@
 abstract class Batiment{
     protected TypeRessource ressourceNecessaire;
-    protected String typeBatiment;
+    protected TypeBatiment typeBatiment;
     protected int pointsDeVie;
     protected int x;
     protected int y;
@@ -8,7 +8,7 @@ abstract class Batiment{
     protected int tempsConstruction;
     protected int coutConstruction;
 
-    public String getTypeBatiment(){//DONE
+    public TypeBatiment getTypeBatiment(){//DONE
         return this.typeBatiment;
     }
     public void setPointsDeVie(int in){//DONE

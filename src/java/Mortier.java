@@ -1,6 +1,6 @@
 public class Mortier extends Defense{
     public Mortier(){//DONE
-        typeBatiment="Mortier";
+        typeBatiment=TypeBatiment.Mortier;
         
         //Héritage Defense
         typeDefense=TypeAttaque.ZONE;

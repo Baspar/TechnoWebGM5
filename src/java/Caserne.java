@@ -1,7 +1,7 @@
 public class Caserne extends Batiment{
     private Armee armee;
     public Caserne(){//WIP
-        typeBatiment="Caserne";
+        typeBatiment=TypeBatiment.Caserne;
     }
     public void upgrade(){//TODO
         super.upgrade();

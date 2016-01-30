@@ -1,7 +1,7 @@
 abstract class Defense extends Batiment{
     protected TypeAttaque typeDefense;
     protected int puissanceDefense;
-    protected float attaqueParSeconde; // On ne le prendra pas en compte dans les calculs juste au cas ou
+    protected double attaqueParSeconde; // On ne le prendra pas en compte dans les calculs juste au cas ou
 
     public void setTypeDefense(TypeAttaque t){//DONE
         typeDefense=t;
@@ -19,11 +19,11 @@ abstract class Defense extends Batiment{
         return puissanceDefense;
     }
 
-    public void setAttaqueParSeconde(float s){//DONE
+    public void setAttaqueParSeconde(double s){//DONE
         attaqueParSeconde=s;
     }
 
-    public float getAttaqueParSeconde(){//DONE
+    public double getAttaqueParSeconde(){//DONE
         return attaqueParSeconde;
     }
 

@@ -1,6 +1,6 @@
 public class Canon extends Defense{
     public Canon(){//DONE
-        typeBatiment="Canon";
+        typeBatiment=TypeBatiment.Canon;
         
         //Héritage Defense
         typeDefense=TypeAttaque.LOCALISE;
