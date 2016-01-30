@@ -3,7 +3,5 @@ public class Trebuchet extends Soldat{
     }
     void update(){//TODO
     }
-    public int calculerCoutUpgrade(){//TODO
-        return 0;
-    }
+   
 }

@@ -3,7 +3,8 @@ abstract class Soldat{
     protected int pointsDeVie;
     protected int puissanceAttaque;
     protected TypeAttaque typeAttaque;
+    protected int coutUpgrade;
 
     abstract void update();
-    abstract int calculerCoutUpgrade();
+
 }
