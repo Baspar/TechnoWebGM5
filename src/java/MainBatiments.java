@@ -20,14 +20,10 @@ public class MainBatiments{
         System.out.println("Vous pouvez instancier des: "+nBatiments);
 
         affichage(batiments);
-        batiments.addNewBuilding(TypeBatiment.HDV);
-        batiments.addNewBuilding(TypeBatiment.MineOr);
+        for(int i=0; i<10; i++)
+            batiments.addNewBuilding(TypeBatiment.MineOr);
         affichage(batiments);
         batiments.addNewBuilding(TypeBatiment.MineOr);
         affichage(batiments);
-        batiments.addNewBuilding(TypeBatiment.MineOr);
-        affichage(batiments);
-        //batiments.getBatiments("MineOr").get(1).upgrade();
-        //affichage(batiments);
     }
 }
