@@ -8,6 +8,7 @@ public class Batiments{
 
     public Batiments(){//DONE
         modeleBatiments=new Hashtable<TypeBatiment, Batiment>();
+        batiments=new Hashtable<TypeBatiment, Vector<Batiment>>();
 
         modeleBatiments.put(TypeBatiment.HDV, new HDV());
         modeleBatiments.put(TypeBatiment.Caserne, new Caserne());
@@ -18,6 +19,9 @@ public class Batiments{
 
         for(TypeBatiment s: getSetNomBatiment())
             batiments.put(s, new Vector<Batiment>());
+
+        batiments.get(TypeBatiment.HDV).add(new HDV());
+        batiments.get(TypeBatiment.Caserne).add(new Caserne());
     }
 
     public Set<TypeBatiment> getSetNomBatiment(){//DONE
