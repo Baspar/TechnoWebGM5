@@ -5,6 +5,9 @@ public class HDV extends Batiment{
 
     public HDV(){//WIP
         typeBatiment=TypeBatiment.HDV;
+
+        quotaBatiments = new Hashtable<TypeBatiment, Integer>();
+
         quotaBatiments.put(TypeBatiment.HDV,(Integer) 1);
         quotaBatiments.put(TypeBatiment.Caserne,(Integer) 1);
         quotaBatiments.put(TypeBatiment.MineOr,(Integer) 10);
