@@ -7,11 +7,14 @@ abstract class Soldat{
     protected int coutUpgrade;
     protected int coutUnite;
     protected int niveau;
+    protected int dureeFormation;
+    protected int placeOccupee;
 
     public void update(){//DONE
         pointsDeVie+=5;
         puissanceAttaque+=4;
         coutUpgrade*=2;
+        coutUnite+=coutUnite/2;
         niveau++;
     }
     
@@ -79,5 +82,19 @@ abstract class Soldat{
         niveau=v;
     }
     
+    public int getDureeFormation(){//DONE
+        return dureeFormation;
+    }        
     
+    public void setDureeFormation(int v){//DONE
+        dureeFormation=v;
+    } 
+    
+    public int getPlaceOccupee(){//DONE
+        return placeOccupee;
+    }        
+    
+    public void setPlaceOccupee(int v){//DONE
+        placeOccupee=v;
+    }
 }
