@@ -5,12 +5,12 @@ public class HDV extends Batiment{
 
     public HDV(){//WIP
         typeBatiment=TypeBatiment.HDV;
-        quotaBatiments.put(TypeBatiment.HDV, 1);
-        quotaBatiments.put(TypeBatiment.Caserne, 1);
-        quotaBatiments.put(TypeBatiment.MineOr, 10);
-        quotaBatiments.put(TypeBatiment.MineCharbon, 10);
-        quotaBatiments.put(TypeBatiment.Mortier, 2);
-        quotaBatiments.put(TypeBatiment.Canon, 2);
+        quotaBatiments.put(TypeBatiment.HDV,(Integer) 1);
+        quotaBatiments.put(TypeBatiment.Caserne,(Integer) 1);
+        quotaBatiments.put(TypeBatiment.MineOr,(Integer) 10);
+        quotaBatiments.put(TypeBatiment.MineCharbon,(Integer) 10);
+        quotaBatiments.put(TypeBatiment.Mortier,(Integer) 2);
+        quotaBatiments.put(TypeBatiment.Canon,(Integer) 2);
     }
     public Integer getQuotaBatiment(TypeBatiment typeBatiment){//DONE
         return quotaBatiments.get(typeBatiment);

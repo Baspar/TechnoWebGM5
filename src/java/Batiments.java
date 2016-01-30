@@ -5,10 +5,9 @@ import java.util.Vector;
 public class Batiments{
     public Hashtable<TypeBatiment,Vector<Batiment>> batiments;
     public Hashtable<TypeBatiment,Batiment> modeleBatiments;
-    
+
     public Batiments(){//DONE
         modeleBatiments=new Hashtable<TypeBatiment, Batiment>();
-        batiments=new Hashtable<TypeBatiment, Vector<Batiment>>();
 
         modeleBatiments.put(TypeBatiment.HDV, new HDV());
         modeleBatiments.put(TypeBatiment.Caserne, new Caserne());
@@ -20,17 +19,19 @@ public class Batiments{
         for(TypeBatiment s: getSetNomBatiment())
             batiments.put(s, new Vector<Batiment>());
     }
-    
+
     public Set<TypeBatiment> getSetNomBatiment(){//DONE
         return modeleBatiments.keySet();
     }
-    
+
     public Vector<Batiment> getBatiments(TypeBatiment type){//DONE
         return batiments.get(type);
     }
-    
-    public void addNewBuilding(TypeBatiment type){//TODO
-        if(getSetNomBatiment().contains(type)){
+
+    public void addNewBuilding(TypeBatiment type){//CHK
+        HDV hdv=(HDV)batiments.get(TypeBatiment.HDV).get(0);
+        //On teste si on a le droit de construire
+        if(hdv.getQuotaBatiment(type) > batiments.get(type).size()){
             Batiment batiment = modeleBatiments.get(type).clone();
             batiment.upgrade();// Le batiment recupere est niveau 0, on le monte d'un niveau
             batiments.get(type).add(batiment);
