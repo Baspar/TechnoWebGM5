@@ -4,8 +4,8 @@ public class MainBatiments{
     public static void affichage(Batiments batiments){
         System.out.println();
         System.out.println("Résumé:");
-        Set<String> nBatiments=batiments.getSetNomBatiment();
-        for(String type: nBatiments){
+        Set<TypeBatiment> nBatiments=batiments.getSetNomBatiment();
+        for(TypeBatiment type: nBatiments){
             System.out.println("  "+type+"["+batiments.getBatiments(type).size()+"]:");
             for(Batiment batiment:batiments.getBatiments(type)){
                 System.out.println("    * lvl"+batiment.getNiveau());
@@ -16,15 +16,18 @@ public class MainBatiments{
     public static void main(String[] args){
         Batiments batiments=new Batiments();
 
-        Set<String> nBatiments=batiments.getSetNomBatiment();
+        Set<TypeBatiment> nBatiments=batiments.getSetNomBatiment();
         System.out.println("Vous pouvez instancier des: "+nBatiments);
 
         affichage(batiments);
-        batiments.addNewBuilding("HDV");
-        batiments.addNewBuilding("MineOr");
-        batiments.addNewBuilding("MineOr");
+        batiments.addNewBuilding(TypeBatiment.HDV);
+        batiments.addNewBuilding(TypeBatiment.MineOr);
         affichage(batiments);
-        batiments.getBatiments("MineOr").get(1).upgrade();
+        batiments.addNewBuilding(TypeBatiment.MineOr);
         affichage(batiments);
+        batiments.addNewBuilding(TypeBatiment.MineOr);
+        affichage(batiments);
+        //batiments.getBatiments("MineOr").get(1).upgrade();
+        //affichage(batiments);
     }
 }
