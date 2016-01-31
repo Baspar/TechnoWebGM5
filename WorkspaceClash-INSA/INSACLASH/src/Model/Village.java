@@ -5,6 +5,7 @@ public class Village{
     private Batiments batiments;
     private Armee armee;
     
+    
     Village(){//TODO
     }
     

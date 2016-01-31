@@ -18,6 +18,5 @@ Defense <|-- Mortier
 Ressource <|-- MineOr
 Ressource <|-- MineCharbon
 
-Batiments "1" ..* "1" HDV
 Armee "1" ..* "1" Caserne
 
