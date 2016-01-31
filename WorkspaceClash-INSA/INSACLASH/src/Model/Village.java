@@ -10,7 +10,7 @@ public class Village{
     
     Village(){//DONE
     	batiments=new Batiments();
-    	armee=new Armee();
+    	armee=this.getCaserne().getArmee();
     }
     
     Village(String n){//DONE
@@ -86,8 +86,6 @@ public class Village{
     			mine.prelever();
     			return res;
     		}
-    		else 
-    			return 0;
     	}
     	return 0;
     }
@@ -111,7 +109,25 @@ public class Village{
     	this.getBatiment(type, i).setY(y);
     }
     
-    public boolean ajouterSoldat(TypeSoldat type ){//TODO
+    public boolean ajouterSoldat(TypeSoldat type ){//DONE
+    	Caserne c=this.getCaserne();
+    	HDV h=this.getHDV();
+    	int tailleArmee=armee.calculNbSoldat();
+    	if(type==TypeSoldat.ARCHER){
+    		Archer a =new Archer();
+    		tailleArmee+=a.getPlaceOccupee();
+    	}	
+    	else{
+    		Trebuchet t=new Trebuchet();
+    		tailleArmee+=t.getPlaceOccupee();
+    	}	
+    	if(c.calculCoutFormation(type)<h.getQuantiteActuelle().get(TypeRessource.CHARBON)){
+    		if(tailleArmee<=c.getTailleTotaleArmee()){
+    			h.utiliser(TypeRessource.CHARBON, c.calculCoutFormation(type));
+    			armee.ajouterSoldat(type, c.getNiveauActuel().get(type));
+    			return true;
+    		}
+    	}
     	return false;
     }
     

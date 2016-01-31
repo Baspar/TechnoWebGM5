@@ -6,7 +6,16 @@ public class Caserne extends Batiment{
     private Armee armee;
     private Hashtable<TypeSoldat,Integer> niveauMax;
 	private Hashtable<TypeSoldat,Integer> niveauActuel;
-    
+	private int tailleTotaleArmee;
+	
+	public int getTailleTotaleArmee(){//DONE
+		return tailleTotaleArmee;
+	}
+
+	public void setTailleTotaleArmee(int tailleTotaleArmee){//DONE
+		this.tailleTotaleArmee = tailleTotaleArmee;
+	}
+
 	public Armee getArmee(){//DONE
 		return armee;
 	}
@@ -42,6 +51,8 @@ public class Caserne extends Batiment{
         
         niveauActuel.put(TypeSoldat.ARCHER, (Integer) 1);
         niveauActuel.put(TypeSoldat.TREBUCHET, (Integer) 1);
+        
+        tailleTotaleArmee=30;
     }
     
     public void upgrade(){//DONE
@@ -51,6 +62,7 @@ public class Caserne extends Batiment{
         	    niveau++;
                 niveauMax.put(type, niveau);
         }        
+        tailleTotaleArmee+=10;
     }
     
     public Caserne clone(){//DONE
@@ -65,6 +77,15 @@ public class Caserne extends Batiment{
     		nvSoldat=new Trebuchet(niveauActuel.get(s));
     	return nvSoldat.getCoutUpgrade();
     }	
+    
+    public int calculCoutFormation(TypeSoldat s){//DONE
+    	Soldat nvSoldat;
+    	if (s==TypeSoldat.ARCHER)
+    		nvSoldat=new Archer(niveauActuel.get(s));
+    	else
+    		nvSoldat=new Trebuchet(niveauActuel.get(s));
+    	return nvSoldat.getCoutUnite();
+    }
     
     public void upgradeSoldat(TypeSoldat s){//DONE
     	int lvl=niveauActuel.get(s);
