@@ -4,9 +4,9 @@ import java.util.Hashtable;
 
 public class HDV extends Batiment{
     private Hashtable<TypeBatiment,Integer> quotaBatiments;
-    public int quantiteOrMax;
-    public int quantiteOr;
-
+    private Hashtable<TypeRessource,Integer> quantiteMax;
+    private Hashtable<TypeRessource,Integer> quantiteActuelle;
+    
     public HDV(){//WIP
         typeBatiment=TypeBatiment.HDV;
 
@@ -19,13 +19,18 @@ public class HDV extends Batiment{
         quotaBatiments.put(TypeBatiment.Mortier,(Integer) 1);
         quotaBatiments.put(TypeBatiment.Canon,(Integer) 1);
 
-        quantiteOr=100;
-        quantiteOrMax=1000;
+        quantiteMax.put(TypeRessource.OR, 1000);
+        quantiteMax.put(TypeRessource.CHARBON, 1000);
+        
+        quantiteActuelle.put(TypeRessource.OR,1000);
+        quantiteActuelle.put(TypeRessource.CHARBON, 1000);
         upgrade();
     }
+    
     public Integer getQuotaBatiment(TypeBatiment typeBatiment){//DONE
         return quotaBatiments.get(typeBatiment);
     }
+
     public void upgrade(){//DONE
         super.upgrade();
         for(TypeBatiment type: TypeBatiment.values())
@@ -34,15 +39,38 @@ public class HDV extends Batiment{
                 quota*=2;
                 quotaBatiments.put(type, quota);
             }
-        quantiteOrMax*=2;
+        for(TypeRessource type: TypeRessource.values()){
+        	Integer i=quantiteMax.get(type);
+        	i*=2;
+        	quantiteMax.put(type,i);
+        }
     }
-    public int getQuantiteOrMax(){//DONE
-        return quantiteOrMax;
-    }
-    public void ajouterOrCaisse(int quantiteOr){//DONE
-        this.quantiteOr=Math.min(quantiteOrMax, this.quantiteOr+quantiteOr);
-    }
+    
     public HDV clone(){//DONE
         return new HDV();
     }
+
+	public Hashtable<TypeBatiment, Integer> getQuotaBatiments(){//DONE
+		return quotaBatiments;
+	}
+
+	public void setQuotaBatiments(Hashtable<TypeBatiment, Integer> quotaBatiments){//DONE
+		this.quotaBatiments = quotaBatiments;
+	}
+
+	public Hashtable<TypeRessource, Integer> getQuantiteMax(){//DONE
+		return quantiteMax;
+	}
+
+	public void setQuantiteMax(Hashtable<TypeRessource, Integer> quantiteMax){//DONE
+		this.quantiteMax = quantiteMax;
+	}
+
+	public Hashtable<TypeRessource, Integer> getQuantiteActuelle(){//DONE
+		return quantiteActuelle;
+	}
+
+	public void setQuantiteActuelle(Hashtable<TypeRessource, Integer> quantiteActuelle){//DONE
+		this.quantiteActuelle = quantiteActuelle;
+	}
 }
