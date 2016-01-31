@@ -11,6 +11,8 @@ public class HDV extends Batiment{
         typeBatiment=TypeBatiment.HDV;
 
         quotaBatiments = new Hashtable<TypeBatiment, Integer>();
+        quantiteMax = new Hashtable<TypeRessource,Integer>();
+        quantiteActuelle = new Hashtable<TypeRessource,Integer>();
 
         quotaBatiments.put(TypeBatiment.HDV,(Integer) 1);
         quotaBatiments.put(TypeBatiment.Caserne,(Integer) 1);

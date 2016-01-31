@@ -26,7 +26,8 @@ public class Batiments{
             batiments.put(s, new Vector<Batiment>());
 
         //Ajout HDV & caserne
-        addNewBuilding(TypeBatiment.HDV);
+        batiments.get(TypeBatiment.HDV).add(new HDV());
+        batiments.get(TypeBatiment.HDV).get(0).upgrade();
         addNewBuilding(TypeBatiment.Caserne);
     }
 
