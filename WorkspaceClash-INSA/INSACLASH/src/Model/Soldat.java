@@ -21,11 +21,11 @@ abstract class Soldat{
         niveau++;
     }
     
-    public TypeSoldat getType() {//DONE
+    public TypeSoldat getType(){//DONE
   		return type;
   	}
 
-  	public void setType(TypeSoldat type) {//DONE
+  	public void setType(TypeSoldat type){//DONE
   		this.type = type;
   	}
     

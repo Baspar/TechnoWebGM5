@@ -4,8 +4,8 @@ import java.util.Hashtable;
 
 public class HDV extends Batiment{
     private Hashtable<TypeBatiment,Integer> quotaBatiments;
-    public int quantiteOrMax=100;
-    public int quantiteOr=100;
+    public int quantiteOrMax;
+    public int quantiteOr;
 
     public HDV(){//WIP
         typeBatiment=TypeBatiment.HDV;
@@ -19,6 +19,8 @@ public class HDV extends Batiment{
         quotaBatiments.put(TypeBatiment.Mortier,(Integer) 1);
         quotaBatiments.put(TypeBatiment.Canon,(Integer) 1);
 
+        quantiteOr=100;
+        quantiteOrMax=1000;
         upgrade();
     }
     public Integer getQuotaBatiment(TypeBatiment typeBatiment){//DONE

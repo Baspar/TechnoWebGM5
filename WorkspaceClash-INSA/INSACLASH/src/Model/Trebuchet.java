@@ -15,7 +15,7 @@ public class Trebuchet extends Soldat{
         placeOccupee=5;
     }
    
-    public Trebuchet(int n){
+    public Trebuchet(int n){//DONE
     	this();
     	for(int i=1; i<n;i++)
     		super.upgrade();

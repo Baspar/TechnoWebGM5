@@ -6,15 +6,15 @@ import java.util.Vector;
 public class Armee{
 	private Vector<Soldat> soldat;
 	
-	public Vector<Soldat> getSoldat() {//DONE
+	public Vector<Soldat> getSoldat(){//DONE
 		return soldat;
 	}
 	
-	public void setSoldat(Vector<Soldat> soldat) {//DONE
+	public void setSoldat(Vector<Soldat> soldat){//DONE
 		this.soldat = soldat;
 	}
 	
-	public Armee() {//DONE
+	public Armee(){//DONE
 		soldat=new Vector<Soldat>();
 	}
 	
@@ -25,7 +25,7 @@ public class Armee{
 		return taille;
 	}
 	
-	public void ajouterSoldat(TypeSoldat s, int n){
+	public void ajouterSoldat(TypeSoldat s, int n){//DONE
 		Soldat nvSoldat;
 		if (s==TypeSoldat.ARCHER)
 			nvSoldat=new Archer(n);

@@ -15,7 +15,7 @@ public class Archer extends Soldat{
         placeOccupee=1;
     }
     
-    public Archer(int n){
+    public Archer(int n){//DONE
     	this();
     	for(int i=1; i<n;i++)
     		super.upgrade();
