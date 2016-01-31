@@ -56,4 +56,25 @@ public class Caserne extends Batiment{
     public Caserne clone(){//DONE
         return new Caserne();
     }
+    
+    public int calculCoutUpgrade(TypeSoldat s){//DONE
+    	Soldat nvSoldat;
+    	if (s==TypeSoldat.ARCHER)
+    		nvSoldat=new Archer(niveauActuel.get(s));
+    	else
+    		nvSoldat=new Trebuchet(niveauActuel.get(s));
+    	return nvSoldat.getCoutUpgrade();
+    }	
+    
+    public void upgradeSoldat(TypeSoldat s){//DONE
+    	int lvl=niveauActuel.get(s);
+    	lvl++;
+    	niveauActuel.put(s, lvl);
+    	for(Soldat sold: armee.getSoldat()){
+    		if(sold.getType()==s)
+    			sold.upgrade();
+    	}
+    }
+    
 }
+

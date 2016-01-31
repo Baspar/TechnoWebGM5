@@ -35,8 +35,10 @@ abstract class Ressource extends Batiment{
         quantiteMaxStockee*=2;
     }
     
-    public void prelever(){//TODO
-    
+    public int prelever(){//DONE
+    	int valeur=calculProduction();
+    	dateDerniereLevee=new Date();
+    	return valeur;
     }
 
     public void setTypeRessource(TypeRessource in){//DONE
