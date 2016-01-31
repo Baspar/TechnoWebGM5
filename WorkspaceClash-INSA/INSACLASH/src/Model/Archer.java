@@ -3,6 +3,7 @@ package Model;
 public class Archer extends Soldat{
     public Archer(){//DONE
         ressourceNecessaire=TypeRessource.CHARBON;
+        type=TypeSoldat.ARCHER;
         pointsDeVie=20;
         puissanceAttaque=7;
         vitesseDeplacement=4;
@@ -12,6 +13,12 @@ public class Archer extends Soldat{
         niveau=1;
         dureeFormation=20;
         placeOccupee=1;
+    }
+    
+    public Archer(int n){
+    	this();
+    	for(int i=1; i<n;i++)
+    		super.upgrade();
     }
     
    

@@ -3,6 +3,7 @@ package Model;
 public class Trebuchet extends Soldat{
     Trebuchet(){//DONE
         ressourceNecessaire=TypeRessource.CHARBON;
+        type=TypeSoldat.TREBUCHET;
         pointsDeVie=300;
         puissanceAttaque=11;
         vitesseDeplacement=1;
@@ -14,5 +15,10 @@ public class Trebuchet extends Soldat{
         placeOccupee=5;
     }
    
+    public Trebuchet(int n){
+    	this();
+    	for(int i=1; i<n;i++)
+    		super.upgrade();
+    }
    
 }

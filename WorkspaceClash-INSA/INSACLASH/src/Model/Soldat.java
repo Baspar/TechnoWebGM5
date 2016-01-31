@@ -1,7 +1,8 @@
 package Model;
 
 abstract class Soldat{
-    protected TypeRessource ressourceNecessaire;
+	protected TypeSoldat type;
+	protected TypeRessource ressourceNecessaire;
     protected int pointsDeVie;
     protected int puissanceAttaque;
     protected int vitesseDeplacement;
@@ -12,13 +13,21 @@ abstract class Soldat{
     protected int dureeFormation;
     protected int placeOccupee;
 
-    public void update(){//DONE
+    public void upgrade(){//DONE
         pointsDeVie+=5;
         puissanceAttaque+=4;
         coutUpgrade*=2;
         coutUnite+=coutUnite/2;
         niveau++;
     }
+    
+    public TypeSoldat getType() {//DONE
+  		return type;
+  	}
+
+  	public void setType(TypeSoldat type) {//DONE
+  		this.type = type;
+  	}
     
     public TypeRessource getRessourceNecessaire(){//DONE
         return ressourceNecessaire;
