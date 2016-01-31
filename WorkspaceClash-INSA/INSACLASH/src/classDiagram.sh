@@ -164,23 +164,15 @@ getClassType() {
     echo "$out"
 }
 preprocessTxt() {
-    #Change every "\n" to a <_NEWLINE_>"
-    while read line
-    do
-        newFile="$newFile<_NEWLINE_>$(echo -n "$line")"
-    done <<< "$(echo "$1")"
+    newFile="$1"
 
     #Main preprocess
-    newFile="$(echo "$newFile"  | sed " s/.*<_NEWLINE_>\(.*\(class\|enum\)\)/\1/g
-                                        s/\/\*.*\*\///g
-                                        s/){\(\/\/\(TODO\|WIP\|CHK\|DONE\)\)[^}]*}/)\1\n/g
-                                        s/{\/\/\(TODO\|WIP\|CHK\|DONE\)/\/\/\1{/g
-                                        s/{\(<_NEWLINE_>\)\?}//g
-                                        s/,\?<_NEWLINE_>/\n/g
-                                        s/;[^$]/;\n/g
-                                        s/;//g" \
-                                | sed " s/\/\/[^\(TODO\|CHK\|WIP\|DONE\)].*//g;
-                                        /^ *\t*$/d" \
+    newFile="$(echo "$newFile"  | sed "s/\/\*[.\n]*\*\///g" \
+                                |  grep "public\|private\|protected" \
+                                | sed " s/{//g;
+                                        s/^[\t ]*//g;
+                                        s/\/\/[^\(TODO\|CHK\|WIP\|DONE\)].*//g;
+                                        s/;//g;"
                                         )"
 
     echo -e "$newFile"
