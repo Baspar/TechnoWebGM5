@@ -48,7 +48,7 @@ public class Village{
 		this.armee = armee;
 	}
     
-    public boolean upgradeSoldat(TypeSoldat type){//TODO
+    public boolean upgradeSoldat(TypeSoldat type){//DONE
     	Caserne c=this.getCaserne();
     	HDV h=this.getHDV();
     	//Assez d'argent et encore la possibilite d'améliorer
