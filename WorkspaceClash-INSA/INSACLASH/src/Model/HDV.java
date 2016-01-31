@@ -53,6 +53,13 @@ public class HDV extends Batiment{
     	quantiteActuelle.put(type, temp);
     }
     
+    public int crediter(TypeRessource type, int nb){//DONE
+    	int temp=quantiteActuelle.get(type)+nb;
+    	temp=Math.min(temp, quantiteMax.get(type));
+    	quantiteActuelle.put(type, temp);
+    	return temp;
+    }
+    
     public HDV clone(){//DONE
         return new HDV();
     }

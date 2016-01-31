@@ -61,11 +61,32 @@ public class Village{
     	return false;
     }
     
-    public boolean upgradeBatiment(TypeBatiment type, int i){//TODO
+    public boolean upgradeBatiment(TypeBatiment type, int i){//DONE
+    	if(i<batiments.getBatiments(type).size()){
+    		HDV h=this.getHDV();
+    		Batiment b=batiments.getBatiments(type).get(i);
+    		TypeRessource t=b.getRessourceNecessaire();
+    		if(h.getQuantiteActuelle().get(t)>=b.getCoutConstruction()){
+    			h.utiliser(t, b.getCoutConstruction());
+    			b.upgrade();
+    			return true;
+    		}	
+    	}
     	return false;
     }
     
-    public void preleverMine(TypeBatiment type, int i){//TODO
-    	
+    public int preleverMine(Ressource type, int i){//DONE
+    	if(i<batiments.getBatiments(type.getTypeBatiment()).size()){
+    		HDV h=this.getHDV();
+    		Ressource mine=(Ressource) batiments.getBatiments(type.getTypeBatiment()).get(i);
+    		if(h.getQuantiteActuelle().get(mine.getTypeRessource())!=h.getQuantiteMax().get(mine.getTypeRessource())){
+    			int res=h.crediter(mine.getTypeRessource(), mine.calculProduction());
+    			mine.prelever();
+    			return res;
+    		}
+    		else 
+    			return 0;
+    	}
+    	return 0;
     }
 }
