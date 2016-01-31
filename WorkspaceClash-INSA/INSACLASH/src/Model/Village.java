@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Vector;
+
 public class Village{
     private String nom;
     private Batiments batiments;
@@ -90,7 +92,7 @@ public class Village{
     	return 0;
     }
     
-    public boolean ajouterBatiment(TypeBatiment type, int x, int y){
+    public boolean ajouterBatiment(TypeBatiment type, int x, int y){//DONE
     	HDV h=this.getHDV();
     	int i=h.getQuantiteActuelle().get(batiments.getBatiments(type).get(0).getRessourceNecessaire());
     	if(i>batiments.getModeleBatiments().get(type).getCoutUpdate()){
@@ -104,5 +106,24 @@ public class Village{
     		return false;
     }
     
+    public void deplacerBatiment(TypeBatiment type, int i, int x, int y){//DONE
+    	this.getBatiment(type,i).setX(x);
+    	this.getBatiment(type, i).setY(y);
+    }
     
+    public boolean ajouterSoldat(TypeSoldat type ){//TODO
+    	return false;
+    }
+    
+    public Batiment getBatiment(TypeBatiment t, int i){//DONE
+    	return batiments.getBatiments(t).get(i);
+    }
+    
+    public Vector<Batiment> getBatiment(TypeBatiment t){//DONE
+    	return batiments.getBatiments(t);
+    }
+    
+    public Vector<Soldat> getSoldats(){//DONE
+    	return armee.getSoldats();
+    }
 }

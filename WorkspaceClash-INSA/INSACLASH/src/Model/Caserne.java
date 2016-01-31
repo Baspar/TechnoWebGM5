@@ -70,7 +70,7 @@ public class Caserne extends Batiment{
     	int lvl=niveauActuel.get(s);
     	lvl++;
     	niveauActuel.put(s, lvl);
-    	for(Soldat sold: armee.getSoldat()){
+    	for(Soldat sold: armee.getSoldats()){
     		if(sold.getType()==s)
     			sold.upgrade();
     	}

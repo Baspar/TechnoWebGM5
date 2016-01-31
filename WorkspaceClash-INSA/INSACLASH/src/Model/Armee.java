@@ -4,24 +4,24 @@ import java.util.Vector;
 
 
 public class Armee{
-	private Vector<Soldat> soldat;
+	private Vector<Soldat> soldats;
 	
-	public Vector<Soldat> getSoldat(){//DONE
-		return soldat;
+	public Vector<Soldat> getSoldats(){//DONE
+		return soldats;
 	}
 	
-	public void setSoldat(Vector<Soldat> soldat){//DONE
-		this.soldat = soldat;
+	public void setSoldats(Vector<Soldat> soldat){//DONE
+		this.soldats = soldat;
 	}
 	
 	public Armee(){//DONE
-		soldat=new Vector<Soldat>();
+		soldats=new Vector<Soldat>();
 	}
 	
 	public int calculNbSoldat(){//DONE
 		int taille=0;
-		for(int i=0; i<soldat.size();i++)
-			taille+=soldat.get(i).getPlaceOccupee();
+		for(int i=0; i<soldats.size();i++)
+			taille+=soldats.get(i).getPlaceOccupee();
 		return taille;
 	}
 	
@@ -31,6 +31,6 @@ public class Armee{
 			nvSoldat=new Archer(n);
 		else 
 			nvSoldat=new Trebuchet(n);
-		soldat.add(nvSoldat);
+		soldats.add(nvSoldat);
 	}
 }
