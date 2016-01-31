@@ -48,7 +48,7 @@ public class HDV extends Batiment{
         
     }
     
-    public void prelever(TypeRessource type, int nb){//DONE
+    public void utiliser(TypeRessource type, int nb){//DONE
     	int temp=quantiteActuelle.get(type)-nb;
     	quantiteActuelle.put(type, temp);
     }

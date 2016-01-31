@@ -54,7 +54,7 @@ public class Village{
     	//Assez d'argent et encore la possibilite d'améliorer
     	if( (c.getNiveauMax().get(type)>c.getNiveauActuel().get(type)) && (h.getQuantiteActuelle().get(TypeRessource.CHARBON)>=c.calculCoutUpgrade(type)) ){
     		int nb=c.calculCoutUpgrade(type);
-    		h.prelever(TypeRessource.CHARBON,nb);
+    		h.utiliser(TypeRessource.CHARBON,nb);
     		c.upgradeSoldat(type);
     		return true;
     	}	
