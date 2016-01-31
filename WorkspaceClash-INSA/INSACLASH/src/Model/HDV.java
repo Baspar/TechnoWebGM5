@@ -33,17 +33,19 @@ public class HDV extends Batiment{
 
     public void upgrade(){//DONE
         super.upgrade();
-        for(TypeBatiment type: TypeBatiment.values())
-            if(type!=TypeBatiment.HDV && type!=TypeBatiment.Caserne){
-                Integer quota=quotaBatiments.get(type);
-                quota*=2;
-                quotaBatiments.put(type, quota);
-            }
+
         for(TypeRessource type: TypeRessource.values()){
         	Integer i=quantiteMax.get(type);
         	i*=2;
         	quantiteMax.put(type,i);
         }
+        
+        for(TypeBatiment type: TypeBatiment.values()){
+            if(type!=TypeBatiment.HDV && type!=TypeBatiment.Caserne){
+                Integer quota=quotaBatiments.get(type);
+                quota*=2;
+                quotaBatiments.put(type, quota); }}    
+        
     }
     
     public HDV clone(){//DONE
