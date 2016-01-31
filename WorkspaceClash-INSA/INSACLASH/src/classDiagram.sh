@@ -206,7 +206,8 @@ echo "Java file analysis in progress"
 for javaFile in $(ls Model/*.java | grep -v "Main")
 do
     name=$(basename -s .java $javaFile) # Nom du fichier sans extenstion
-    md5sumJava=$(md5sum $javaFile)
+    myFile=$(preprocessTxt "$(cat "$javaFile")")
+    md5sumJava=$(echo "$myFile" | md5sum)
     echo "!include Classe$name.uml"  >> uml/Classes.uml
 
     indic=$(($indic + 1)) # Numero du fichier traité
@@ -228,7 +229,6 @@ do
         rm -f uml/Classe$name.uml
 
         #Get the file content, and get its header and its declarations
-        myFile=$(preprocessTxt "$(cat "$javaFile")")
         header=$(cat "$javaFile" | grep "class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
         myFile=$(echo "$myFile" | grep -v "class\|enum"  | sed '/^}$/d' )
 
