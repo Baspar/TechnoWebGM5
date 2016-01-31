@@ -7,7 +7,7 @@ public class HDV extends Batiment{
     private Hashtable<TypeRessource,Integer> quantiteMax;
     private Hashtable<TypeRessource,Integer> quantiteActuelle;
     
-    public HDV(){//WIP
+    public HDV(){//DONE
         typeBatiment=TypeBatiment.HDV;
 
         quotaBatiments = new Hashtable<TypeBatiment, Integer>();
