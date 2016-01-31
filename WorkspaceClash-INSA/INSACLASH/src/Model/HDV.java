@@ -24,7 +24,6 @@ public class HDV extends Batiment{
         
         quantiteActuelle.put(TypeRessource.OR,1000);
         quantiteActuelle.put(TypeRessource.CHARBON, 1000);
-        upgrade();
     }
     
     public Integer getQuotaBatiment(TypeBatiment typeBatiment){//DONE

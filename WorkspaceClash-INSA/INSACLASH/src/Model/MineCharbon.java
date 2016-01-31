@@ -15,7 +15,7 @@ public class MineCharbon extends Ressource{
         y=-1;
         ressourceNecessaire=TypeRessource.OR;
         tempsConstruction=7;
-        coutConstruction=75;
+        coutUpdate=75;
 
         //Héritage de Ressource
         typeRessource=TypeRessource.CHARBON;

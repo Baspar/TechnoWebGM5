@@ -8,7 +8,7 @@ abstract class Batiment{
     protected int y;
     protected int niveau;
     protected int tempsConstruction;
-    protected int coutConstruction;
+    protected int coutUpdate;
 
     public TypeBatiment getTypeBatiment(){//DONE
         return this.typeBatiment;
@@ -53,12 +53,12 @@ abstract class Batiment{
         return this.tempsConstruction;
     }
 
-    public void setCoutConstruction(int in){//DONE
-        this.coutConstruction = in;
+    public void setCoutUpdate(int in){//DONE
+        this.coutUpdate = in;
     }
 
-    public int getCoutConstruction(){//DONE
-        return this.coutConstruction;
+    public int getCoutUpdate(){//DONE
+        return this.coutUpdate;
     }
 
     public void setRessourceNecessaire(TypeRessource in){//DONE
@@ -74,7 +74,7 @@ abstract class Batiment{
     public void upgrade(){//DONE
         pointsDeVie+=40;
         tempsConstruction*=2;
-        coutConstruction*=3;
+        coutUpdate*=3;
         niveau++;
     }
 }

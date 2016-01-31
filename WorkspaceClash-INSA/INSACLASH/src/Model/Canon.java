@@ -16,7 +16,7 @@ public class Canon extends Defense{
         x=-1;
         y=-1;
         tempsConstruction=5;
-        coutConstruction=2000;
+        coutUpdate=2000;
     }
     
     public Canon clone(){//DONE

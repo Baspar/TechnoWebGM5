@@ -66,8 +66,8 @@ public class Village{
     		HDV h=this.getHDV();
     		Batiment b=batiments.getBatiments(type).get(i);
     		TypeRessource t=b.getRessourceNecessaire();
-    		if(h.getQuantiteActuelle().get(t)>=b.getCoutConstruction()){
-    			h.utiliser(t, b.getCoutConstruction());
+    		if(h.getQuantiteActuelle().get(t)>=b.getCoutUpdate()){
+    			h.utiliser(t, b.getCoutUpdate());
     			b.upgrade();
     			return true;
     		}	
@@ -89,4 +89,20 @@ public class Village{
     	}
     	return 0;
     }
+    
+    public boolean ajouterBatiment(TypeBatiment type, int x, int y){
+    	HDV h=this.getHDV();
+    	int i=h.getQuantiteActuelle().get(batiments.getBatiments(type).get(0).getRessourceNecessaire());
+    	if(i>batiments.getModeleBatiments().get(type).getCoutUpdate()){
+    		boolean bool =batiments.addNewBuilding(type);
+    		Batiment b=batiments.getBatiments(type).get(batiments.getBatiments(type).size());
+    		b.setX(x);
+    		b.setY(y);
+    		return bool;	
+    	}
+    	else
+    		return false;
+    }
+    
+    
 }

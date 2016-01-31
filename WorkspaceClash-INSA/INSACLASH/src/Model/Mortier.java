@@ -16,7 +16,7 @@ public class Mortier extends Defense{
         x=-1;
         y=-1;
         tempsConstruction=5;
-        coutConstruction=2000;
+        coutUpdate=2000;
     }
    
     public Mortier clone(){//DONE

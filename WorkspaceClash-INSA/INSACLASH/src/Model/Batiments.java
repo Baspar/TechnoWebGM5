@@ -26,8 +26,8 @@ public class Batiments{
             batiments.put(s, new Vector<Batiment>());
 
         //Ajout HDV & caserne
-        batiments.get(TypeBatiment.HDV).add(new HDV());
-        batiments.get(TypeBatiment.Caserne).add(new Caserne());
+        addNewBuilding(TypeBatiment.HDV);
+        addNewBuilding(TypeBatiment.Caserne);
     }
 
     public Set<TypeBatiment> getSetNomBatiment(){//DONE
@@ -38,13 +38,25 @@ public class Batiments{
         return batiments.get(type);
     }
 
-    public void addNewBuilding(TypeBatiment type){//DONE
+    public boolean addNewBuilding(TypeBatiment type){//DONE
         HDV hdv=(HDV)batiments.get(TypeBatiment.HDV).get(0);
         //On teste si on a le droit de construire
         if(hdv.getQuotaBatiment(type) > batiments.get(type).size()){
             Batiment batiment = modeleBatiments.get(type).clone();
             batiment.upgrade();// Le batiment recupere est niveau 0, on le monte d'un niveau
             batiments.get(type).add(batiment);
+            return true;
         }
+        return false;
     }
+
+	public Hashtable<TypeBatiment, Batiment> getModeleBatiments(){//DONE
+		return modeleBatiments;
+	}
+
+	public void setModeleBatiments(Hashtable<TypeBatiment, Batiment> modeleBatiments){//DONE
+		this.modeleBatiments = modeleBatiments;
+	}
+    
+    
 }

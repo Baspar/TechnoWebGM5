@@ -16,7 +16,7 @@ public class MineOr extends Ressource{
         y=-1;
         ressourceNecessaire=TypeRessource.CHARBON;
         tempsConstruction=7;
-        coutConstruction=75;
+        coutUpdate=75;
 
         //Héritage de Ressource
         typeRessource=TypeRessource.OR;
