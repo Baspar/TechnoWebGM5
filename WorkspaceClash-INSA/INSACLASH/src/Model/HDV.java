@@ -3,7 +3,7 @@ package Model;
 import java.util.Hashtable;
 
 public class HDV extends Batiment{
-    private Hashtable<TypeBatiment, Integer> quotaBatiments;
+    private Hashtable<TypeBatiment,Integer> quotaBatiments;
     public int quantiteOrMax=100;
     public int quantiteOr=100;
 
