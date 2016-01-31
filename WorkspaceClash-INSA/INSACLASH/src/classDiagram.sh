@@ -167,7 +167,7 @@ preprocessTxt() {
     newFile="$1"
 
     #Main preprocess
-    newFile="$(echo "$newFile"  | sed "s/\/\*[.\n]*\*\///g" \
+    newFile="$(echo "$newFile"  | sed "s/\/\*[.\n]*?\*\///g" \
                                 |  grep "public\|private\|protected" \
                                 | sed " s/{//g;
                                         s/^[\t ]*//g;
