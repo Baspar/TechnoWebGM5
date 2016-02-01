@@ -45,6 +45,8 @@ public class MainVillage {
 		for(int i=0;i<5;i++)
 			v.upgradeBatiment(TypeBatiment.CANON, 0);
 		affichageVillage(v);
-
+		v.upgradeSoldat(TypeSoldat.ARCHER);
+		v.upgradeSoldat(TypeSoldat.ARCHER);
+		affichageVillage(v);
 	}
 }
