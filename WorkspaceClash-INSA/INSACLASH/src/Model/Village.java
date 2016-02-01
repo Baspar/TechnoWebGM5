@@ -92,10 +92,10 @@ public class Village{
     
     public boolean ajouterBatiment(TypeBatiment type, int x, int y){//DONE
     	HDV h=this.getHDV();
-    	int i=h.getQuantiteActuelle().get(batiments.getBatiments(type).get(0).getRessourceNecessaire());
+    	int i=h.getQuantiteActuelle().get(batiments.getModeleBatiments().get(type).getRessourceNecessaire());
     	if(i>batiments.getModeleBatiments().get(type).getCoutUpdate()){
     		boolean bool =batiments.addNewBuilding(type);
-    		Batiment b=batiments.getBatiments(type).get(batiments.getBatiments(type).size());
+    		Batiment b=batiments.getBatiments(type).get(batiments.getBatiments(type).size()-1);
     		b.setX(x);
     		b.setY(y);
     		return bool;	

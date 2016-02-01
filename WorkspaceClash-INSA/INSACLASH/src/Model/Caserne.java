@@ -52,6 +52,7 @@ public class Caserne extends Batiment{
         niveauActuel.put(TypeSoldat.ARCHER, (Integer) 1);
         niveauActuel.put(TypeSoldat.TREBUCHET, (Integer) 1);
         
+        armee=new Armee();
         tailleTotaleArmee=30;
     }
     

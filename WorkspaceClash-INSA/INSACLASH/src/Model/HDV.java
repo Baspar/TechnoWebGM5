@@ -21,11 +21,11 @@ public class HDV extends Batiment{
         quotaBatiments.put(TypeBatiment.Mortier,(Integer) 1);
         quotaBatiments.put(TypeBatiment.Canon,(Integer) 1);
 
-        quantiteMax.put(TypeRessource.OR, 1000);
-        quantiteMax.put(TypeRessource.CHARBON, 1000);
+        quantiteMax.put(TypeRessource.OR, 100000);
+        quantiteMax.put(TypeRessource.CHARBON, 100000);
         
-        quantiteActuelle.put(TypeRessource.OR,1000);
-        quantiteActuelle.put(TypeRessource.CHARBON, 1000);
+        quantiteActuelle.put(TypeRessource.OR,100000);
+        quantiteActuelle.put(TypeRessource.CHARBON, 100000);
     }
     
     public Integer getQuotaBatiment(TypeBatiment typeBatiment){//DONE
