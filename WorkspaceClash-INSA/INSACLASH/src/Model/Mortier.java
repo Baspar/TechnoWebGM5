@@ -2,7 +2,7 @@ package Model;
 
 public class Mortier extends Defense{
     public Mortier(){//DONE
-        typeBatiment=TypeBatiment.Mortier;
+        typeBatiment=TypeBatiment.MORTIER;
         
         //Héritage Defense
         typeDefense=TypeAttaque.ZONE;

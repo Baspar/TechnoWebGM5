@@ -2,7 +2,7 @@ package Model;
 
 public class Canon extends Defense{
     public Canon(){//DONE
-        typeBatiment=TypeBatiment.Canon;
+        typeBatiment=TypeBatiment.CANON;
         
         //Héritage Defense
         typeDefense=TypeAttaque.LOCALISE;

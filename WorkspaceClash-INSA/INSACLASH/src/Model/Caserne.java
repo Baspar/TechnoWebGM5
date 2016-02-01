@@ -41,7 +41,7 @@ public class Caserne extends Batiment{
 	}
 	
     public Caserne(){//DONE
-        typeBatiment=TypeBatiment.Caserne;
+        typeBatiment=TypeBatiment.CASERNE;
         
         niveauMax=new Hashtable<TypeSoldat,Integer>();
         niveauActuel= new Hashtable<TypeSoldat,Integer>();

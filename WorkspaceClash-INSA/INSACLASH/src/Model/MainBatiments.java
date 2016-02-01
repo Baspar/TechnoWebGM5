@@ -23,9 +23,9 @@ public class MainBatiments{
 
         affichage(batiments);
         for(int i=0; i<10; i++)
-            batiments.addNewBuilding(TypeBatiment.MineOr);
+            batiments.addNewBuilding(TypeBatiment.MINEOR);
         affichage(batiments);
-        batiments.addNewBuilding(TypeBatiment.MineOr);
+        batiments.addNewBuilding(TypeBatiment.MINEOR);
         affichage(batiments);
     }
 }

@@ -21,9 +21,9 @@ public class MainVillage {
 	public static void main(String[] args){
 		Village v=new Village("blaine");
 		affichageVillage(v);
-		v.ajouterBatiment(TypeBatiment.Canon, 0, 0);
+		v.ajouterBatiment(TypeBatiment.CANON, 0, 0);
 		affichageVillage(v);
-		v.deplacerBatiment(TypeBatiment.Canon, 0, 2, 2);
+		v.deplacerBatiment(TypeBatiment.CANON, 0, 2, 2);
 		affichageVillage(v);
 		v.ajouterSoldat(TypeSoldat.ARCHER);
 		affichageVillage(v);
@@ -33,17 +33,17 @@ public class MainVillage {
 		}	
 		affichageVillage(v);
 		for(int i=0;i<3;i++){
-			v.ajouterBatiment(TypeBatiment.Canon, i, i);
-			v.ajouterBatiment(TypeBatiment.Mortier, i, i);
-			v.ajouterBatiment(TypeBatiment.MineOr, i, i);
-			v.ajouterBatiment(TypeBatiment.MineCharbon, 0, 0);
+			v.ajouterBatiment(TypeBatiment.CANON, i, i);
+			v.ajouterBatiment(TypeBatiment.MORTIER, i, i);
+			v.ajouterBatiment(TypeBatiment.MINEOR, i, i);
+			v.ajouterBatiment(TypeBatiment.MINECHARBON, 0, 0);
 			v.ajouterBatiment(TypeBatiment.HDV, 0, 0);
-			v.ajouterBatiment(TypeBatiment.Caserne, 0, 0);
+			v.ajouterBatiment(TypeBatiment.CASERNE, 0, 0);
 		}
 		affichageVillage(v);
 		v.upgradeBatiment(TypeBatiment.HDV, 0);
 		for(int i=0;i<5;i++)
-			v.upgradeBatiment(TypeBatiment.Canon, 0);
+			v.upgradeBatiment(TypeBatiment.CANON, 0);
 		affichageVillage(v);
 
 	}

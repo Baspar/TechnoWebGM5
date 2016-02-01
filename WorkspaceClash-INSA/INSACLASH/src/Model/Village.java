@@ -23,7 +23,7 @@ public class Village{
     }
     
     public Caserne getCaserne(){//DONE
-    	return (Caserne) batiments.getBatiments(TypeBatiment.Caserne).get(0);
+    	return (Caserne) batiments.getBatiments(TypeBatiment.CASERNE).get(0);
     }
 
 	public String getNom(){//DONE

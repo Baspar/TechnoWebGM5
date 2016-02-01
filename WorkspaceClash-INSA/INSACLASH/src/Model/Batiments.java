@@ -15,11 +15,11 @@ public class Batiments{
 
         //Ajout modèles
         modeleBatiments.put(TypeBatiment.HDV, new HDV());
-        modeleBatiments.put(TypeBatiment.Caserne, new Caserne());
-        modeleBatiments.put(TypeBatiment.Canon, new Canon());
-        modeleBatiments.put(TypeBatiment.Mortier, new Mortier());
-        modeleBatiments.put(TypeBatiment.MineOr, new MineOr());
-        modeleBatiments.put(TypeBatiment.MineCharbon, new MineCharbon());
+        modeleBatiments.put(TypeBatiment.CASERNE, new Caserne());
+        modeleBatiments.put(TypeBatiment.CANON, new Canon());
+        modeleBatiments.put(TypeBatiment.MORTIER, new Mortier());
+        modeleBatiments.put(TypeBatiment.MINEOR, new MineOr());
+        modeleBatiments.put(TypeBatiment.MINECHARBON, new MineCharbon());
 
         //Init batiments
         for(TypeBatiment s: getSetNomBatiment())
@@ -28,7 +28,7 @@ public class Batiments{
         //Ajout HDV & caserne
         batiments.get(TypeBatiment.HDV).add(new HDV());
         batiments.get(TypeBatiment.HDV).get(0).upgrade();
-        addNewBuilding(TypeBatiment.Caserne);
+        addNewBuilding(TypeBatiment.CASERNE);
     }
 
     public Set<TypeBatiment> getSetNomBatiment(){//DONE

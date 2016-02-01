@@ -6,7 +6,7 @@ public class MineOr extends Ressource{
 
     public MineOr(){//DONE
 
-        typeBatiment=TypeBatiment.MineOr;
+        typeBatiment=TypeBatiment.MINEOR;
 
         //Héritage de Batiment
         pointsDeVie=360;

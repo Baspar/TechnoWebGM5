@@ -18,11 +18,11 @@ public class HDV extends Batiment{
 
         
         quotaBatiments.put(TypeBatiment.HDV,(Integer) 1);
-        quotaBatiments.put(TypeBatiment.Caserne,(Integer) 1);
-        quotaBatiments.put(TypeBatiment.MineOr,(Integer) 1);
-        quotaBatiments.put(TypeBatiment.MineCharbon,(Integer) 1);
-        quotaBatiments.put(TypeBatiment.Mortier,(Integer) 1);
-        quotaBatiments.put(TypeBatiment.Canon,(Integer) 1);
+        quotaBatiments.put(TypeBatiment.CASERNE,(Integer) 1);
+        quotaBatiments.put(TypeBatiment.MINEOR,(Integer) 1);
+        quotaBatiments.put(TypeBatiment.MINECHARBON,(Integer) 1);
+        quotaBatiments.put(TypeBatiment.MORTIER,(Integer) 1);
+        quotaBatiments.put(TypeBatiment.CANON,(Integer) 1);
 
         for(TypeBatiment t : TypeBatiment.values()){
         	niveauMaxBatiment.put(t, 1);
@@ -59,7 +59,7 @@ public class HDV extends Batiment{
         }
         
         for(TypeBatiment type: TypeBatiment.values()){
-            if(type!=TypeBatiment.HDV && type!=TypeBatiment.Caserne){
+            if(type!=TypeBatiment.HDV && type!=TypeBatiment.CASERNE){
                 Integer quota=quotaBatiments.get(type);
                 quota*=2;
                 quotaBatiments.put(type, quota); }
