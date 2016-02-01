@@ -64,8 +64,8 @@ public class Village{
     }
     
     public boolean upgradeBatiment(TypeBatiment type, int i){//DONE
-    	if(i<batiments.getBatiments(type).size()){
-    		HDV h=this.getHDV();
+		HDV h=this.getHDV();
+    	if(i<batiments.getBatiments(type).size()&&batiments.getBatiments(type).get(i).getNiveau()<h.getNiveauMaxBatiment(type)){
     		Batiment b=batiments.getBatiments(type).get(i);
     		TypeRessource t=b.getRessourceNecessaire();
     		if(h.getQuantiteActuelle().get(t)>=b.getCoutUpdate()){
@@ -96,8 +96,8 @@ public class Village{
     	if(i>batiments.getModeleBatiments().get(type).getCoutUpdate()){
     		boolean bool =batiments.addNewBuilding(type);
     		Batiment b=batiments.getBatiments(type).get(batiments.getBatiments(type).size()-1);
-    		b.setX(x);
-    		b.setY(y);
+    		if(bool==true) {b.setX(x);
+    		b.setY(y);}
     		return bool;	
     	}
     	else

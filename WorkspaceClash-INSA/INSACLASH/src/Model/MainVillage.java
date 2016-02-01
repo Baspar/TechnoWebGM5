@@ -25,5 +25,26 @@ public class MainVillage {
 		affichageVillage(v);
 		v.deplacerBatiment(TypeBatiment.Canon, 0, 2, 2);
 		affichageVillage(v);
+		v.ajouterSoldat(TypeSoldat.ARCHER);
+		affichageVillage(v);
+		for(int i=0;i<12;i++){
+			v.ajouterSoldat(TypeSoldat.TREBUCHET);
+			v.ajouterSoldat(TypeSoldat.ARCHER);
+		}	
+		affichageVillage(v);
+		for(int i=0;i<3;i++){
+			v.ajouterBatiment(TypeBatiment.Canon, i, i);
+			v.ajouterBatiment(TypeBatiment.Mortier, i, i);
+			v.ajouterBatiment(TypeBatiment.MineOr, i, i);
+			v.ajouterBatiment(TypeBatiment.MineCharbon, 0, 0);
+			v.ajouterBatiment(TypeBatiment.HDV, 0, 0);
+			v.ajouterBatiment(TypeBatiment.Caserne, 0, 0);
+		}
+		affichageVillage(v);
+		v.upgradeBatiment(TypeBatiment.HDV, 0);
+		for(int i=0;i<5;i++)
+			v.upgradeBatiment(TypeBatiment.Canon, 0);
+		affichageVillage(v);
+
 	}
 }

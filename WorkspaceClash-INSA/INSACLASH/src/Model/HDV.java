@@ -4,16 +4,19 @@ import java.util.Hashtable;
 
 public class HDV extends Batiment{
     private Hashtable<TypeBatiment,Integer> quotaBatiments;
+    private Hashtable<TypeBatiment,Integer> niveauMaxBatiment;
     private Hashtable<TypeRessource,Integer> quantiteMax;
     private Hashtable<TypeRessource,Integer> quantiteActuelle;
-    
-    public HDV(){//DONE
+
+	public HDV(){//DONE
         typeBatiment=TypeBatiment.HDV;
 
         quotaBatiments = new Hashtable<TypeBatiment, Integer>();
+        niveauMaxBatiment = new Hashtable<TypeBatiment, Integer>();
         quantiteMax = new Hashtable<TypeRessource,Integer>();
         quantiteActuelle = new Hashtable<TypeRessource,Integer>();
 
+        
         quotaBatiments.put(TypeBatiment.HDV,(Integer) 1);
         quotaBatiments.put(TypeBatiment.Caserne,(Integer) 1);
         quotaBatiments.put(TypeBatiment.MineOr,(Integer) 1);
@@ -21,17 +24,31 @@ public class HDV extends Batiment{
         quotaBatiments.put(TypeBatiment.Mortier,(Integer) 1);
         quotaBatiments.put(TypeBatiment.Canon,(Integer) 1);
 
+        for(TypeBatiment t : TypeBatiment.values()){
+        	niveauMaxBatiment.put(t, 1);
+        }
         quantiteMax.put(TypeRessource.OR, 100000);
         quantiteMax.put(TypeRessource.CHARBON, 100000);
         
         quantiteActuelle.put(TypeRessource.OR,100000);
         quantiteActuelle.put(TypeRessource.CHARBON, 100000);
+        
+        ressourceNecessaire=TypeRessource.OR;
     }
     
     public Integer getQuotaBatiment(TypeBatiment typeBatiment){//DONE
         return quotaBatiments.get(typeBatiment);
     }
 
+    
+    public Integer getNiveauMaxBatiment(TypeBatiment t){//DONE
+		return niveauMaxBatiment.get(t);
+	}
+
+	public void setNiveauMaxBatiment(Hashtable<TypeBatiment, Integer> niveauMaxBatiment){//DONE
+		this.niveauMaxBatiment = niveauMaxBatiment;
+	}
+	
     public void upgrade(){//DONE
         super.upgrade();
 
@@ -45,7 +62,11 @@ public class HDV extends Batiment{
             if(type!=TypeBatiment.HDV && type!=TypeBatiment.Caserne){
                 Integer quota=quotaBatiments.get(type);
                 quota*=2;
-                quotaBatiments.put(type, quota); }}    
+                quotaBatiments.put(type, quota); }
+            int niveau=niveauMaxBatiment.get(type);
+            niveau++;
+            niveauMaxBatiment.put(type, niveau);
+        }    
         
     }
     

@@ -53,6 +53,7 @@ public class Caserne extends Batiment{
         niveauActuel.put(TypeSoldat.TREBUCHET, (Integer) 1);
         
         armee=new Armee();
+        ressourceNecessaire=TypeRessource.CHARBON;
         tailleTotaleArmee=30;
     }
     
