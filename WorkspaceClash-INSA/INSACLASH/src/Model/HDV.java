@@ -27,11 +27,11 @@ public class HDV extends Batiment{
         for(TypeBatiment t : TypeBatiment.values()){
         	niveauMaxBatiment.put(t, 1);
         }
-        quantiteMax.put(TypeRessource.OR, 1000);
-        quantiteMax.put(TypeRessource.CHARBON, 1000);
+        quantiteMax.put(TypeRessource.OR, 100000);
+        quantiteMax.put(TypeRessource.CHARBON, 100000);
         
-        quantiteActuelle.put(TypeRessource.OR,1000);
-        quantiteActuelle.put(TypeRessource.CHARBON, 1000);
+        quantiteActuelle.put(TypeRessource.OR,100000);
+        quantiteActuelle.put(TypeRessource.CHARBON, 100000);
         
         ressourceNecessaire=TypeRessource.OR;
     }

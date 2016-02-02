@@ -23,6 +23,7 @@ public class MainVillage {
 		affichageVillage(v);
 		v.ajouterBatiment(TypeBatiment.CANON, 0, 0);
 		affichageVillage(v);
+		System.out.println("ok");
 		v.deplacerBatiment(TypeBatiment.CANON, 0, 2, 2);
 		affichageVillage(v);
 		v.ajouterSoldat(TypeSoldat.ARCHER);
