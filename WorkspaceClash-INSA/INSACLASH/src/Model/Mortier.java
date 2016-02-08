@@ -13,8 +13,6 @@ public class Mortier extends Defense{
         niveau=0;
         ressourceNecessaire=TypeRessource.OR;
         pointsDeVie=400;
-        x=-1;
-        y=-1;
         tempsConstruction=5;
         coutUpdate=2000;
     }

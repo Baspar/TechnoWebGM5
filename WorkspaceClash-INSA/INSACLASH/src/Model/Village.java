@@ -3,14 +3,23 @@ package Model;
 import java.util.Vector;
 
 public class Village{
+	private final static int tailleVillage=25;
     private String nom;
     private Batiments batiments;
     private Armee armee;
+    private Vector<Vector<Batiment>> carte;
     
     
     Village(){//DONE
     	batiments=new Batiments();
     	armee=this.getCaserne().getArmee();
+
+    	carte=new Vector<Vector<Batiment>>();
+    	for(int i=0; i<tailleVillage; i++){
+    		carte.add(new Vector<Batiment>());
+    		for(int j=0; j<tailleVillage; j++)
+    			carte.get(i).add(null);
+    	}
     }
     
     Village(String n){//DONE
@@ -93,20 +102,25 @@ public class Village{
     public boolean ajouterBatiment(TypeBatiment type, int x, int y){//DONE
     	HDV h=this.getHDV();
     	int i=h.getQuantiteActuelle().get(batiments.getModeleBatiments().get(type).getRessourceNecessaire());
-    	if(i>batiments.getModeleBatiments().get(type).getCoutUpdate()){
-    		boolean bool =batiments.addNewBuilding(type);
+    	if(i>batiments.getModeleBatiments().get(type).getCoutUpdate() && getBatiment(x, y)==null){
+    		boolean bool=batiments.addNewBuilding(type);
     		Batiment b=batiments.getBatiments(type).get(batiments.getBatiments(type).size()-1);
-    		if(bool==true) {b.setX(x);
-    		b.setY(y);}
+    		if(bool==true) {
+    			b.setX(x);
+				b.setY(y);
+			}
     		return bool;	
-    	}
-    	else
+    	} else
     		return false;
     }
     
-    public void deplacerBatiment(TypeBatiment type, int i, int x, int y){//DONE
-    	this.getBatiment(type,i).setX(x);
-    	this.getBatiment(type, i).setY(y);
+    public boolean deplacerBatiment(TypeBatiment type, int i, int x, int y){//DONE
+    	if(getBatiment(x, y)==null){
+			this.getBatiment(type, i).setX(x);
+			this.getBatiment(type, i).setY(y);
+			return true;
+    	} else
+			return false;
     }
     
     public boolean ajouterSoldat(TypeSoldat type ){//DONE
@@ -130,7 +144,12 @@ public class Village{
     	}
     	return false;
     }
+
     
+    public Batiment getBatiment(int x, int y){//DONE
+    	return carte.get(x).get(y);
+    }
+
     public Batiment getBatiment(TypeBatiment t, int i){//DONE
     	return batiments.getBatiments(t).get(i);
     }

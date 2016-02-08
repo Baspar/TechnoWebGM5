@@ -4,8 +4,8 @@ abstract class Batiment{
     protected TypeRessource ressourceNecessaire;
     protected TypeBatiment typeBatiment;
     protected int pointsDeVie;
-    protected int x;
-    protected int y;
+    protected int x=-1;
+    protected int y=-1;
     protected int niveau;
     protected int tempsConstruction;
     protected int coutUpdate;
