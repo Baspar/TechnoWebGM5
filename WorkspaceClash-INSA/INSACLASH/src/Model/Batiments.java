@@ -58,6 +58,4 @@ public class Batiments{
 	public void setModeleBatiments(Hashtable<TypeBatiment, Batiment> modeleBatiments){//DONE
 		this.modeleBatiments = modeleBatiments;
 	}
-    
-    
 }
