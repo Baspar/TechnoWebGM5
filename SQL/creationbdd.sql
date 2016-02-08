@@ -1,5 +1,5 @@
 create database insaclash;
-use plateforme;
+use insaclash;
 
 SET foreign_key_checks = 0;
 drop table Joueur;
