@@ -1,4 +1,4 @@
-create database plateforme;
+create database insaclash;
 use plateforme;
 
 SET foreign_key_checks = 0;
