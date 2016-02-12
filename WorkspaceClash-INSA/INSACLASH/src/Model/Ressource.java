@@ -14,14 +14,14 @@ abstract class Ressource extends Batiment{
         Date dateActuelle=new Date();
         //Avec GetTime
         long date1= dateActuelle.getTime();
-      //  System.out.println(date1);
+        //  System.out.println(date1);
         long date2 = dateDerniereLevee.getTime();
-      //  System.out.println(date2);
-      //  System.out.println(date1-date2);
-      //  System.out.println(1000*60*60);
+        //  System.out.println(date2);
+        //  System.out.println(date1-date2);
+        //  System.out.println(1000*60*60);
         float unitetemps=1000*60*60;
         float diff = (date1-date2)/unitetemps;
-     //   System.out.println(diff);
+        //   System.out.println(diff);
         float production = diff*tauxParHeure;
         if (production>quantiteMaxStockee)
             return quantiteMaxStockee;
@@ -29,16 +29,16 @@ abstract class Ressource extends Batiment{
             return (int ) production;
     }
 
-     public void upgrade(){//DONE
+    public void upgrade(){//DONE
         super.upgrade();
         tauxParHeure*=2;
         quantiteMaxStockee*=2;
     }
-    
+
     public int prelever(){//DONE
-    	int valeur=calculProduction();
-    	dateDerniereLevee=new Date();
-    	return valeur;
+        int valeur=calculProduction();
+        dateDerniereLevee=new Date();
+        return valeur;
     }
 
     public void setTypeRessource(TypeRessource in){//DONE

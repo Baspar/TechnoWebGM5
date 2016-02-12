@@ -14,11 +14,11 @@ public class Trebuchet extends Soldat{
         dureeFormation=120;
         placeOccupee=5;
     }
-   
+
     public Trebuchet(int n){//DONE
-    	this();
-    	for(int i=1; i<n;i++)
-    		super.upgrade();
+        this();
+        for(int i=1; i<n;i++)
+            super.upgrade();
     }
-   
+
 }

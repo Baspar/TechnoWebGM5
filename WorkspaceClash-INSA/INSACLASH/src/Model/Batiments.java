@@ -51,11 +51,11 @@ public class Batiments{
         return false;
     }
 
-	public Hashtable<TypeBatiment, Batiment> getModeleBatiments(){//DONE
-		return modeleBatiments;
-	}
+    public Hashtable<TypeBatiment, Batiment> getModeleBatiments(){//DONE
+        return modeleBatiments;
+    }
 
-	public void setModeleBatiments(Hashtable<TypeBatiment, Batiment> modeleBatiments){//DONE
-		this.modeleBatiments = modeleBatiments;
-	}
+    public void setModeleBatiments(Hashtable<TypeBatiment, Batiment> modeleBatiments){//DONE
+        this.modeleBatiments = modeleBatiments;
+    }
 }
