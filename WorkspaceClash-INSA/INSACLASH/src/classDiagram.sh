@@ -5,32 +5,49 @@ getter=""
 setter=""
 attribut=""
 
+echoerr() { echo "$@" 1>&2; }
+
+computeEnum() {
+    line="$(echo "$1" | sed 's/[,;]$//g')"
+    attribut="$attribut        $line\n"
+}
 compute() {
     line="$1"
+    classname="$2"
     isAFunction=$(echo "$line" | grep "(" | sed '/^$/d')
     if ! [[ "$isAFunction" ]]
     then
         attrType=$(getAttrType "$line")
 
-        attrOut=$(echo "$line" | cut -d ' ' -f 2)
-        attrName=$(echo "$line" | cut -d ' ' -f 3)
+        attrOut=$(getAttrOut "$line")
+        attrName=$(getAttrName "$line")
 
         attribut="$attribut        $attrType $attrName : $attrOut\n"
     else
-        state=$(echo $line |grep "//" | sed "s/.*\/\/\(.*\)/\1/g")
-        ligne=$(echo $line | sed "s/\/\/.*//g")
+        #Get state + remove
+        state=$(getFunctionState "$line")
+        line=$(echo $line | sed "s/\/\/.*//g")
 
-        #Constructor case
-        etat="+"
-        out=$(echo "$ligne"  | cut -d "(" -f 1 | tr ' ' '\n' | tail -n 2 | head -n 1)
-        nomFonction=$(echo "$ligne"  | cut -d "(" -f 1 | tr ' ' '\n' | tail -n 1)
-        fonction=$(echo "$ligne" | sed "s/.*$out \(.*\)/\1/1")
+        # get visibility + remove
+        etat=$(getAttrType "$line")
+        line=$(echo $line | cut -d' ' -f2-)
+
+        #Get function/function name
+        nomFonction=$(getFunctionName "$line")
+        fonction=$(getFunction "$line")
 
         #"Abstract function" case
-        if [[ $(echo "$ligne" | sed "s/$fonction//g" | grep abstract) != "" ]]
+        if [[ $(echo "$line" | grep abstract) != "" ]]
         then
             fonction="{abstract}$fonction"
+            line=$(echo $line | cut -d' ' -f2-)
         fi
+
+        if [ "$nomFonction" != "$classname" ]
+        then
+            out=$(getFunctionOut "$line")
+        fi
+
 
         #Progress detection
         color=$(getFunctionColor "$state" "$fonction")
@@ -40,6 +57,22 @@ compute() {
         #Append function to its correct list
         sortFunction "$etat" "$fonction" "$out" "$name"
     fi
+}
+getFunctionState() {
+    echo -n "$1" | grep "//" | sed "s/.*\/\/\(.*\)/\1/g"
+}
+getFunction() {
+    indice=$(echo -n "$1" | tr ' ' '\n' | grep -n '(' | head -n 1 | cut -d: -f1)
+    echo -n "$1" | cut -d' ' -f$indice-
+}
+getFunctionOut() {
+    indice=$(echo -n "$1" | tr ' ' '\n' | grep -n '(' | head -n 1 | cut -d: -f1)
+    indice=$((indice-1))
+
+    echo -n "$1" | cut -d' ' -f-$indice
+}
+getFunctionName() {
+    echo -n "$1" | tr ' ' '\n' | grep "(" | head -n 1 | sed 's/(.*//g'
 }
 printFile() {
     classType="$1"
@@ -126,12 +159,19 @@ getFunctionColor() {
         color="brown"
     else
         color="white"
-        echoerr "    Error with method $2"
+        echoerr "    Error with method $2 ($1)"
     fi
     echo $color
 }
-echoerr() { echo "$@" 1>&2; }
 
+getAttrName() {
+    line=$(echo "$1" | sed "s/.* \([^ ]*\)$/\1/g")
+    echo -n "$line"
+}
+getAttrOut() {
+    line=$(echo "$1" | sed "s/[^ ]\+ \(.*\) [^ ]\+$/\1/g")
+    echo -n "$line"
+}
 getAttrType() {
     out=$(echo "$1" | cut -d ' ' -f 1)
     if [[ $out == "protected" ]]
@@ -171,6 +211,10 @@ preprocessTxt() {
                                         s/^[\t ]*//g;"\
                                 | grep "^public\|^private\|^protected" \
                                 | sed " s/{//g;
+                                        s/\(static\|final\) //g;
+                                        s/ *\([,=]\) */\1/g;
+                                        s/\(<(\) */\1/g;
+                                        s/ *\(>)\)/\1/g;
                                         s/\/\/[^\(TODO\|CHK\|WIP\|DONE\)].*//g;
                                         s/;//g;"
                                         )"
@@ -206,22 +250,15 @@ echo "Java file analysis in progress"
 for javaFile in $(ls Model/*.java | grep -v "Main")
 do
     name=$(basename -s .java $javaFile) # Nom du fichier sans extenstion
-    myFile=$(preprocessTxt "$(cat "$javaFile")")
-    md5sumJava=$(echo "$myFile" | md5sum)
+    preprocessedFile=$(preprocessTxt "$(cat "$javaFile")")
+    md5sumJava=$(echo "$preprocessedFile" | md5sum)
     echo "!include Classe$name.uml"  >> uml/Classes.uml
 
     indic=$(($indic + 1)) # Numero du fichier traité
-    if [ $indic -lt 10 ]
-    then
-        echoerr -n "[ $indic/$nbFichier]" #debug
-    else
-        echoerr -n "[$indic/$nbFichier]" #debug
-    fi
-
-    dejaFait=$(isAlreadyTested "$javaFile" "$md5sumJava")
+    echoerr -n "[$indic/$nbFichier]" #debug
 
 
-    if [[ "$dejaFait" ]]
+    if [[ "$(isAlreadyTested "$javaFile" "$md5sumJava")" ]]
     then
         echoerr "  (-)  Class $name"
     else
@@ -230,7 +267,7 @@ do
 
         #Get the file content, and get its header and its declarations
         header=$(cat "$javaFile" | grep "class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
-        myFile=$(echo "$myFile" | grep -v "class\|enum"  | sed '/^}$/d' )
+        preprocessedFile=$(echo "$preprocessedFile" | grep -v "class\|enum"  | sed '/^}$/d' )
 
         #Is the class abstract/an interface ?
         classType=$(getClassType "$header")
@@ -241,16 +278,16 @@ do
         setter=""
         attribut=""
 
-        [[ "$myFile" ]] && while read line
+        [[ "$preprocessedFile" ]] && while read line
         do
             #Sort every line(=Attribute/Method) in its corresponding group
             if [[ $classType == "enum" ]]
             then
-                attribut="$attribut        $line\n"
+                computeEnum "$line"
             else
-                compute "$line"
+                compute "$line" "$name"
             fi
-        done <<< "$(echo "$myFile")"
+        done <<< "$(echo "$preprocessedFile")"
 
         printFile "$classType" "$name" "$attribut" "$contr" "$setter" "$getter" "$meth" "$md5sumJava"
     fi

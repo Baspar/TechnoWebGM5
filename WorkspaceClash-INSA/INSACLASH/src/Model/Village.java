@@ -111,13 +111,13 @@ public class Village{
         	//Essai de construction de batiment.
         	//Peut ne pas marcher si fonds insuffisants.
             boolean constructionOK=batiments.addNewBuilding(type);
-            
+
             //Si construction OK, on deplace
             if(constructionOK){
 				deplacerBatiment(type, batiments.getBatiments(type).size()-1, x, y);
 				return true;
             }
-        } 
+        }
 		return false;
     }
 
@@ -130,13 +130,13 @@ public class Village{
             this.getBatiment(type, i).setX(x);
             this.getBatiment(type, i).setY(y);
 
-            //Retrait batiment anciennes coords (si coordonnees != (-1, -1)) 
+            //Retrait batiment anciennes coords (si coordonnees != (-1, -1))
             if(oldX!=-1 && oldY!=-1)
 				carte.get(oldX).set(oldY, null);
 
             //Placement batiment nouvelles coords
             carte.get(x).set(y, getBatiment(type, i));
-            
+
             return true;
         } else
             return false;
@@ -163,7 +163,6 @@ public class Village{
         }
         return false;
     }
-
 
     public Batiment getBatiment(int x, int y){//DONE
         return carte.get(x).get(y);

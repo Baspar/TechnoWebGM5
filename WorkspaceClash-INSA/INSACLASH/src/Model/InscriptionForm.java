@@ -52,7 +52,7 @@ public final class InscriptionForm {
      * Les erreurs du formulaire.
      * Une map liant les mots clés d'erreur à la précision du type d'erreur
      */
-    private Map<String, String> erreurs          = new HashMap<String, String>();
+    private Map<String, String> erreurs;
 
 
     /**
@@ -77,6 +77,7 @@ public final class InscriptionForm {
      * @see JoueurDao
      */
     public InscriptionForm( JoueurDao joueurDao ) {
+        erreurs=new HashMap<String, String>();
         this.joueurDao = joueurDao;
     }
 

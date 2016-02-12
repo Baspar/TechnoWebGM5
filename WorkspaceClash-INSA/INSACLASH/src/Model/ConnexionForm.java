@@ -21,7 +21,7 @@ public final class ConnexionForm {
     private String resultat;
 
 
-    private Map<String, String> erreurs = new HashMap<String, String>();
+    private Map<String, String> erreurs;
 
 
     private JoueurDao joueurDao;
@@ -38,6 +38,7 @@ public final class ConnexionForm {
 
 
     public ConnexionForm( JoueurDao joueur){
+        erreurs= new HashMap<String, String>();
         this.joueurDao=joueur;
     }
 
