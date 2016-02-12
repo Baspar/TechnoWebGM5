@@ -99,25 +99,44 @@ public class Village{
         return 0;
     }
 
-    public boolean ajouterBatiment(TypeBatiment type, int x, int y){//DONE
+    public boolean quantiteBatimentAtteinte(TypeBatiment type){//DONE
         HDV h=this.getHDV();
-        int i=h.getQuantiteActuelle().get(batiments.getModeleBatiments().get(type).getRessourceNecessaire());
-        if(i>batiments.getModeleBatiments().get(type).getCoutUpdate() && getBatiment(x, y)==null){
-            boolean bool=batiments.addNewBuilding(type);
-            Batiment b=batiments.getBatiments(type).get(batiments.getBatiments(type).size()-1);
-            if(bool==true) {
-                b.setX(x);
-                b.setY(y);
+        int quantiteActuelle=h.getQuantiteActuelle().get(type);
+        int quantiteMax=h.getQuantiteMax().get(type);
+        return (quantiteActuelle >= quantiteMax);
+    }
+
+    public boolean ajouterBatiment(TypeBatiment type, int x, int y){//DONE
+        if(!quantiteBatimentAtteinte(type) && getBatiment(x, y)==null){
+        	//Essai de construction de batiment.
+        	//Peut ne pas marcher si fonds insuffisants.
+            boolean constructionOK=batiments.addNewBuilding(type);
+            
+            //Si construction OK, on deplace
+            if(constructionOK){
+				deplacerBatiment(type, batiments.getBatiments(type).size()-1, x, y);
+				return true;
             }
-            return bool;
-        } else
-            return false;
+        } 
+		return false;
     }
 
     public boolean deplacerBatiment(TypeBatiment type, int i, int x, int y){//DONE
+    	int oldX=getBatiment(type, i).getX();
+    	int oldY=getBatiment(type, i).getY();
+
         if(getBatiment(x, y)==null){
+        	//Modification coords au niveau du batiment
             this.getBatiment(type, i).setX(x);
             this.getBatiment(type, i).setY(y);
+
+            //Retrait batiment anciennes coords (si coordonnees != (-1, -1)) 
+            if(oldX!=-1 && oldY!=-1)
+				carte.get(oldX).set(oldY, null);
+
+            //Placement batiment nouvelles coords
+            carte.get(x).set(y, getBatiment(type, i));
+            
             return true;
         } else
             return false;
