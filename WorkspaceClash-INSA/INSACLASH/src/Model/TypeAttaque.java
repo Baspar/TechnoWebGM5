@@ -1,6 +1,6 @@
 package Model;
 
 public enum TypeAttaque{
-    ZZONE,
+    ZONE,
     LOCALISE;
 }
