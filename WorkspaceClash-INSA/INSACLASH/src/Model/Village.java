@@ -179,4 +179,35 @@ public class Village{
     public Vector<Soldat> getSoldats(){//DONE
         return armee.getSoldats();
     }
+
+    public String affichageVillage(){//WIP
+        String out="";
+
+        //Affichage nom village
+        out += "Nom village : " +getNom()+"\n";
+
+        //Affichage grille village
+        for(int i=0; i<tailleVillage; i++){
+        }
+
+        //Affichage composition village
+        out += "#####BATIMENTS#####\n";
+        for(TypeBatiment type: TypeBatiment.values()){
+            out += "  "+type+"["+getBatiments().getBatiments(type).size()+"]:\n";
+            for(Batiment batiment:getBatiments().getBatiments(type))
+                out += "    * lvl"+batiment.getNiveau()+"  x="+batiment.getX()+"   y="+batiment.getY()+"\n";
+        }
+
+        //Affichage armee
+        out += "#####ARMEE#####\n";
+        out += "Taille armee "+getArmee().calculNbSoldat()+"\n";
+        out += "Compo armee\n";
+        for(int i=0;i<getArmee().getSoldats().size();i++)
+            out += "\t Type " +getArmee().getSoldats().get(i).getType()+"niveau"+getArmee().getSoldats().get(i).getNiveau()+"\n";
+        out += "\n";
+
+
+
+        return out;
+    }
 }
