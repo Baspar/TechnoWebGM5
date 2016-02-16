@@ -20,6 +20,7 @@ public class Village{
             for(int j=0; j<tailleVillage; j++)
                 carte.get(i).add(null);
         }
+        deplacerBatiment(TypeBatiment.HDV, 0, 0, 0);
     }
 
     Village(String n){//DONE
@@ -180,15 +181,43 @@ public class Village{
         return armee.getSoldats();
     }
 
-    public String affichageVillage(){//WIP
+    public String affichageVillage(){//DONE
         String out="";
 
         //Affichage nom village
         out += "Nom village : " +getNom()+"\n";
 
         //Affichage grille village
-        for(int i=0; i<tailleVillage; i++){
+        out +="+";
+        for(int i=0; i<tailleVillage; i++)
+            out += "---+";
+        out += "\n";
+        for(Vector<Batiment> ligne:carte){
+            out += "|";
+            for(Batiment batiment:ligne){
+                switch(batiment){
+                    case TypeBatiment.CANON:        out += " C ";
+                                                    break;
+                    case TypeBatiment.MORTIER:      out += " M ";
+                                                    break;
+                    case TypeBatiment.MINEOR:       out += "MiO";
+                                                    break;
+                    case TypeBatiment.MINEARGENT:   out += "MiA";
+                                                    break;
+                    case TypeBatiment.HDV:          out += "HDV";
+                                                    break;
+                    case TypeBatiment.CASERNE:      out += "Cas";
+                                                    break;
+                }
+                out += "|";
+            }
+            out += "\n";
+            out +="+";
+            for(int i=0; i<tailleVillage; i++)
+                out += "--+";
+            out += "\n";
         }
+        out += "\n";
 
         //Affichage composition village
         out += "#####BATIMENTS#####\n";
