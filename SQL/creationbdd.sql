@@ -48,6 +48,8 @@ CREATE TABLE HDV(
     loginJoueur VARCHAR(20) NOT NULL,
     x INTEGER NOT NULL,
     y INTEGER NOT NULL,
+    quantiteOr INTEGER NOT NULL,
+    quantiteCharbon INTEGER NOT NULL,
 
     PRIMARY KEY(loginJoueur),
     FOREIGN KEY(loginJoueur) REFERENCES Joueur(login)

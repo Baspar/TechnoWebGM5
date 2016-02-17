@@ -145,6 +145,10 @@ public class DAOFactory {
 	public JoueurDao getJoueurDao() {
 		return new JoueurDaoImpl( this );
 	}
+	
+	public HDVDao getHDVDao() {
+		return new HDVDaoImpl( this );
+	}
 		
 	
 } 

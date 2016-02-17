@@ -70,6 +70,14 @@ public final class InscriptionForm {
         }else
             throw new FormValidationException( "Le login doit contenir au moins 3 caractères." );
     }
+    private void traiterMotsDePasse( String motDePasse, String confirmation, Joueur joueur ) {
+        try {
+            validationMotsDePasse( motDePasse, confirmation );
+        } catch ( FormValidationException e ) {
+            setErreur( CHAMP_PASS, e.getMessage() );
+            setErreur( CHAMP_CONF, null );
+        }
+    }    
     private void validationMotsDePasse( String motDePasse, String confirmation ) throws FormValidationException {
         if ( motDePasse != null && confirmation != null ) {
             if ( !motDePasse.equals( confirmation ) ) {

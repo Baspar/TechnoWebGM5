@@ -3,6 +3,8 @@
 
 <!DOCTYPE html>
 <html>
+	
+	<c:import url="/inc/menuDebut.jsp" />
 
 	<head>
 		<meta charset="utf-8" />
