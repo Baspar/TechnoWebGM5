@@ -13,5 +13,8 @@ public class ArmeeCombat{
         for(Soldat soldat:armee.getSoldats())
             soldats.add(new SoldatCombat(soldat));
     }
+    Vector<SoldatCombat> getSoldats(){//DONE
+        return soldats;
+    }
 }
 
