@@ -1,7 +1,12 @@
 ' Package Combat
 Combat "1" o-- "1" VillageCombat
 Combat "1" o-- "1" ArmeeCombat
+Combat "1" o-- "*" EntiteCombat
 ArmeeCombat "1" o-- "*" SoldatCombat
+VillageCombat "1" o-- "*" BatimentCombat
+
+EntiteCombat <|-- SoldatCombat
+EntiteCombat <|-- BatimentCombat
 
 
 ' Package Model
