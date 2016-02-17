@@ -10,39 +10,23 @@ import dao.JoueurDao;
 
 public final class ConnexionForm {
     private static final String CHAMP_LOGIN = "login";
-
-
     private static final String CHAMP_PASS = "motDePasse";
-
-
     private static final String ALGO_CHIFFREMENT ="SHA-256";
-
-
     private String resultat;
-
-
     private Map<String, String> erreurs;
-
-
     private JoueurDao joueurDao;
 
 
     public String getResultat() {
         return resultat;
     }
-
-
     public Map<String, String> getErreurs() {
         return erreurs;
     }
-
-
     public ConnexionForm( JoueurDao joueur){
         erreurs= new HashMap<String, String>();
         this.joueurDao=joueur;
     }
-
-
     public Joueur connecterJoueur( HttpServletRequest request ) {
         /* Récupération des champs du formulaire */
         String login = getValeurChamp( request, CHAMP_LOGIN );
@@ -66,8 +50,6 @@ public final class ConnexionForm {
 
         return joueur;
     }
-
-
     private void traiterLogin( String login, Joueur joueur ) {
         try {
             validationLogin( login );
@@ -76,8 +58,6 @@ public final class ConnexionForm {
         }
         joueur.setLogin( login );
     }
-
-
     private void validationLogin( String login ) throws FormValidationException {
         if ( login != null && login.length() > 3 ) {
             if (joueurDao.trouver(login)==null){
@@ -87,8 +67,6 @@ public final class ConnexionForm {
         }else
             throw new FormValidationException( "Le login doit contenir au moins 3 caractères." );
     }
-
-
     private void traiterMotDePasse( String login, String motDePasse, Joueur joueur) {
         try {
             validationMotDePasse(login, motDePasse );
@@ -96,8 +74,6 @@ public final class ConnexionForm {
             setErreur( CHAMP_PASS, e.getMessage() );
         }
     }
-
-
     private void validationMotDePasse( String login, String motDePasse ) throws FormValidationException {
         if ( motDePasse != null ) {
             if ( motDePasse.length() > 3 ) {
@@ -113,13 +89,9 @@ public final class ConnexionForm {
             throw new FormValidationException( "Merci de saisir votre mot de passe." );
         }
     }
-
-
     private void setErreur( String champ, String message ) {
         erreurs.put( champ, message );
     }
-
-
     private static String getValeurChamp( HttpServletRequest request, String nomChamp ) {
         String valeur = request.getParameter( nomChamp );
         if ( valeur == null || valeur.trim().length() == 0 ) {
