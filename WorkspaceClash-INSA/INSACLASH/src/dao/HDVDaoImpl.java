@@ -15,11 +15,12 @@ import Model.TypeRessource;
 
 public class HDVDaoImpl implements HDVDao {
 	//Différentes requêtes dont on a besoin
-    private static final String SQL_SELECT_PAR_LOGIN = "SELECT * FROM HDV WHERE login = ?";
-    private static final String SQL_UPDATE_HDV ="UPDATE HDV set niveau=? WHERE login= ?";
-	private static final String SQL_DEPLACEMENT_HDV ="UPDATE HDV set x=?, y=? where login= ?";
-    private static final String SQl_AJOUT_HDV="INSERT INTO HDV (niveau, loginJoueur, x,y, quantiteOr, quantiteCharbon) VALUES (?, ?, ?, ?)";
-
+    private static final String SQL_SELECT_PAR_LOGIN = "SELECT * FROM HDV WHERE loginJoueur = ?";
+    private static final String SQL_UPDATE_HDV ="UPDATE HDV set niveau=? WHERE loginJoueur= ?";
+	private static final String SQL_DEPLACEMENT_HDV ="UPDATE HDV set x=?, y=? where loginJoueur= ?";
+    private static final String SQl_AJOUT_HDV="INSERT INTO HDV (niveau, loginJoueur, x,y, quantiteOr, quantiteCharbon) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String SQL_MAJ_OR="UPDATE HDV set quantiteOr=? WHERE loginJoueur=?";
+    private static final String SQL_MAJ_CHARBON="UPDATE HDV set quantiteCharbon=? WHERE loginJoueur=?";
 	
 	DAOFactory daoFactory;
 	
@@ -83,7 +84,7 @@ public class HDVDaoImpl implements HDVDao {
 	    try{
 	    	connexion =daoFactory.getConnection();
 	    	HDV hdv=trouverHDV(login);
-	    	preparedStatement=initialisationRequetePreparee(connexion, SQL_UPDATE_HDV, false, login, hdv.getNiveau()+1);
+	    	preparedStatement=initialisationRequetePreparee(connexion, SQL_UPDATE_HDV, false, hdv.getNiveau()+1, login);
 	    	int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
                 throw new DAOException( "Échec de l'augmentation de niveau de l'hdv, aucune ligne modifiée dans la table." );
@@ -118,11 +119,49 @@ public class HDVDaoImpl implements HDVDao {
 	    
 	    try{
 	    	connexion =daoFactory.getConnection();
-	    	HDV hdv=trouverHDV(login);
-	    	preparedStatement=initialisationRequetePreparee(connexion, SQL_DEPLACEMENT_HDV, false, login, x,y);
+	    	preparedStatement=initialisationRequetePreparee(connexion, SQL_DEPLACEMENT_HDV, false, x,y, login);
 	    	int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
-                throw new DAOException( "Échec de l'augmentation de niveau de l'hdv, aucune ligne modifiée dans la table." );
+                throw new DAOException( "Échec du deplacement de l'hdv, aucune ligne modifiée dans la table." );
+            }
+	    }catch(SQLException e){
+	    	throw new DAOException(e);
+	    } finally{
+	    	fermeturesSilencieuses(preparedStatement, connexion);
+	    }
+		
+	}
+
+	@Override
+	public void miseAJourOr(String login, int qte) {
+		Connection connexion = null;
+	    PreparedStatement preparedStatement = null;
+	    
+	    try{
+	    	connexion =daoFactory.getConnection();
+	    	preparedStatement=initialisationRequetePreparee(connexion, SQL_MAJ_OR, false, qte, login);
+	    	int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de la mise a jour du niveau d'or, aucune ligne modifiée dans la table." );
+            }
+	    }catch(SQLException e){
+	    	throw new DAOException(e);
+	    } finally{
+	    	fermeturesSilencieuses(preparedStatement, connexion);
+	    }
+	}
+
+	@Override
+	public void miseAJourCharbon(String login, int qte) {
+		Connection connexion = null;
+	    PreparedStatement preparedStatement = null;
+	    
+	    try{
+	    	connexion =daoFactory.getConnection();
+	    	preparedStatement=initialisationRequetePreparee(connexion, SQL_MAJ_CHARBON, false, qte, login);
+	    	int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de la maj de la qte de charbon de l'hdv, aucune ligne modifiée dans la table." );
             }
 	    }catch(SQLException e){
 	    	throw new DAOException(e);
