@@ -241,4 +241,7 @@ public class Village{
 
         return out;
     }
+    int getTailleVillage(){//DONE
+        return tailleVillage;
+    }
 }
