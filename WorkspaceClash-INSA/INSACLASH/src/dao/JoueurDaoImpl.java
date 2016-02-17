@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import Model.ConnexionForm;
 import Model.Joueur;
+import form.ConnexionForm;
 
 /**
 * Classe JoueurDaoImpl implémentant l'interface JoueurDao

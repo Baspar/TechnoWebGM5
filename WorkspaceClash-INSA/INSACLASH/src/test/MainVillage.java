@@ -1,4 +1,8 @@
-package Model;
+package test;
+
+import Model.TypeBatiment;
+import Model.TypeSoldat;
+import Model.Village;
 
 public class MainVillage {
     public static void main(String[] args){

@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Model.ConnexionForm;
 import dao.JoueurDao;
+import form.ConnexionForm;
 import dao.DAOFactory;
 import Model.Joueur;
 

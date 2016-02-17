@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import Model.Joueur;
 import dao.DAOFactory;
 import dao.JoueurDao;
-import Model.InscriptionForm;
+import form.InscriptionForm;
 
 /**
 * Servlet inscription gerant l'inscription d'un joueur

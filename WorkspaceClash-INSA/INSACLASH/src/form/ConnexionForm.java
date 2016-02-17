@@ -1,10 +1,11 @@
-package Model;
+package form;
 
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
+import Model.Joueur;
 import dao.DAOException;
 import dao.JoueurDao;
 

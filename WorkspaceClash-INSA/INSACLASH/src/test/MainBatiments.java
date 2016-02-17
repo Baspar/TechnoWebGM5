@@ -1,6 +1,10 @@
-package Model;
+package test;
 
 import java.util.Set;
+
+import Model.Batiment;
+import Model.Batiments;
+import Model.TypeBatiment;
 
 public class MainBatiments{
     public static void affichage(Batiments batiments){
