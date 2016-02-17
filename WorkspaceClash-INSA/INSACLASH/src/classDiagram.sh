@@ -1,4 +1,6 @@
 #!/bin/bash
+JAVA_PATH=$(find | grep \.java$ | cut -d/ -f2 | sort | uniq)
+
 constr=""
 meth=""
 getter=""
@@ -84,43 +86,48 @@ printFile() {
     meth="$7"
     md5sumJava="$8"
 
-    echo "@startuml" > uml/Classe$name.uml
-    echo "$classType $name{" >> uml/Classe$name.uml
+    echo "@startuml" > uml/$package.Classe$name.uml
+    echo "$classType $name{" >> uml/$package.Classe$name.uml
 
     if [ "$attribut" != "" ]
     then
         if [[ $classType != "enum" ]]
         then
-            echo "    ==<b>Attributes</b>==" >> uml/Classe$name.uml
-            echo -en "$attribut" | sed 's/\\\*/\*/g'|sort >> uml/Classe$name.uml
+            echo "    ==<b>Attributes</b>==" >> uml/$package.Classe$name.uml
+            echo -en "$attribut" | sed 's/\\\*/\*/g'|sort >> uml/$package.Classe$name.uml
         else
-            echo -en "$attribut" | sed 's/\\\*/\*/g'>> uml/Classe$name.uml
+            echo -en "$attribut" | sed 's/\\\*/\*/g'>> uml/$package.Classe$name.uml
         fi
     fi
     if [ "$constr" != "" ]
     then
-        echo "    ==<b>Constructors</b>==" >> uml/Classe$name.uml
-        echo -en "$constr" | sed 's/\\\*/\*/g'|sort >> uml/Classe$name.uml
+        echo "    ==<b>Constructors</b>==" >> uml/$package.Classe$name.uml
+        echo -en "$constr" | sed 's/\\\*/\*/g'|sort >> uml/$package.Classe$name.uml
     fi
     if [ "$setter" != "" ]
     then
-        echo "    ==<b>Setters</b>==" >> uml/Classe$name.uml
-        echo -en "$setter" | sed 's/\\\*/\*/g'|sort >> uml/Classe$name.uml
+        echo "    'BEGINSETTER">> uml/$package.Classe$name.uml
+        echo "    ==<b>Setters</b>==" >> uml/$package.Classe$name.uml
+        echo -en "$setter" | sed 's/\\\*/\*/g'|sort >> uml/$package.Classe$name.uml
+        echo "    'ENDSETTER">> uml/$package.Classe$name.uml
     fi
     if [ "$getter" != "" ]
     then
-        echo "    ==<b>Getters</b>==" >> uml/Classe$name.uml
-        echo -en "$getter" | sed 's/\\\*/\*/g'|sort >> uml/Classe$name.uml
+        echo "    'BEGINGETTER">> uml/$package.Classe$name.uml
+        echo "    ==<b>Getters</b>==" >> uml/$package.Classe$name.uml
+        echo -en "$getter" | sed 's/\\\*/\*/g'|sort >> uml/$package.Classe$name.uml
+        echo "    'ENDGETTER">> uml/$package.Classe$name.uml
     fi
     if [ "$meth" != "" ]
     then
-        echo "    ==<b>Methods</b>==" >> uml/Classe$name.uml
-        echo -en "$meth" | sed 's/\\\*/\*/g'|sort >> uml/Classe$name.uml
+        echo "    ==<b>Methods</b>==" >> uml/$package.Classe$name.uml
+        echo -en "$meth" | sed 's/\\\*/\*/g'|sort >> uml/$package.Classe$name.uml
+        echo "    'END">> uml/$package.Classe$name.uml
     fi
 
-    echo "}" >> uml/Classe$name.uml
-    echo "@enduml" >> uml/Classe$name.uml
-    echo "'$md5sumJava" >> uml/Classe$name.uml
+    echo "}" >> uml/$package.Classe$name.uml
+    echo "@enduml" >> uml/$package.Classe$name.uml
+    echo "'$md5sumJava" >> uml/$package.Classe$name.uml
 }
 sortFunction() {
     nomFonction=$(echo "$fonction" | sed "s/.*>\(.*\)(.*/\1/g")
@@ -143,7 +150,7 @@ getFunctionColor() {
         color="grey"
     elif [[ "$1" == "" ]]
     then
-        echoerr "  No progress for $2"
+        echoerr "    No progress for $2"
         color="black"
     elif [[ "$1" == "TODO" ]]
     then
@@ -163,7 +170,6 @@ getFunctionColor() {
     fi
     echo $color
 }
-
 getAttrName() {
     line=$(echo "$1" | sed "s/.* \([^ ]*\)$/\1/g")
     echo -n "$line"
@@ -223,9 +229,11 @@ preprocessTxt() {
 }
 isAlreadyTested() {
     name=$(basename -s .java $1)
-    if [ -e uml/Classe$name.uml ]
+    myMD5=$2
+    package=$3
+    if [ -e uml/$package.Classe$name.uml ]
     then
-        dejaFait=$(cat uml/Classe$name.uml | tail -n 2 | tr "\n" " " | grep "'$2")
+        dejaFait=$(cat uml/$package.Classe$name.uml | tail -n 2 | tr "\n" " " | grep "'$myMD5")
     else
         dejaFait=""
     fi
@@ -234,8 +242,13 @@ isAlreadyTested() {
 
 
 rm -rf uml/Classes.uml Classes.png
-[ "$1" == "clean" ] && rm -f uml/Classe*.uml
-[ "$1" == "clear" ] && rm -f uml/Classe*.uml && echo "UML files deleted" && exit 0
+for i in $*
+do
+    [ "$i" == "clean" ] && rm -f uml/*Classe*.uml
+    [ "$i" == "clear" ] && rm -f uml/*Classe*.uml && echo "UML files deleted" && exit 0
+    [ "$i" == "noget" ] && noget='true'
+    [ "$i" == "noset" ] && noset='true'
+done
 
 echo "@startuml" >> uml/Classes.uml
 echo "!include skin.uml" >> uml/Classes.uml
@@ -243,30 +256,41 @@ echo "!include skin.uml" >> uml/Classes.uml
 
 
 
-for i in Model Combat
+for package in $JAVA_PATH
 do
-    echo "Java file analysis in progress in $i"
-    nbFichier=$(ls $i/*.java |grep -v "Main" | wc -l)
+    echo "Package $package in analysis"
+    nbFichier=$(ls $package/*.java |grep -v "Main" | wc -l)
     indic=0
-    echo "package $i{" >> uml/Classes.uml
-    echo "!include links$i.uml" >> uml/Classes.uml
-    for javaFile in $(ls $i/*.java | grep -v "Main")
+    echo "package $package{" >> uml/Classes.uml
+    for javaFile in $(ls $package/*.java | grep -v "Main")
     do
         name=$(basename -s .java $javaFile) # Nom du fichier sans extenstion
         preprocessedFile=$(preprocessTxt "$(cat "$javaFile")")
         md5sumJava=$(echo "$preprocessedFile" | md5sum)
-        echo "!include Classe$name.uml"  >> uml/Classes.uml
 
         indic=$(($indic + 1)) # Numero du fichier traité
-        echoerr -n "[$indic/$nbFichier]" #debug
+        echoerr -n "  [$indic/$nbFichier]" #debug
+
+        if [ "$noget" ] && [ "$noset" ]
+        then
+            echo "!include ngns.$package.Classe$name.uml"  >> uml/Classes.uml
+        elif [ "$noget" ]
+        then
+            echo "!include ng.$package.Classe$name.uml"  >> uml/Classes.uml
+        elif [ "$noset" ]
+        then
+            echo "!include ns.$package.Classe$name.uml"  >> uml/Classes.uml
+        else
+            echo "!include $package.Classe$name.uml"  >> uml/Classes.uml
+        fi
 
 
-        if [[ "$(isAlreadyTested "$javaFile" "$md5sumJava")" ]]
+        if [[ "$(isAlreadyTested "$javaFile" "$md5sumJava" "$package")" ]]
         then
             echoerr "  (-)  Class $name"
         else
             echoerr "  (O)  Class $name" # Debug
-            rm -f uml/Classe$name.uml
+            rm -f uml/$package.Classe$name.uml
 
             #Get the file content, and get its header and its declarations
             header=$(cat "$javaFile" | grep "class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
@@ -293,14 +317,29 @@ do
             done <<< "$(echo "$preprocessedFile")"
 
             printFile "$classType" "$name" "$attribut" "$contr" "$setter" "$getter" "$meth" "$md5sumJava"
+
+        fi
+        if [ "$noget" ] && [ "$noset" ]
+        then
+            cat uml/$package.Classe$name.uml | tr '\n' '\f' | sed 's/BEGINSETTER.*ENDGETTER//g' | tr '\f' '\n'>> uml/ngns.$package.Classe$name.uml
+        elif [ "$noget" ]
+        then
+            cat uml/$package.Classe$name.uml | tr '\n' '\f' | sed 's/BEGINGETTER.*ENDGETTER//g' | tr '\f' '\n'>> uml/ng.$package.Classe$name.uml
+        elif [ "$noset" ]
+        then
+            cat uml/$package.Classe$name.uml | tr '\n' '\f' | sed 's/BEGINSETTER.*ENDSETTER//g' | tr '\f' '\n'>> uml/ns.$package.Classe$name.uml
         fi
     done
     echo "}" >> uml/Classes.uml
 done
 
+
+echo "!include links.uml" >> uml/Classes.uml
 echo "@enduml" >> uml/Classes.uml
 echo "UML created. PNG rendering in progress"
 java -jar uml/plantuml.jar uml/Classes.uml
 mv uml/Classes.png .
+
+rm -rf uml/ngns.* uml/ng.* uml/ns.*
 
 [ -e Classes.png ] && eog Classes.png || xdg-open Classes.png

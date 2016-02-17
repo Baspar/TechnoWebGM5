@@ -1,3 +1,8 @@
+Combat o-- VillageCombat
+Combat o-- ArmeeCombat
+
+VillageCombat o-- Village
+ArmeeCombat o-- Armee
 Joueur "1" o-- "*" Village
 Village "1" o-- "1" Batiments
 Village "1" o-- "1" Armee

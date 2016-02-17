@@ -1,3 +1,4 @@
 Classes.png
-uml/Class*.uml
+uml/*.Classe*.uml
+uml/Classe*.uml
 *.class
