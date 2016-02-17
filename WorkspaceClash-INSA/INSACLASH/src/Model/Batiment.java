@@ -1,6 +1,6 @@
 package Model;
 
-abstract class Batiment{
+public abstract class Batiment{
     protected TypeRessource ressourceNecessaire;
     protected TypeBatiment typeBatiment;
     protected int pointsDeVie;

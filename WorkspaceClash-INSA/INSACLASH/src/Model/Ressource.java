@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Date;
 
-abstract class Ressource extends Batiment{
+public abstract class Ressource extends Batiment{
     protected TypeRessource typeRessource;
     protected int tauxParHeure;
     //Represente le dernier moment ou on a vide la mine
