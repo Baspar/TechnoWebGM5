@@ -1,0 +1,5 @@
+Combat o-- VillageCombat
+Combat o-- ArmeeCombat
+
+VillageCombat o-- Village
+ArmeeCombat o-- Armee

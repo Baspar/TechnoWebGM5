@@ -239,58 +239,63 @@ rm -rf uml/Classes.uml Classes.png
 
 echo "@startuml" >> uml/Classes.uml
 echo "!include skin.uml" >> uml/Classes.uml
-echo "!include links.uml" >> uml/Classes.uml
 
 
 
-nbFichier=$(ls Model/*.java |grep -v "Main" | wc -l)
-indic=0
 
-echo "Java file analysis in progress"
-for javaFile in $(ls Model/*.java | grep -v "Main")
+for i in Model Combat
 do
-    name=$(basename -s .java $javaFile) # Nom du fichier sans extenstion
-    preprocessedFile=$(preprocessTxt "$(cat "$javaFile")")
-    md5sumJava=$(echo "$preprocessedFile" | md5sum)
-    echo "!include Classe$name.uml"  >> uml/Classes.uml
+    echo "Java file analysis in progress in $i"
+    nbFichier=$(ls $i/*.java |grep -v "Main" | wc -l)
+    indic=0
+    echo "package $i{" >> uml/Classes.uml
+    echo "!include links$i.uml" >> uml/Classes.uml
+    for javaFile in $(ls $i/*.java | grep -v "Main")
+    do
+        name=$(basename -s .java $javaFile) # Nom du fichier sans extenstion
+        preprocessedFile=$(preprocessTxt "$(cat "$javaFile")")
+        md5sumJava=$(echo "$preprocessedFile" | md5sum)
+        echo "!include Classe$name.uml"  >> uml/Classes.uml
 
-    indic=$(($indic + 1)) # Numero du fichier traité
-    echoerr -n "[$indic/$nbFichier]" #debug
+        indic=$(($indic + 1)) # Numero du fichier traité
+        echoerr -n "[$indic/$nbFichier]" #debug
 
 
-    if [[ "$(isAlreadyTested "$javaFile" "$md5sumJava")" ]]
-    then
-        echoerr "  (-)  Class $name"
-    else
-        echoerr "  (O)  Class $name" # Debug
-        rm -f uml/Classe$name.uml
+        if [[ "$(isAlreadyTested "$javaFile" "$md5sumJava")" ]]
+        then
+            echoerr "  (-)  Class $name"
+        else
+            echoerr "  (O)  Class $name" # Debug
+            rm -f uml/Classe$name.uml
 
-        #Get the file content, and get its header and its declarations
-        header=$(cat "$javaFile" | grep "class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
-        preprocessedFile=$(echo "$preprocessedFile" | grep -v "class\|enum"  | sed '/^}$/d' )
+            #Get the file content, and get its header and its declarations
+            header=$(cat "$javaFile" | grep "class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
+            preprocessedFile=$(echo "$preprocessedFile" | grep -v "class\|enum"  | sed '/^}$/d' )
 
-        #Is the class abstract/an interface ?
-        classType=$(getClassType "$header")
+            #Is the class abstract/an interface ?
+            classType=$(getClassType "$header")
 
-        constr=""
-        meth=""
-        getter=""
-        setter=""
-        attribut=""
+            constr=""
+            meth=""
+            getter=""
+            setter=""
+            attribut=""
 
-        [[ "$preprocessedFile" ]] && while read line
-        do
-            #Sort every line(=Attribute/Method) in its corresponding group
-            if [[ $classType == "enum" ]]
-            then
-                computeEnum "$line"
-            else
-                compute "$line" "$name"
-            fi
-        done <<< "$(echo "$preprocessedFile")"
+            [[ "$preprocessedFile" ]] && while read line
+            do
+                #Sort every line(=Attribute/Method) in its corresponding group
+                if [[ $classType == "enum" ]]
+                then
+                    computeEnum "$line"
+                else
+                    compute "$line" "$name"
+                fi
+            done <<< "$(echo "$preprocessedFile")"
 
-        printFile "$classType" "$name" "$attribut" "$contr" "$setter" "$getter" "$meth" "$md5sumJava"
-    fi
+            printFile "$classType" "$name" "$attribut" "$contr" "$setter" "$getter" "$meth" "$md5sumJava"
+        fi
+    done
+    echo "}" >> uml/Classes.uml
 done
 
 echo "@enduml" >> uml/Classes.uml

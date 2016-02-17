@@ -3,7 +3,7 @@ package Model;
 import java.util.Vector;
 
 public class Village{
-    private final static int tailleVillage=25;
+    private final static int tailleVillage=10;
     private String nom;
     private Batiments batiments;
     private Armee armee;
@@ -21,6 +21,7 @@ public class Village{
                 carte.get(i).add(null);
         }
         deplacerBatiment(TypeBatiment.HDV, 0, 0, 0);
+        deplacerBatiment(TypeBatiment.CASERNE, 0, 0, 1);
     }
 
     Village(String n){//DONE
@@ -102,8 +103,8 @@ public class Village{
 
     public boolean quantiteBatimentAtteinte(TypeBatiment type){//DONE
         HDV h=this.getHDV();
-        int quantiteActuelle=h.getQuantiteActuelle().get(type);
-        int quantiteMax=h.getQuantiteMax().get(type);
+        int quantiteActuelle=getBatiments().getBatiments(type).size();
+        int quantiteMax=h.getQuotaBatiment(type);
         return (quantiteActuelle >= quantiteMax);
     }
 
@@ -195,26 +196,28 @@ public class Village{
         for(Vector<Batiment> ligne:carte){
             out += "|";
             for(Batiment batiment:ligne){
-                switch(batiment){
-                    case TypeBatiment.CANON:        out += " C ";
-                                                    break;
-                    case TypeBatiment.MORTIER:      out += " M ";
-                                                    break;
-                    case TypeBatiment.MINEOR:       out += "MiO";
-                                                    break;
-                    case TypeBatiment.MINEARGENT:   out += "MiA";
-                                                    break;
-                    case TypeBatiment.HDV:          out += "HDV";
-                                                    break;
-                    case TypeBatiment.CASERNE:      out += "Cas";
-                                                    break;
-                }
+                if(batiment!=null){
+                    TypeBatiment type=batiment.getTypeBatiment();
+                    if (type == TypeBatiment.CANON)
+                        out += " C ";
+                    else if(type == TypeBatiment.MORTIER)
+                        out += " M ";
+                    else if(type == TypeBatiment.MINEOR)
+                        out += "MiO";
+                    else if(type == TypeBatiment.MINECHARBON)
+                        out += "MiC";
+                    else if(type == TypeBatiment.HDV)
+                        out += "HDV";
+                    else if(type == TypeBatiment.CASERNE)
+                        out += "Cas";
+                } else
+                    out += "   ";
                 out += "|";
             }
             out += "\n";
             out +="+";
             for(int i=0; i<tailleVillage; i++)
-                out += "--+";
+                out += "---+";
             out += "\n";
         }
         out += "\n";
@@ -229,10 +232,9 @@ public class Village{
 
         //Affichage armee
         out += "#####ARMEE#####\n";
-        out += "Taille armee "+getArmee().calculNbSoldat()+"\n";
-        out += "Compo armee\n";
+        out += "  Taille: "+getArmee().calculNbSoldat()+"\n";
         for(int i=0;i<getArmee().getSoldats().size();i++)
-            out += "\t Type " +getArmee().getSoldats().get(i).getType()+"niveau"+getArmee().getSoldats().get(i).getNiveau()+"\n";
+            out += "    *" +getArmee().getSoldats().get(i).getType()+" lvl"+getArmee().getSoldats().get(i).getNiveau()+"\n";
         out += "\n";
 
 
