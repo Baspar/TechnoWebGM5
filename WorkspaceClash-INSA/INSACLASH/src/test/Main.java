@@ -1,6 +1,8 @@
-package Model;
+package test;
 
 import java.util.*;
+
+import Model.MineOr;
 public class Main{
     public static void main (String [] arg){
         MineOr mine=new MineOr();

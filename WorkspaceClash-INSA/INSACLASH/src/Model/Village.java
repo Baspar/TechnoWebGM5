@@ -10,7 +10,7 @@ public class Village{
     private Vector<Vector<Batiment>> carte;
 
 
-    Village(){//DONE
+    public Village(){//DONE
         batiments=new Batiments();
         armee=this.getCaserne().getArmee();
 
@@ -24,7 +24,7 @@ public class Village{
         deplacerBatiment(TypeBatiment.CASERNE, 0, 0, 1);
     }
 
-    Village(String n){//DONE
+    public Village(String n){//DONE
         this();
         nom=n;
     }

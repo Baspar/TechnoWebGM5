@@ -8,8 +8,8 @@ import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
 
-import Model.ConnexionForm;
 import Model.Joueur;
+import form.ConnexionForm;
 
 /**
 * Classe DAOFactory representant la fabrique DAO
