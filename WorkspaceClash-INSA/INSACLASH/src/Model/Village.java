@@ -234,7 +234,7 @@ public class Village{
         out += "#####ARMEE#####\n";
         out += "  Taille: "+getArmee().calculNbSoldat()+"\n";
         for(int i=0;i<getArmee().getSoldats().size();i++)
-            out += "    *" +getArmee().getSoldats().get(i).getType()+" lvl"+getArmee().getSoldats().get(i).getNiveau()+"\n";
+            out += "    * ["+getArmee().getSoldats().get(i).getId()+"]" +getArmee().getSoldats().get(i).getType()+" lvl"+getArmee().getSoldats().get(i).getNiveau()+"\n";
         out += "\n";
 
 

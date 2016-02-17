@@ -1,6 +1,8 @@
 package Model;
 
 public abstract class Soldat{
+    protected static int cpt=0;
+    protected int id;
     protected TypeSoldat type;
     protected TypeRessource ressourceNecessaire;
     protected int pointsDeVie;
@@ -21,6 +23,9 @@ public abstract class Soldat{
         niveau++;
     }
 
+    public int getId(){//DONE
+        return id;
+    }
     public TypeSoldat getType(){//DONE
         return type;
     }
