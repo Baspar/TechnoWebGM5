@@ -2,8 +2,6 @@ package Model;
 
 public class Archer extends Soldat{
     public Archer(){//DONE
-        id=cpt;
-        cpt++;
         ressourceNecessaire=TypeRessource.CHARBON;
         type=TypeSoldat.ARCHER;
         pointsDeVie=20;
