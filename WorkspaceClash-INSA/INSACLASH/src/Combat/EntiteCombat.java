@@ -27,6 +27,12 @@ public abstract class EntiteCombat{
     public int getPV(){//DONE
         return PV;
     }
+    public void setX(int i){//DONE
+        x=i;
+    }
+    public void setY(int i){//DONE
+        y=i;
+    }
     public int getX(){//DONE
         return x;
     }

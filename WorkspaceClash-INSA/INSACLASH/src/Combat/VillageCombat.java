@@ -10,7 +10,7 @@ import Model.Batiment;
 public class VillageCombat{
     private Vector<BatimentCombat> batiments;
 
-    public VillageCombat(Village village){//TODO
+    public VillageCombat(Village village){//DONE
         Set<TypeBatiment> typeBatiment=village.getBatiments().getSetNomBatiment();
         for(TypeBatiment type : typeBatiment)
             for(Batiment batiment : village.getBatiment(type))

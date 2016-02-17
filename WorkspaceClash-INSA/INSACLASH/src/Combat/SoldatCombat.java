@@ -6,12 +6,12 @@ public class SoldatCombat extends EntiteCombat{
 
     private Soldat soldat;
 
-    public SoldatCombat(Soldat soldat){//TODO
+    public SoldatCombat(Soldat soldat){//DONE
         this.x      = -1;
         this.y      = -1;
         this.soldat = soldat;
     }
-    public void deplacer(){//TODO
+    public void deplacerVers(BatimentCombat batiment){//TODO
     }
     public void attaquer(EntiteCombat entite){//TODO
     }
