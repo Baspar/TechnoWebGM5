@@ -1,6 +1,6 @@
 package Model;
 
-abstract class Soldat{
+public abstract class Soldat{
     protected TypeSoldat type;
     protected TypeRessource ressourceNecessaire;
     protected int pointsDeVie;

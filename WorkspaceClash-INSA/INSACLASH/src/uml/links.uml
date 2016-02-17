@@ -1,8 +1,10 @@
-Combat o-- VillageCombat
-Combat o-- ArmeeCombat
+' Package Combat
+Combat "1" o-- "1" VillageCombat
+Combat "1" o-- "1" ArmeeCombat
+ArmeeCombat "1" o-- "*" SoldatCombat
 
-VillageCombat o-- Village
-ArmeeCombat o-- Armee
+
+' Package Model
 Joueur "1" o-- "*" Village
 Village "1" o-- "1" Batiments
 Village "1" o-- "1" Armee

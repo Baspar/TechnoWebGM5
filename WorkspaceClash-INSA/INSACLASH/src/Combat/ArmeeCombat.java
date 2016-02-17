@@ -1,13 +1,17 @@
 package Combat;
 
+import java.util.Vector;
+
 import Model.Armee;
+import Model.Soldat;
 
 public class ArmeeCombat{
-    public Armee armee;
+    Vector<SoldatCombat> soldats;
 
-    public ArmeeCombat(){//TODO
-    }
-    public ArmeeCombat(Armee armee){//TODO
+    public ArmeeCombat(Armee armee){//DONE
+        soldats=new Vector<SoldatCombat>();
+        for(Soldat soldat:armee.getSoldats())
+            soldats.add(new SoldatCombat(soldat));
     }
 }
 

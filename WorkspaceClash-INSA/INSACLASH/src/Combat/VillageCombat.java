@@ -1,9 +1,11 @@
 package Combat;
 
+import java.util.Vector;
+
 import Model.Village;
 
 public class VillageCombat{
-    public Village village;
+
 
     public VillageCombat(){//TODO
     }
