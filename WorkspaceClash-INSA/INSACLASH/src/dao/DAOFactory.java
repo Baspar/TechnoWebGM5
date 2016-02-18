@@ -149,6 +149,12 @@ public class DAOFactory {
 	public HDVDao getHDVDao() {
 		return new HDVDaoImpl( this );
 	}
+
+
+	public CaserneDaoImpl getCaserneDao() {
+		// TODO Auto-generated method stub
+		return new CaserneDaoImpl(this);
+	}
 		
 	
 } 
