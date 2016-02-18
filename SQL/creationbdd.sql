@@ -20,7 +20,7 @@ CREATE TABLE Joueur(
     PRIMARY KEY(login)
 );
 CREATE TABLE Ressource(
-    id INTEGER NOT NULL,
+    id INTEGER AUTO_INCREMENT NOT NULL,
     niveau INTEGER NOT NULL,
     loginJoueur VARCHAR(20) NOT NULL,
     typeRessource ENUM('MineCharbon', 'MineOr'),
@@ -32,7 +32,7 @@ CREATE TABLE Ressource(
     FOREIGN KEY(loginJoueur) REFERENCES Joueur(login)
 );
 CREATE TABLE Defense(
-    id INTEGER NOT NULL,
+    id INTEGER AUTO_INCREMENT NOT NULL,
     niveau INTEGER NOT NULL,
     loginJoueur VARCHAR(20) NOT NULL,
     typeDefense ENUM('Canon', 'Mortier'),
