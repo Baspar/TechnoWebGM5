@@ -156,5 +156,7 @@ public class DAOFactory {
 		return new CaserneDaoImpl(this);
 	}
 		
-	
+	public DefenseDaoImpl getDefenseDao(){
+		return new DefenseDaoImpl(this);
+	}
 } 
