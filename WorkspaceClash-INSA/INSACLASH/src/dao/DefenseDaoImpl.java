@@ -127,7 +127,7 @@ public class DefenseDaoImpl implements DefenseDao {
 	    	preparedStatement=initialisationRequetePreparee(connexion, SQL_UPGRADE_DEFENSE, false, d.getNiveau()+1, login,id);
 	    	int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
-                throw new DAOException( "Échec du deplacement de la defense, aucune ligne modifiée dans la table." );
+                throw new DAOException( "Échec de l'amélioration de la défense, aucune ligne modifiée dans la table." );
             }
 	    }catch(SQLException e){
 	    	throw new DAOException(e);
@@ -167,7 +167,9 @@ public class DefenseDaoImpl implements DefenseDao {
             	preparedStatement = initialisationRequetePreparee( connexion, SQL_AJOUTER_DEFENSE, true, defense.getNiveau(),login, "Mortier", defense.getX(), defense.getY());
             int statut = preparedStatement.executeUpdate();
             //ON DONNE A LA DEFENSE SON ID GENERE DANS LA TABLE 
-           // defense.setId(preparedStatement.getGeneratedKeys().getInt("id"));
+            ResultSet result=preparedStatement.getGeneratedKeys();
+            if(result.next())
+            	defense.setId(result.getInt(1));
             if ( statut == 0 ) {
                 throw new DAOException( "Échec de l'ajout de la defense, aucune ligne ajoutée dans la table." );
             }

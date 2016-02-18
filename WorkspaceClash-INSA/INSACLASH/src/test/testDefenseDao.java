@@ -18,7 +18,7 @@ public class testDefenseDao {
 		//caserne.creerCaserne(casernetest, "test");
 		System.out.println("Affichage de la taille des vecteurs");
 		System.out.println(def.trouverCanon("test").size());
-		System.out.println(def.trouverCanon("test").size());
+		System.out.println(def.trouverMortier("test").size());
 		System.out.println("ajout d'un canon et d'un mortier");
 		def.ajouterDefense("test", new Canon());
 		def.ajouterDefense("test", new Mortier());
