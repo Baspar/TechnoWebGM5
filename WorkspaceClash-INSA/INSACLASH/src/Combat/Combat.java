@@ -17,10 +17,10 @@ public class Combat{
     // Si le Model.village a une taille de X, le terrain aura une taille de X*zoom, plus deux ligne et colonnes sur les bords permettant le placement des soldats
     // En clair, les batiments font 1x1 dans Model.Village, mais font Zoom*Zoom dans VillageCombat
 
-    public Combat(Village tVillage, Armee tArmee){//WIP
+    public Combat(Village tVillage, Armee tArmee){//DONE
         //Creation village et armee
         armee=new ArmeeCombat(tArmee);
-        village=new VillageCombat(tVillage);
+        village=new VillageCombat(tVillage, zoom);
 
         //Recuperation taillevillage
         tailleVillage=tVillage.getTailleVillage();
@@ -50,50 +50,17 @@ public class Combat{
             }
         return (resteBatiments && resteSoldats);
     }
-    private Vector<SoldatCombat> trouverSoldatsAPortee(BatimentCombat batiment){//TODO
-        Vector<SoldatCombat> out = new Vector<SoldatCombat>();
-        return out;
-    }
-    private BatimentCombat trouverBatimentAPortee(SoldatCombat soldat){//TODO
-        int x = soldat.getX();
-        int y = soldat.getY();
-
-        for(int i=-1; i<2; i++)
-            for(int j=-1; j<2; j++)
-                if( i!=0 || j!=0 )
-                    if( (x+i>=0) && (y+j>=0) && (x+i<tailleVillage*zoom+2) && (y+j<tailleVillage*zoom+2) )
-                        for(Integer idEntite : terrain.get(x+i).get(y+j).keySet())
-                            if(terrain.get(x+i).get(y+j).get(idEntite).getType()==TypeEntite.BATIMENT)
-                                return (BatimentCombat)terrain.get(x+i).get(y+j).get(idEntite);
-
-        return null;
-    }
-    private BatimentCombat trouverBatimentLePlusProche(SoldatCombat soldat){//TODO
-        return null;
-    }
-    private void tourBatiment(){//DONE
-        for(BatimentCombat batiment:village.getBatiments()){
-            if(!batiment.estMort()){
-                Vector<SoldatCombat> soldatsAPortee= trouverSoldatsAPortee(batiment);
-                for(SoldatCombat soldat : soldatsAPortee)
-                    batiment.attaquer(soldat);
-            }
-        }
-    }
     private double distance(int x1, int y1, int x2, int y2){//DONE
         return Math.sqrt( Math.pow((y1-y2), 2) + Math.pow((y1-y2), 2));
     }
-    private void deplacementSoldat(SoldatCombat soldat){//WIP
+    private void deplacementSoldat(SoldatCombat soldat){//CHK
         int deplacementMax = soldat.getSoldat().getVitesseDeplacement();
         int id = soldat.getId();
         int oldX = soldat.getX();
         int oldY = soldat.getY();
-        int newX = 0;
-        int newY = 0;
-
-        //TODO: Trouver où deplacer ce fichu soldat a la con
-        // Même pas sur que batimentleplusproche() soit utile, puisque les batiment font zoom*zoom et non pas 1*1
-        // BatimentCombat batimentLePlusProche=trouverBatimentLePlusProche(soldat);
+        Vector<Integer> result = soldat.ouAller(village.getBatiments());
+        int newX = result.get(0);
+        int newY = result.get(1);
 
         soldat.setX(newX);
         soldat.setY(newY);
@@ -101,21 +68,25 @@ public class Combat{
         terrain.get(newX).get(newY).put(id, soldat);
 
     }
-    private void tourSoldat(){//DONE
-        for(SoldatCombat soldat : armee.getSoldats()){
-            if(!soldat.estMort()){
-                BatimentCombat batimentAPortee = trouverBatimentAPortee(soldat);
-                if(batimentAPortee == null){
-                    deplacementSoldat(soldat);
-                } else
-                    soldat.attaquer(batimentAPortee);
+    private void tourBatiment(){//DONE
+        for(BatimentCombat batiment:village.getBatiments()){
+            if(!batiment.estMort()){
+                Vector<SoldatCombat> soldats = batiment.trouverSoldatAPortee(armee.getSoldats());
+                if(soldats.size()!=0)
+                    batiment.attaquer(soldats);
             }
         }
     }
-    private void tourDeJeu(){//DONE
-        tourBatiment();
-        tourSoldat();
-        checkMorts();
+    private void tourSoldat(){//DONE
+        for(SoldatCombat soldat : armee.getSoldats()){
+            if(!soldat.estMort()){
+                Vector<BatimentCombat> batiments = soldat.trouverBatimentAPortee(village.getBatiments());
+                if(batiments.size()!=0)
+                    soldat.attaquer(batiments);
+                else
+                    deplacementSoldat(soldat);
+            }
+        }
     }
     private void checkMorts(){//DONE
         for(int i=0; i<armee.getSoldats().size(); i++)
@@ -137,7 +108,10 @@ public class Combat{
             }
     }
     public void combattre(){//DONE
-        while(!estTermine())
-            tourDeJeu();
+        while(!estTermine()){
+            tourBatiment();
+            tourSoldat();
+            checkMorts();
+        }
     }
 }

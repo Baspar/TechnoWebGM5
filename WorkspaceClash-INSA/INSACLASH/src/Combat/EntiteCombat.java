@@ -1,5 +1,7 @@
 package Combat;
 
+import java.util.Vector;
+
 public abstract class EntiteCombat{
     protected static int cpt=0;
     protected final int id=cpt++;
@@ -7,8 +9,12 @@ public abstract class EntiteCombat{
     protected int y;
     protected int PV;
     protected TypeEntite type;
+    protected int taille;
 
 
+    public int getTaille(){//DONE
+        return taille;
+    }
     public int getId(){//DONE
         return id;
     }
@@ -23,6 +29,9 @@ public abstract class EntiteCombat{
     }
     public void setPV(int i){//DONE
         PV=i;
+    }
+    public void retirerPV(int pv){//DONE
+        PV=Math.max(0, PV-pv);
     }
     public int getPV(){//DONE
         return PV;
@@ -42,5 +51,4 @@ public abstract class EntiteCombat{
     public TypeEntite getType(){//DONE
         return type;
     }
-    public abstract void attaquer(EntiteCombat entite);
 }
