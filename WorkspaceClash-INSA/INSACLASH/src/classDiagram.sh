@@ -19,10 +19,18 @@ compute() {
     isAFunction=$(echo "$line" | grep "(" | sed '/^$/d')
     if ! [[ "$isAFunction" ]]
     then
+
         attrType=$(getAttrType "$line")
 
         attrOut=$(getAttrOut "$line")
         attrName=$(getAttrName "$line")
+
+        #"static function" case
+        if [[ $(echo "$line" | grep static) != "" ]]
+        then
+            attrName="{static}$attrName"
+            line=$(echo $line | sed 's/static //g')
+        fi
 
         attribut="$attribut        $attrType $attrName : $attrOut\n"
     else
@@ -42,7 +50,13 @@ compute() {
         if [[ $(echo "$line" | grep abstract) != "" ]]
         then
             fonction="{abstract}$fonction"
-            line=$(echo $line | cut -d' ' -f2-)
+            line=$(echo $line | sed 's/abstract //g')
+        fi
+        #"static function" case
+        if [[ $(echo "$line" | grep static) != "" ]]
+        then
+            fonction="{static}$fonction"
+            line=$(echo $line | sed 's/static //g')
         fi
 
         if [ "$nomFonction" != "$classname" ]
@@ -217,7 +231,7 @@ preprocessTxt() {
                                         s/^[\t ]*//g;"\
                                 | grep "^public\|^private\|^protected" \
                                 | sed " s/{//g;
-                                        s/\(static\|final\) //g;
+                                        s/final //g;
                                         s/ *\([,=]\) */\1/g;
                                         s/\(<(\) */\1/g;
                                         s/ *\(>)\)/\1/g;
