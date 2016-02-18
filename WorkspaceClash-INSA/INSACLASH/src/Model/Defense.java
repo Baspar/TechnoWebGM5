@@ -1,6 +1,6 @@
 package Model;
 
-abstract class Defense extends Batiment{
+public abstract class Defense extends Batiment{
     protected TypeAttaque typeDefense;
     protected int puissanceDefense;
     protected double attaqueParSeconde; // On ne le prendra pas en compte dans les calculs juste au cas ou
