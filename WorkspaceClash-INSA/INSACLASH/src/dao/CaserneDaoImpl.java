@@ -20,10 +20,10 @@ public class CaserneDaoImpl implements CaserneDao {
 	private static final String SQL_FIND_CASERNE="SELECT * FROM Caserne where loginJoueur= ?";
 	private static final String SQL_UPGRADE_CASERNE="UPDATE Caserne SET niveau=? WHERE loginJoueur=?";
 	private static final String SQL_DEPLACER_CASERNE="UPDATE Caserne SET x=?, y=? WHERE loginJoueur=?";
-	private static final String SQL_AMELIORER_ARCHER="UPDATE Casernet SET niveauArcher=? WHERE loginJoueur=? ";
-	private static final String SQL_AMELIORER_TREBUCHET="UPDATE Casernet SET niveauTrebuchet=? WHERE loginJoueur=? ";
-	private static final String SQL_MODIF_NOMBRE_ARCHER="UPDATE Casernet SET nombreArcher=? WHERE loginJoueur=? ";
-	private static final String SQL_MODIF_NOMBRE_TREBUCHET="UPDATE Casernet SET nombreTrebuchet=? WHERE loginJoueur=? ";
+	private static final String SQL_AMELIORER_ARCHER="UPDATE Caserne SET niveauArcher=? WHERE loginJoueur=? ";
+	private static final String SQL_AMELIORER_TREBUCHET="UPDATE Caserne SET niveauTrebuchet=? WHERE loginJoueur=? ";
+	private static final String SQL_MODIF_NOMBRE_ARCHER="UPDATE Caserne SET nombreArcher=? WHERE loginJoueur=? ";
+	private static final String SQL_MODIF_NOMBRE_TREBUCHET="UPDATE Caserne SET nombreTrebuchet=? WHERE loginJoueur=? ";
 
 	private DAOFactory daoFactory;
 	
@@ -134,10 +134,13 @@ public class CaserneDaoImpl implements CaserneDao {
 		Armee armee=new Armee();
 		int nbArcher=res.getInt("nombreArcher");
 		int nbTrebuchet=res.getInt("nombreTrebuchet");
+	//	System.err.println(nbArcher);
+	//	System.err.println(nbTrebuchet);
 		for(int i=0; i<nbArcher; i++)
 			armee.ajouterSoldat(TypeSoldat.ARCHER, niveauArcher);
 		for(int j=0; j<nbTrebuchet;j++)
 			armee.ajouterSoldat(TypeSoldat.TREBUCHET, niveauTrebuchet);
+		cas.setArmee(armee);
 		return cas;
 	}
 
@@ -152,8 +155,11 @@ public class CaserneDaoImpl implements CaserneDao {
 	    	if(type==TypeSoldat.ARCHER){
 	    		preparedStatement=initialisationRequetePreparee(connexion, SQL_MODIF_NOMBRE_ARCHER, false, caserne.getNombreArcher()+nombre , login);
 	    	}
-	    	else
-	    		preparedStatement=initialisationRequetePreparee(connexion, SQL_MODIF_NOMBRE_TREBUCHET, false, caserne.getNombreTrebuchet()+nombre, login);
+	    	else{
+	    		int nb=caserne.getNombreTrebuchet()+nombre;
+	    		//System.err.println(nb);
+	    		preparedStatement=initialisationRequetePreparee(connexion, SQL_MODIF_NOMBRE_TREBUCHET, false, nb , login);
+	    	}
 	    	int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
                 throw new DAOException( "Échec de l'augmentation du niveau de la troupe, aucune ligne modifiée dans la table." );
