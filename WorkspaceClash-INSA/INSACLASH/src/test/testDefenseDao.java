@@ -1,36 +1,42 @@
 package test;
 
-import Model.Caserne;
-import dao.CaserneDaoImpl;
+
+import Model.Canon;
+import Model.Defense;
+import Model.Mortier;
 import dao.DAOFactory;
+import dao.DefenseDaoImpl;
 
 public class testDefenseDao {
 
 	public static void main(String[] args) {
 
 		DAOFactory fac= DAOFactory.getInstance();
-		CaserneDaoImpl caserne= (CaserneDaoImpl) fac.getCaserneDao();
-		Caserne casernetest=new Caserne();
+		DefenseDaoImpl def= (DefenseDaoImpl) fac.getDefenseDao();
 		//Fonction mais faire attention a ce que l'id soit bien dans la table joueur et 
 		// qu'il n'y a pas deja un caserne pour ce joueur
 		//caserne.creerCaserne(casernetest, "test");
-		System.out.println("Fonction trouver");
-		System.out.println("caserne existant:");
-		casernetest=caserne.trouverCaserne("test");
-		System.out.println("niveau "+casernetest.getNiveau());
-		System.out.println("x "+casernetest.getX());
-		System.out.println("y "+casernetest.getY());
-		System.out.println("nombreArcher "+casernetest.getNombreArcher());
-		System.out.println("caserne non existant");
-		System.out.println(caserne.trouverCaserne("test2"));
-		System.out.println("Fonction améliorer");
-		caserne.upgrade("test");
-		casernetest=caserne.trouverCaserne("test");
-		System.out.println("niveau "+casernetest.getNiveau());
-		System.out.println("x "+casernetest.getX());
-		System.out.println("y "+casernetest.getY());
-		System.out.println("nombreArcher "+casernetest.getNombreArcher());
-		System.out.println("Fonction deplacer");
-		
+		System.out.println("Affichage de la taille des vecteurs");
+		System.out.println(def.trouverCanon("test").size());
+		System.out.println(def.trouverCanon("test").size());
+		System.out.println("ajout d'un canon et d'un mortier");
+		def.ajouterDefense("test", new Canon());
+		def.ajouterDefense("test", new Mortier());
+		System.out.println(def.trouverCanon("test").size());
+		System.out.println(def.trouverCanon("test").size());
+		System.out.println("On essaie de trouver la defense avec l'id 1");
+		Defense d=def.trouverDefense("test", 1);
+		System.out.println(d.getId());
+		System.out.println(d.getNiveau());
+		System.out.println(d.getX());
+		System.out.println(d.getY());
+		System.out.println("On améliore son niveau et on le deplace");
+		def.deplacerDefense("test", 1, 2, 2);
+		def.upgradeDefense("test", 1);
+		d=def.trouverDefense("test", 1);
+		System.out.println(d.getId());
+		System.out.println(d.getNiveau());
+		System.out.println(d.getX());
+		System.out.println(d.getY());
 	}
 }
