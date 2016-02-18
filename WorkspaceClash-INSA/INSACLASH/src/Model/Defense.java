@@ -1,11 +1,22 @@
 package Model;
 
 public abstract class Defense extends Batiment{
+	private int id;
     protected TypeAttaque typeDefense;
     protected int puissanceDefense;
     protected double attaqueParSeconde; // On ne le prendra pas en compte dans les calculs juste au cas ou
 
-    public void setTypeDefense(TypeAttaque t){//DONE
+    
+    
+    public int getId(){//DONE
+		return id;
+	}
+
+	public void setId(int id){//DONE
+		this.id = id;
+	}
+
+	public void setTypeDefense(TypeAttaque t){//DONE
         typeDefense=t;
     }
 

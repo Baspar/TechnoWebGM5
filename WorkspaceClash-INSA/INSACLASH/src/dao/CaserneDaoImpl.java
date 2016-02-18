@@ -111,7 +111,7 @@ public class CaserneDaoImpl implements CaserneDao {
 	    	preparedStatement=initialisationRequetePreparee(connexion, SQL_DEPLACER_CASERNE, false, x,y, login);
 	    	int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
-                throw new DAOException( "Échec du deplacement de l'hdv, aucune ligne modifiée dans la table." );
+                throw new DAOException( "Échec du deplacement de la caserne, aucune ligne modifiée dans la table." );
             }
 	    }catch(SQLException e){
 	    	throw new DAOException(e);
@@ -122,7 +122,9 @@ public class CaserneDaoImpl implements CaserneDao {
 	
 	private Caserne map(ResultSet res) throws SQLException{
 		Caserne cas =new Caserne();
-		cas.setNiveau(res.getInt("niveau"));
+		int lvl=res.getInt("niveau");
+		for(int i=0;i <lvl; i++)
+			cas.upgrade();
 		cas.setX(res.getInt("X"));
 		cas.setY(res.getInt("y"));
 		Hashtable<TypeSoldat, Integer> niveauActuel=new Hashtable<TypeSoldat, Integer>();

@@ -3,14 +3,23 @@ package Model;
 import java.util.Date;
 
 public abstract class Ressource extends Batiment{
+	private int id;
     protected TypeRessource typeRessource;
     protected int tauxParHeure;
     //Represente le dernier moment ou on a vide la mine
     protected Date dateDerniereLevee;
     //Represente la quantite a partir de laquelle on considére que la mine est pleine
     protected int quantiteMaxStockee;
+    
+    public int getId(){//DONE
+		return id;
+	}
 
-    public int calculProduction(){//DONE
+	public void setId(int id){//DONE
+		this.id = id;
+	}
+
+	public int calculProduction(){//DONE
         Date dateActuelle=new Date();
         //Avec GetTime
         long date1= dateActuelle.getTime();
