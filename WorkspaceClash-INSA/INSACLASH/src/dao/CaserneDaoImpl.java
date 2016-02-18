@@ -22,6 +22,8 @@ public class CaserneDaoImpl implements CaserneDao {
 	private static final String SQL_DEPLACER_CASERNE="UPDATE Caserne SET x=?, y=? WHERE loginJoueur=?";
 	private static final String SQL_AMELIORER_ARCHER="UPDATE Casernet SET niveauArcher=? WHERE loginJoueur=? ";
 	private static final String SQL_AMELIORER_TREBUCHET="UPDATE Casernet SET niveauTrebuchet=? WHERE loginJoueur=? ";
+	private static final String SQL_MODIF_NOMBRE_ARCHER="UPDATE Casernet SET nombreArcher=? WHERE loginJoueur=? ";
+	private static final String SQL_MODIF_NOMBRE_TREBUCHET="UPDATE Casernet SET nombreTrebuchet=? WHERE loginJoueur=? ";
 
 	private DAOFactory daoFactory;
 	
@@ -141,8 +143,26 @@ public class CaserneDaoImpl implements CaserneDao {
 
 	@Override
 	public void modifNombreSoldat(String login, int nombre, TypeSoldat type) {
-		// TODO Auto-generated method stub
-		
+		Connection connexion = null;
+	    PreparedStatement preparedStatement = null;
+	    
+	    try{
+	    	connexion =daoFactory.getConnection();
+	    	Caserne caserne=trouverCaserne(login);
+	    	if(type==TypeSoldat.ARCHER){
+	    		preparedStatement=initialisationRequetePreparee(connexion, SQL_MODIF_NOMBRE_ARCHER, false, caserne.getNombreArcher()+nombre , login);
+	    	}
+	    	else
+	    		preparedStatement=initialisationRequetePreparee(connexion, SQL_MODIF_NOMBRE_TREBUCHET, false, caserne.getNombreTrebuchet()+nombre, login);
+	    	int statut = preparedStatement.executeUpdate();
+            if ( statut == 0 ) {
+                throw new DAOException( "Échec de l'augmentation du niveau de la troupe, aucune ligne modifiée dans la table." );
+            }
+	    }catch(SQLException e){
+	    	throw new DAOException(e);
+	    } finally{
+	    	fermeturesSilencieuses(preparedStatement, connexion);
+	    }
 	}
 
 	@Override
@@ -160,7 +180,7 @@ public class CaserneDaoImpl implements CaserneDao {
 	    		preparedStatement=initialisationRequetePreparee(connexion, SQL_AMELIORER_TREBUCHET, false, caserne.getNiveauActuel().get(TypeSoldat.TREBUCHET)+1, login);
 	    	int statut = preparedStatement.executeUpdate();
             if ( statut == 0 ) {
-                throw new DAOException( "Échec de l'augmentation du niveau de la troupe, aucune ligne modifiée dans la table." );
+                throw new DAOException( "Échec de la modif du nombre de soldat, aucune ligne modifiée dans la table." );
             }
 	    }catch(SQLException e){
 	    	throw new DAOException(e);
