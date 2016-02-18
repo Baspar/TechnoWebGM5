@@ -2,8 +2,6 @@ package Model;
 
 public class Trebuchet extends Soldat{
     Trebuchet(){//DONE
-        id=cpt;
-        cpt++;
         ressourceNecessaire=TypeRessource.CHARBON;
         type=TypeSoldat.TREBUCHET;
         pointsDeVie=300;
