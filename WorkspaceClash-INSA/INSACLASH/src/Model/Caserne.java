@@ -8,6 +8,21 @@ public class Caserne extends Batiment{
     private Hashtable<TypeSoldat,Integer> niveauActuel;
     private int tailleTotaleArmee;
 
+    public int getNombreArcher(){
+    	int nb=0;
+    	for(int i=0; i<armee.getSoldats().size();i++)
+    		if(armee.getSoldats().get(i).getType()==TypeSoldat.ARCHER)
+    			nb++;
+    	return nb;
+    }
+    
+    public int getNombreTrebuchet(){
+    	int nb=0;
+    	for(int i=0; i<armee.getSoldats().size();i++)
+    		if(armee.getSoldats().get(i).getType()==TypeSoldat.TREBUCHET)
+    			nb++;
+    	return nb;
+    }
     public int getTailleTotaleArmee(){//DONE
         return tailleTotaleArmee;
     }

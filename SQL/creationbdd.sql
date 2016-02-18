@@ -7,7 +7,6 @@ DROP TABLE Ressource;
 DROP TABLE Defense;
 DROP TABLE HDV;
 DROP TABLE Caserne;
-DROP TABLE Soldat;
 SET foreign_key_checks = 1;
 
 
@@ -59,16 +58,11 @@ CREATE TABLE Caserne(
     loginJoueur VARCHAR(20) NOT NULL,
     x INTEGER NOT NULL,
     y INTEGER NOT NULL,
+    nombreArcher INTEGER NOT NULL, 
+    niveauArcher INTEGER NOT NULL, 
+    nombreTrebuchet INTEGER NOT NULL,
+    niveauTrebuchet INTEGER NOT NULL,
 
     PRIMARY KEY(loginJoueur),
-    FOREIGN KEY(loginJoueur) REFERENCES Joueur(login)
-);
-CREATE TABLE Soldat(
-    id INTEGER NOT NULL,
-    niveau INTEGER NOT NULL,
-    loginJoueur VARCHAR(20) NOT NULL,
-    typeSoldat ENUM('Trebuchet', 'Archer'),
-
-    PRIMARY KEY(loginJoueur, typeSoldat, id),
     FOREIGN KEY(loginJoueur) REFERENCES Joueur(login)
 );
