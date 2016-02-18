@@ -53,7 +53,7 @@ public class CaserneDaoImpl implements CaserneDao {
 
 	@Override
 	public Caserne trouverCaserne(String login) {
-		Connection connexion = null;
+		 Connection connexion = null;
 	     PreparedStatement preparedStatement = null;
 	     ResultSet resultSet = null;
 	     Caserne caserne = null;

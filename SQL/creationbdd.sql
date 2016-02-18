@@ -28,7 +28,7 @@ CREATE TABLE Ressource(
     x INTEGER,
     y INTEGER,
 
-    PRIMARY KEY(loginJoueur, typeRessource, id),
+    PRIMARY KEY( id),
     FOREIGN KEY(loginJoueur) REFERENCES Joueur(login)
 );
 CREATE TABLE Defense(
@@ -39,7 +39,7 @@ CREATE TABLE Defense(
     x INTEGER NOT NULL,
     y INTEGER NOT NULL,
 
-    PRIMARY KEY(loginJoueur, typeDefense, id),
+    PRIMARY KEY( id),
     FOREIGN KEY(loginJoueur) REFERENCES Joueur(login)
 );
 CREATE TABLE HDV(
