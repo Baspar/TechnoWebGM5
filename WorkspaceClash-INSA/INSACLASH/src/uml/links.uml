@@ -32,3 +32,10 @@ Ressource <|-- MineCharbon
 
 Armee "1" ..* "1" Caserne
 
+' Package Dao
+CaserneDao <-- CaserneDaoImpl
+DefenseDao <-- DefenseDaoImpl
+HDVDao <-- HDVDaoImpl
+JoueurDao <-- JoueurDaoImpl
+RessourceDao <-- RessourceDaoImpl
+VillageDao <-- VillageDaoImpl

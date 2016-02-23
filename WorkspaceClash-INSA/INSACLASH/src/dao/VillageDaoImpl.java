@@ -93,4 +93,18 @@ public class VillageDaoImpl implements VillageDao {
 		return v;
 	}
 
+
+	@Override
+	public void deplacerBatiment(String login, Batiment b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void ameliorerBatiment(String login, Batiment b) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
