@@ -10,10 +10,11 @@ public class SoldatCombat extends EntiteCombat{
     private Soldat soldat;
 
     public SoldatCombat(Soldat soldat){//DONE
-        this.x      = -1;
-        this.y      = -1;
+        this.x      = 1;
+        this.y      = 1;
         this.soldat = soldat;
         this.taille = 1;
+        id=cpt++;
     }
     public Vector<BatimentCombat> trouverBatimentAPortee(Vector<BatimentCombat> batiments){//CHK
         int nbMaxBatiments=1;

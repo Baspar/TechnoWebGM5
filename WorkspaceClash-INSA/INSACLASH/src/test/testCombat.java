@@ -39,7 +39,6 @@ public class testCombat {
         }
         v.upgradeSoldat(TypeSoldat.ARCHER);
         v.upgradeSoldat(TypeSoldat.ARCHER);
-        System.out.println(v.affichageVillage());
      
         Armee armee =new Armee();
         for(int i=0; i<5; i++)
