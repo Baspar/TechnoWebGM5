@@ -171,6 +171,31 @@ public class Combat{
             tourBatiment();
             tourSoldat();
             checkMorts();
+            updateTerrainDistance();
+            afficherCombat();
         }
+    }
+    private void afficherCombat(){//DONE
+        String out="";
+
+        out +="+";
+        for(int i=0; i<tailleVillage; i++)
+            out += "---+";
+        out += "\n";
+
+        for(int x=0; x<tailleVillage; x++){
+            for(int y=0; y<tailleVillage; y++){
+                out +="+";
+                out +="+";
+            }
+            out += "\n";
+        }
+
+        out +="+";
+        for(int i=0; i<tailleVillage; i++)
+            out += "---+";
+        out += "\n";
+
+        System.out.println(out);
     }
 }
