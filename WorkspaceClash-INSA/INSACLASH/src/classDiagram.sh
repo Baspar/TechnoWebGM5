@@ -16,7 +16,7 @@ computeEnum() {
 compute() {
     line="$1"
     classname="$2"
-    isAFunction=$(echo "$line" | grep "(" | sed '/^$/d')
+    isAFunction=$(echo "$line" | grep "[^\"]*(" | sed '/^$/d')
     if ! [[ "$isAFunction" ]]
     then
 
