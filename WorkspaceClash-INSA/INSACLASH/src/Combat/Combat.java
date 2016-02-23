@@ -185,7 +185,11 @@ public class Combat{
         for(int x=0; x<tailleVillage; x++){
             out +="+";
             for(int y=0; y<tailleVillage; y++){
-                out +="  ";
+                int nb=0;
+                for(SoldatCombat soldat : armee.getSoldats())
+                    if (soldat.getX() == x && soldat.getY() )
+                        nb++;
+                out +=" "+nb+" ";
                 out +="+";
             }
             out += "\n";
