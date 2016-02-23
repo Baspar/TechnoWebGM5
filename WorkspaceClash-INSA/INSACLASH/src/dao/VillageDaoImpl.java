@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -8,12 +9,13 @@ import Model.Batiments;
 import Model.Canon;
 import Model.Caserne;
 import Model.Defense;
-import Model.HDV;
 import Model.MineCharbon;
 import Model.MineOr;
 import Model.Mortier;
 import Model.Ressource;
 import Model.TypeBatiment;
+import Model.TypeRessource;
+import Model.TypeSoldat;
 import Model.Village;
 
 public class VillageDaoImpl implements VillageDao {
@@ -100,13 +102,84 @@ public class VillageDaoImpl implements VillageDao {
 			CaserneDaoImpl cas=new CaserneDaoImpl(daoFactory);
 			cas.deplacer(login, x, y);
 		}
+		if(b.getTypeBatiment()==TypeBatiment.HDV){
+			HDVDaoImpl hdv=new HDVDaoImpl(daoFactory);
+			hdv.deplacer(login, x, y);
+		}
+		if(b.getTypeBatiment()==TypeBatiment.CASERNE || b.getTypeBatiment()==TypeBatiment.MORTIER){
+			DefenseDaoImpl def=new DefenseDaoImpl(daoFactory);
+			def.deplacerDefense(login, b.getId(), x, y);
+		}
+		if(b.getTypeBatiment()==TypeBatiment.MINECHARBON || b.getTypeBatiment()==TypeBatiment.MINEOR){
+			RessourceDaoImpl res=new RessourceDaoImpl(daoFactory);
+			res.deplacerRessource(login, b.getId(), x, y);
+		}
 	}
+
 
 
 	@Override
 	public void ameliorerBatiment(String login, Batiment b) {
-		// TODO Auto-generated method stub
-		
+		if(b.getTypeBatiment()==TypeBatiment.CASERNE){
+			CaserneDaoImpl cas=new CaserneDaoImpl(daoFactory);
+			cas.upgrade(login);
+		}
+		if(b.getTypeBatiment()==TypeBatiment.HDV){
+			HDVDaoImpl hdv=new HDVDaoImpl(daoFactory);
+			hdv.upgrade(login);
+		}
+		if(b.getTypeBatiment()==TypeBatiment.CASERNE || b.getTypeBatiment()==TypeBatiment.MORTIER){
+			DefenseDaoImpl def=new DefenseDaoImpl(daoFactory);
+			def.upgradeDefense(login, b.getId());
+		}
+		if(b.getTypeBatiment()==TypeBatiment.MINECHARBON || b.getTypeBatiment()==TypeBatiment.MINEOR){
+			RessourceDaoImpl res=new RessourceDaoImpl(daoFactory);
+			res.upgradeRessource(login, b.getId());
+		}
 	}
 
+
+	@Override
+	public void ajouterBatiment(String login, Batiment b) {
+		if(b.getTypeBatiment()==TypeBatiment.CASERNE || b.getTypeBatiment()==TypeBatiment.MORTIER){
+			DefenseDaoImpl def=new DefenseDaoImpl(daoFactory);
+			def.ajouterDefense(login, (Defense) b);
+		}
+		if(b.getTypeBatiment()==TypeBatiment.MINECHARBON || b.getTypeBatiment()==TypeBatiment.MINEOR){
+			RessourceDaoImpl res=new RessourceDaoImpl(daoFactory);
+			res.ajouterRessource(login, (Ressource) b);
+			}
+	}
+
+
+	@Override
+	public void viderRessource(String login, int id, Date d) {
+		RessourceDaoImpl res=new RessourceDaoImpl(daoFactory);
+		res.viderRessource(login, id, d);
+	}
+
+
+	@Override
+	public void miseAJourRessource(String login, TypeRessource type, int qte) {
+		HDVDaoImpl hdv=new HDVDaoImpl(daoFactory);
+		if(type==TypeRessource.CHARBON)
+			hdv.miseAJourCharbon(login, qte);
+		else
+			hdv.miseAJourOr(login, qte);
+	}
+
+
+	@Override
+	public void modifNbSoldat(String login, TypeSoldat t, int qte) {
+		CaserneDaoImpl cas=new CaserneDaoImpl(daoFactory);
+		cas.modifNombreSoldat(login, qte, t);
+	}
+
+
+	@Override
+	public void ameliorerSoldat(String login, TypeSoldat t) {
+		CaserneDaoImpl cas=new CaserneDaoImpl(daoFactory);
+		cas.ameliorerSoldat(login, t);
+	}
+	
 }
