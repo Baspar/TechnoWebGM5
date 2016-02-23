@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.LinkedList;
 
+import Model.TypeBatiment;
 import Model.Armee;
 import Model.Village;
 
@@ -185,11 +186,20 @@ public class Combat{
         for(int x=0; x<tailleVillage; x++){
             out +="+";
             for(int y=0; y<tailleVillage; y++){
-                int nb=0;
+                int nbSol=0;
                 for(SoldatCombat soldat : armee.getSoldats())
-                    if (soldat.getX() == x && soldat.getY() )
-                        nb++;
-                out +=" "+nb+" ";
+                    if (soldat.getX() == x && soldat.getY() == y)
+                        nbSol++;
+                if(nbSol != 0)
+                    out +=" "+nbSol+" ";
+                else{
+                    TypeBatiment typeBat=null;
+                    for(BatimentCombat bat : village.getBatiments())
+                        if (bat.getX() == x && bat.getY() == y)
+                            typeBat = bat.getBatiment().getTypeBatiment();
+                    if(typeBat != null)
+                        out+= typeBat==TypeBatiment.CASERNE?"CAS":typeBat==TypeBatiment.HDV?"HDV":typeBat==TypeBatiment.MORTIER?"MOR": typeBat==TypeBatiment.MINEOR?"MiO": typeBat==TypeBatiment.MINECHARBON?"MiC":"   ";
+                }
                 out +="+";
             }
             out += "\n";
