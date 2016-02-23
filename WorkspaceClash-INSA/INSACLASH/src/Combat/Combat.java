@@ -2,22 +2,25 @@ package Combat;
 
 import java.util.Vector;
 import java.util.Hashtable;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.LinkedList;
 
 import Model.Armee;
 import Model.Village;
 
 public class Combat{
-    public VillageCombat village;
-    public ArmeeCombat armee;
-    public Vector<Vector<Hashtable<Integer, EntiteCombat>>> terrain;
-    public int tailleVillage;
-    public int zoom=5;
+    private VillageCombat village;
+    private ArmeeCombat armee;
+    private Vector<Vector<Hashtable<Integer, EntiteCombat>>> terrain;
+    private int tailleVillage;
+    private int zoom=5;
+    private Vector<Vector<SimpleEntry<Integer, BatimentCombat>>> terrainDistance;
 
     // Note terrain :
     // Si le Model.village a une taille de X, le terrain aura une taille de X*zoom, plus deux ligne et colonnes sur les bords permettant le placement des soldats
     // En clair, les batiments font 1x1 dans Model.Village, mais font Zoom*Zoom dans VillageCombat
 
-    public Combat(Village tVillage, Armee tArmee){//DONE
+    public Combat(Village tVillage, Armee tArmee){//WIP
         //Creation village et armee
         armee=new ArmeeCombat(tArmee);
         village=new VillageCombat(tVillage, zoom);
@@ -27,10 +30,14 @@ public class Combat{
 
         //Creation terrain vierge
         terrain=new Vector<Vector<Hashtable<Integer, EntiteCombat>>>();
+        terrainDistance=new Vector<Vector<SimpleEntry<Integer, BatimentCombat>>>();
         for(int i=0; i<tailleVillage*zoom+2; i++){
             terrain.add(new Vector<Hashtable<Integer, EntiteCombat>>());
-            for(int j=0; j<tailleVillage*zoom+2; j++)
+            terrainDistance.add(new Vector<SimpleEntry<Integer, BatimentCombat>>());
+            for(int j=0; j<tailleVillage*zoom+2; j++){
                 terrain.get(i).add(new Hashtable<Integer, EntiteCombat>());
+                terrainDistance.get(i).add(new SimpleEntry<Integer, BatimentCombat>(-1, null));
+            }
         }
 
         //Placement batiments sur terrain
@@ -38,6 +45,46 @@ public class Combat{
             for(int i=0; i<zoom; i++)
                 for(int j=0; j<zoom; j++)
                     terrain.get(batiment.getX()*zoom+i+1).get(batiment.getY()*zoom+j+1).put(batiment.getId(), batiment);
+        }
+    }
+    private void updateTerrainDistance(){//WIP
+        //Remise a zero terrain distance
+        terrainDistance=new Vector<Vector<SimpleEntry<Integer, BatimentCombat>>>();
+        for(int i=0; i<tailleVillage*zoom+2; i++){
+            terrainDistance.add(new Vector<SimpleEntry<Integer, BatimentCombat>>());
+            for(int j=0; j<tailleVillage*zoom+2; j++)
+                terrainDistance.get(i).add(new SimpleEntry<Integer, BatimentCombat>(-1, null));
+        }
+
+        // Boucle sur batiment
+        for(BatimentCombat batiment : village.getBatiments()){
+            if(batiment.estATuer() || batiment.estMort()){
+            int xBat=batiment.getxBat();
+            int yBat=batiment.getyBat();
+            LinkedList<SimpleEntry<SimpleEntry<Integer, Integer>, Integer>> fifo = new LinkedList<SimpleEntry<SimpleEntry<Integer, Integer>, Integer>>();
+
+            // Ajout ligne haut et bas
+            for(int i=0; i<zoom; i++){
+                fifo.add(new SimpleEntry(new SimpleEntry(xBat+i, yBat), 0));
+                fifo.add(new SimpleEntry(new SimpleEntry(xBat+i, yBat+zoom-1), 0));
+            }
+
+            // Ajout colonne droite et gauche
+            for(int i=1; i<zoom-1; i++){
+                fifo.add(new SimpleEntry(new SimpleEntry(xBat, yBat+i), 0));
+                fifo.add(new SimpleEntry(new SimpleEntry(xBat+zoom-1, yBat+i), 0));
+            }
+
+            while(!fifo.isEmpty()){
+                SimpleEntry<SimpleEntry<Integer, Integer>, Integer> cell = fifo.removeFirst();
+                int x = cell.getKey().getKey();
+                int y = cell.getKey().getValue();
+                int dist = cell.getValue();
+                dist++;
+                for(int dx=-1; dx<2; dx+=2)
+                    for(int dy=-1; dy<2; dy+=2)
+                        if()
+            }
         }
     }
     private boolean estTermine(){//DONE
@@ -61,6 +108,9 @@ public class Combat{
         Vector<Integer> result = soldat.ouAller(village.getBatiments());
         int newX = result.get(0);
         int newY = result.get(1);
+
+        for(int dx=-deplacementMax; dx<deplacementMax; dx++)
+            for(int dy=-deplacementMax; dy<deplacementMax; dy++)
 
         soldat.setX(newX);
         soldat.setY(newY);

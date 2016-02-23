@@ -15,7 +15,7 @@ public class SoldatCombat extends EntiteCombat{
         this.taille = 1;
     }
     public Vector<BatimentCombat> trouverBatimentAPortee(Vector<BatimentCombat> batiments){//CHK
-        int nbMaxBatiments=2; //TODO: a mettre dans les classes
+        int nbMaxBatiments=1;
         int portee=5;//TODO: a mettre dans les classes
 
         Vector<BatimentCombat> out = new Vector<BatimentCombat>();
