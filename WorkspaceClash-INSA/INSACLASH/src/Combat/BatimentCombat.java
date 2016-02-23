@@ -20,8 +20,9 @@ public class BatimentCombat extends EntiteCombat{
     public void attaquer(Vector<SoldatCombat> soldats){//DONE
         TypeBatiment type = batiment.getTypeBatiment();
         if(type==TypeBatiment.CANON || type==TypeBatiment.MORTIER)
-            for(SoldatCombat soldat: soldats)
-                    soldat.retirerPV(((Defense)batiment).getPuissanceDefense());
+            for(SoldatCombat soldat: soldats){
+                    //soldat.retirerPV(((Defense)batiment).getPuissanceDefense());
+            }
     }
     public double distanceMin(int xo, int yo){//DONE
         // Calcul de la ditance mini d'un point a un carre (#)

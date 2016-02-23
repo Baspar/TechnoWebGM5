@@ -10,8 +10,8 @@ public abstract class Batiment{
     protected int tempsConstruction;
     protected int coutUpdate;
     protected int id;
-    
-    
+
+
 
     public int getId(){//DONE
 		return id;

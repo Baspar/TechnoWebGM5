@@ -10,20 +10,22 @@ public class SoldatCombat extends EntiteCombat{
     private Soldat soldat;
 
     public SoldatCombat(Soldat soldat){//DONE
-        this.x      = 1;
+        this.x      = 5;
         this.y      = 1;
         this.soldat = soldat;
         this.taille = 1;
+        this.PV     = soldat.getPointsDeVie();
         id=cpt++;
     }
-    public Vector<BatimentCombat> trouverBatimentAPortee(Vector<BatimentCombat> batiments){//CHK
+    public Vector<BatimentCombat> trouverBatimentAPortee(Vector<BatimentCombat> batiments, int zoom){//CHK
         int nbMaxBatiments=1;
-        int portee=5;//TODO: a mettre dans les classes
+        int portee=2;//TODO: a mettre dans les classes
 
         Vector<BatimentCombat> out = new Vector<BatimentCombat>();
         for(BatimentCombat batiment:batiments)
-            if( batiment.distanceMin(x, y) < portee ){
+            if( Math.abs(x-batiment.getX()*zoom+1)+Math.abs(y-batiment.getY()*zoom+1) <= portee ){
                 out.add(batiment);
+                System.out.println("    J'attaque un "+batiment.getBatiment().getTypeBatiment()+" ("+(Math.abs(x-batiment.getX()*zoom+1))+"eeee"+(Math.abs(y-batiment.getY()*zoom+1))+") ["+batiment.getPV()+"] -"+(batiment.getX()*zoom+1)+","+(batiment.getY()*zoom+1)+"-");
                 if(out.size()==nbMaxBatiments)
                     return out;
             }
