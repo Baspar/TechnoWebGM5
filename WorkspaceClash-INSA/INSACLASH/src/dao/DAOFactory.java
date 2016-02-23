@@ -29,14 +29,14 @@ public class DAOFactory {
 	private String username; 
 	private String password;
 	
-	DAOFactory( String url, String username, String password ) {
+	DAOFactory( String url, String username, String password ) {//DONE
 		this.url = url;
 		this.username = username;
 		this.password = password;
 	}
 	
 
-	public static DAOFactory getInstance() throws DAOConfigurationException {
+	public static DAOFactory getInstance() throws DAOConfigurationException {//DONE
 		Properties properties = new Properties();
 		String url;
 		String driver;
@@ -72,27 +72,27 @@ public class DAOFactory {
 		
 	
 	// Méthodes de récupération de l'implémentation des différents DAO (un seul pour le moment)
-	public JoueurDao getJoueurDao() {
+	public JoueurDao getJoueurDao() {//DONE
 		return new JoueurDaoImpl( this );
 	}
 	
-	public HDVDao getHDVDao() {
+	public HDVDao getHDVDao() {//DONE
 		return new HDVDaoImpl( this );
 	}
 
-	public CaserneDao getCaserneDao() {
+	public CaserneDao getCaserneDao() {//DONE
 		return new CaserneDaoImpl(this);
 	}
 		
-	public DefenseDao getDefenseDao(){
+	public DefenseDao getDefenseDao(){//DONE
 		return new DefenseDaoImpl(this);
 	}
 	
-	public RessourceDao getRessourceDao(){
+	public RessourceDao getRessourceDao(){//DONE
 		return new RessourceDaoImpl(this);
 	}
 	
-	public VillageDao getVillageDao(){
+	public VillageDao getVillageDao(){//DONE
 		return new VillageDaoImpl(this);
 	}
 } 

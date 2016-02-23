@@ -25,12 +25,12 @@ public class DefenseDaoImpl implements DefenseDao {
 		
 	private DAOFactory daoFactory;
 	
-	public DefenseDaoImpl(DAOFactory daof) {
+	public DefenseDaoImpl(DAOFactory daof) {//DONE
 		daoFactory=daof;
 	}
 	
 	@Override
-	public Defense trouverDefense(String login, int id) {
+	public Defense trouverDefense(String login, int id) {//DONE
 		 Connection connexion = null;
 	     PreparedStatement preparedStatement = null;
 	     ResultSet resultSet = null;
@@ -59,7 +59,7 @@ public class DefenseDaoImpl implements DefenseDao {
 	}
 	
 	@Override
-	public Vector<Canon> trouverCanon(String login) {
+	public Vector<Canon> trouverCanon(String login) {//DONE
 		 Connection connexion = null;
 	     PreparedStatement preparedStatement = null;
 	     ResultSet resultSet = null;
@@ -88,7 +88,7 @@ public class DefenseDaoImpl implements DefenseDao {
 	}
 
 	@Override
-	public Vector<Mortier> trouverMortier(String login) {
+	public Vector<Mortier> trouverMortier(String login) {//DONE
 		 Connection connexion = null;
 	     PreparedStatement preparedStatement = null;
 	     ResultSet resultSet = null;
@@ -117,7 +117,7 @@ public class DefenseDaoImpl implements DefenseDao {
 	}
 
 	@Override
-	public void upgradeDefense(String login, int id) {
+	public void upgradeDefense(String login, int id) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -137,7 +137,7 @@ public class DefenseDaoImpl implements DefenseDao {
 	}
 
 	@Override
-	public void deplacerDefense(String login, int id, int x, int y) {
+	public void deplacerDefense(String login, int id, int x, int y) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -156,7 +156,7 @@ public class DefenseDaoImpl implements DefenseDao {
 	}
 
 	@Override
-	public void ajouterDefense(String login, Defense defense) {
+	public void ajouterDefense(String login, Defense defense) {//DONE
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         try {
