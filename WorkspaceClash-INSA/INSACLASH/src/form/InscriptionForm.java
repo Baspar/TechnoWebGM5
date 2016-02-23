@@ -82,6 +82,11 @@ public final class InscriptionForm {
             setErreur( CHAMP_PASS, e.getMessage() );
             setErreur( CHAMP_CONF, null );
         }
+        ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+        passwordEncryptor.setAlgorithm( ALGO_CHIFFREMENT );
+        passwordEncryptor.setPlainDigest( false );
+        String motDePasseChiffre = passwordEncryptor.encryptPassword( motDePasse );
+        joueur.setMotDePasse( motDePasseChiffre );
     }    
     private void validationMotsDePasse( String motDePasse, String confirmation ) throws FormValidationException {
         if ( motDePasse != null && confirmation != null ) {
@@ -89,7 +94,7 @@ public final class InscriptionForm {
                 throw new FormValidationException( "Les mots de passe entrés sont différents, merci de les saisir à nouveau." );
             } else if ( motDePasse.length() < 3 ) {
                 throw new FormValidationException( "Les mots de passe doivent contenir au moins 3 caractères." );
-            }
+            } 
         } else {
             throw new FormValidationException( "Merci de saisir et confirmer votre mot de passe." );
         }
