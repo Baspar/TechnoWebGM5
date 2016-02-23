@@ -16,7 +16,7 @@ computeEnum() {
 compute() {
     line="$1"
     classname="$2"
-    isAFunction=$(echo "$line" | grep "(" | sed '/^$/d')
+    isAFunction=$(echo "$line" | grep "[^\"]*(" | sed '/^$/d')
     if ! [[ "$isAFunction" ]]
     then
 
@@ -66,7 +66,7 @@ compute() {
 
 
         #Progress detection
-        color=$(getFunctionColor "$state" "$fonction")
+        color=$(getFunctionColor "$state" "$fonction" "$classType")
         fonction="<color:$color>$fonction"
         out="$out</color>"
 
@@ -159,7 +159,10 @@ sortFunction() {
     fi
 }
 getFunctionColor() {
-    if [[ $(echo "$2" | grep abstract ) != "" ]] 
+    if [[ $(echo "$3" | grep interface ) != "" ]] 
+    then
+        color="grey"
+    elif [[ $(echo "$2" | grep abstract ) != "" ]] 
     then
         color="grey"
     elif [[ "$1" == "" ]]
@@ -307,8 +310,8 @@ do
             rm -f uml/$package.Classe$name.uml
 
             #Get the file content, and get its header and its declarations
-            header=$(cat "$javaFile" | grep "class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
-            preprocessedFile=$(echo "$preprocessedFile" | grep -v "class\|enum"  | sed '/^}$/d' )
+            header=$(cat "$javaFile" | grep "interface \+$name\|class \+$name\|enum \+$name" | sed "s/\(class \)\?\+$name.*//g")
+            preprocessedFile=$(echo "$preprocessedFile" | grep -v "interface\|class\|enum"  | sed '/^}$/d' )
 
             #Is the class abstract/an interface ?
             classType=$(getClassType "$header")
