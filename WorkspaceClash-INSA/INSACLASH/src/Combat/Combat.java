@@ -184,8 +184,9 @@ public class Combat{
         out += "\n";
 
         for(int x=0; x<tailleVillage; x++){
+            out +="+";
             for(int y=0; y<tailleVillage; y++){
-                out +="+";
+                out +="  ";
                 out +="+";
             }
             out += "\n";
