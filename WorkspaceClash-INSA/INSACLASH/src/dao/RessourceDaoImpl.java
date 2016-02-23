@@ -27,12 +27,12 @@ public class RessourceDaoImpl implements RessourceDao {
 	
 	private DAOFactory daoFactory;
 	
-	public RessourceDaoImpl(DAOFactory daof) {
+	public RessourceDaoImpl(DAOFactory daof) {//DONE
 		daoFactory=daof;
 	}
 
 	@Override
-	public Ressource trouverMine(String login, int id) {
+	public Ressource trouverMine(String login, int id) {//DONE
 		 Connection connexion = null;
 	     PreparedStatement preparedStatement = null;
 	     ResultSet resultSet = null;
@@ -61,7 +61,7 @@ public class RessourceDaoImpl implements RessourceDao {
 	}
 	
 	@Override
-	public Vector<MineOr> trouverMineOr(String login) {
+	public Vector<MineOr> trouverMineOr(String login) {//DONE
 		 Connection connexion = null;
 	     PreparedStatement preparedStatement = null;
 	     ResultSet resultSet = null;
@@ -90,7 +90,7 @@ public class RessourceDaoImpl implements RessourceDao {
 	}
 
 	@Override
-	public Vector<MineCharbon> trouverMineCharbon(String login) {
+	public Vector<MineCharbon> trouverMineCharbon(String login) {//DONE
 		 Connection connexion = null;
 	     PreparedStatement preparedStatement = null;
 	     ResultSet resultSet = null;
@@ -119,7 +119,7 @@ public class RessourceDaoImpl implements RessourceDao {
 	}
 
 	@Override
-	public void upgradeRessource(String login, int id) {
+	public void upgradeRessource(String login, int id) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -140,7 +140,7 @@ public class RessourceDaoImpl implements RessourceDao {
 	}
 
 	@Override
-	public void viderRessource(String login, int id, Date g) {
+	public void viderRessource(String login, int id, Date g) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -160,7 +160,7 @@ public class RessourceDaoImpl implements RessourceDao {
 	}
 
 	@Override
-	public void deplacerRessource(String login, int id, int x, int y) {
+	public void deplacerRessource(String login, int id, int x, int y) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -180,7 +180,7 @@ public class RessourceDaoImpl implements RessourceDao {
 	}
 
 	@Override
-	public void ajouterRessource(String login, Ressource r) {
+	public void ajouterRessource(String login, Ressource r) {//DONE
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -206,7 +206,7 @@ public class RessourceDaoImpl implements RessourceDao {
 	}
 
 	
-	private Ressource map(ResultSet res) throws SQLException{
+	private Ressource map(ResultSet res) throws SQLException{//DONE
 		Ressource r;
 		if(res.getString("typeRessource").equals("MineCharbon"))
 			r=new MineCharbon();

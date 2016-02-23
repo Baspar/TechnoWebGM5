@@ -24,12 +24,12 @@ public class HDVDaoImpl implements HDVDao {
 	
 	DAOFactory daoFactory;
 	
-	HDVDaoImpl(DAOFactory dao){
+	HDVDaoImpl(DAOFactory dao){//DONE
 		daoFactory=dao;
 	}
 	
 	@Override
-	public void creerHDV(HDV hdv, String login) {
+	public void creerHDV(HDV hdv, String login) {//DONE
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -47,7 +47,7 @@ public class HDVDaoImpl implements HDVDao {
 	}
 
 	@Override
-	public HDV trouverHDV(String login) {
+	public HDV trouverHDV(String login) {//DONE
 		 Connection connexion = null;
 	     PreparedStatement preparedStatement = null;
 	     ResultSet resultSet = null;
@@ -76,7 +76,7 @@ public class HDVDaoImpl implements HDVDao {
 	}
 
 	@Override
-	public void upgrade(String login) {
+	public void upgrade(String login) {//DONE
 		// TODO Auto-generated method stub
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
@@ -97,7 +97,7 @@ public class HDVDaoImpl implements HDVDao {
 	}
 
 	
-	private HDV map(ResultSet res) throws SQLException{
+	private HDV map(ResultSet res) throws SQLException{//DONE
 		HDV hdv=new HDV();
 		int lvl=res.getInt("niveau");
 		for(int i=0; i<lvl;i++)
@@ -113,7 +113,7 @@ public class HDVDaoImpl implements HDVDao {
 	}
 
 	@Override
-	public void deplacer(String login, int x, int y) {
+	public void deplacer(String login, int x, int y) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -133,7 +133,7 @@ public class HDVDaoImpl implements HDVDao {
 	}
 
 	@Override
-	public void miseAJourOr(String login, int qte) {
+	public void miseAJourOr(String login, int qte) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -152,7 +152,7 @@ public class HDVDaoImpl implements HDVDao {
 	}
 
 	@Override
-	public void miseAJourCharbon(String login, int qte) {
+	public void miseAJourCharbon(String login, int qte) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    

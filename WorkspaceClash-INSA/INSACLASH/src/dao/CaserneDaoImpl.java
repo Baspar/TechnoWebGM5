@@ -27,12 +27,12 @@ public class CaserneDaoImpl implements CaserneDao {
 
 	private DAOFactory daoFactory;
 	
-	public CaserneDaoImpl(DAOFactory daof){
+	public CaserneDaoImpl(DAOFactory daof){//DONE
 		daoFactory=daof;
 	}
 	
 	@Override
-	public void creerCaserne(Caserne caserne, String login) {
+	public void creerCaserne(Caserne caserne, String login) {//DONE
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -52,7 +52,7 @@ public class CaserneDaoImpl implements CaserneDao {
 	}
 
 	@Override
-	public Caserne trouverCaserne(String login) {
+	public Caserne trouverCaserne(String login) {//DONE
 		 Connection connexion = null;
 	     PreparedStatement preparedStatement = null;
 	     ResultSet resultSet = null;
@@ -81,7 +81,7 @@ public class CaserneDaoImpl implements CaserneDao {
 	}
 
 	@Override
-	public void upgrade(String login) {
+	public void upgrade(String login) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -102,7 +102,7 @@ public class CaserneDaoImpl implements CaserneDao {
 	}
 
 	@Override
-	public void deplacer(String login, int x, int y) {
+	public void deplacer(String login, int x, int y) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -120,7 +120,7 @@ public class CaserneDaoImpl implements CaserneDao {
 	    }
 	}
 	
-	private Caserne map(ResultSet res) throws SQLException{
+	private Caserne map(ResultSet res) throws SQLException{//DONE
 		Caserne cas =new Caserne();
 		int lvl=res.getInt("niveau");
 		for(int i=0;i <lvl; i++)
@@ -147,7 +147,7 @@ public class CaserneDaoImpl implements CaserneDao {
 	}
 
 	@Override
-	public void modifNombreSoldat(String login, int nombre, TypeSoldat type) {
+	public void modifNombreSoldat(String login, int nombre, TypeSoldat type) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    
@@ -174,7 +174,7 @@ public class CaserneDaoImpl implements CaserneDao {
 	}
 
 	@Override
-	public void ameliorerSoldat(String login, TypeSoldat type) {
+	public void ameliorerSoldat(String login, TypeSoldat type) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
 	    

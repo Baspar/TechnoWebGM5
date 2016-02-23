@@ -13,78 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import Model.Joueur;
 import form.ConnexionForm;
 
-/**
-* Classe JoueurDaoImpl implémentant l'interface JoueurDao
-*
-* @author  Celine Chaugny & Damien Pointin 
-*/
-public class JoueurDaoImpl implements JoueurDao {
-	/**
-	* SQL_SELECT_PAR_LOGIN correspond a la requete SQL de recherche par login dans la table joueur.
-	*/ 
+public class JoueurDaoImpl implements JoueurDao { 
     private static final String SQL_SELECT_PAR_LOGIN = "SELECT login, motDePasse FROM Joueur WHERE login = ?";
-    
-    
-    /**
-	* SQL_INSERT correspond a la requete SQL d'insertion dans la table joueur.
-	*/ 
     private static final String SQL_INSERT           = "INSERT INTO Joueur (login, motDePasse) VALUES (?, ?)";
-
-    
-    /**
-	* La daoFactory qui va permettre la connection a la base de donnee.
-	*/ 
     private DAOFactory daoFactory;
-
     
-    /**
-	* Constructeur JoueurDaoImpl.
-	* <p>
-	* Avec le parametre daoFactory
-	* </p>
-	*
-	* @param daoFactory
-	* La Fabrique dao du joueurDaoImpl.
-	*
-	* @see JoueurDaoImpl#daoFactory
-	* @see DAOFactory
-	*/ 
-    JoueurDaoImpl( DAOFactory daoFactory ) {
+    JoueurDaoImpl( DAOFactory daoFactory ) {//DONE
         this.daoFactory = daoFactory;
     }
 
-    
-    /**
-	* Implementation de la methode definie dans l'interface JoueurDao
-	*
-	* @return joueur que l'on veut trouver
-	* 
-	* @throws DAOException Si une erreur arrive lors la recherche dans la bdd
-	* 
-	* @see Joueur
-	* @see DAOException
-	* @see JoueurDao
-	* @see JoueurDaoImpl#trouver(String, Object...)
-	*/ 
     @Override
-    public Joueur trouver( String login ) throws DAOException {
+    public Joueur trouver( String login ) throws DAOException {//DONE
     	return trouver( SQL_SELECT_PAR_LOGIN, login );
     }
 
-    
-    /**
-	* Implémentation de la méthode définie dans l'interface JoueurDao 
-	*
-	* @param joueur que l'on veut ajouter
-	* 
-	* @throws DAOException Si une erreur arrive lors de l'ajout a la bdd
-	* 
-	* @see Joueur
-	* @see DAOException
-	* @see JoueurDao
-	*/ 
+  
     @Override
-    public void creer( Joueur joueur ) throws DAOException {
+    public void creer( Joueur joueur ) throws DAOException {//DONE
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -102,24 +47,8 @@ public class JoueurDaoImpl implements JoueurDao {
     }
 
    
-    /**
-	* Methode qui retourne un utilisateur depuis la base
-    * de donnees, correspondant à la requete SQL donnee prenant en parametres
-    * les objets passes en argument.
-	* 
-	* @param sql
-	* la requete sql
-	* @param objets
-	* les parametre de la requete sql
-	*
-	* @return le joueur de la base de donnes
-	* 
-	* @throws DAOException s'il y a une erreur lors du traitement de la requete
-	* @see Joueur
-	* @see DAOException
-	* @see PreparedStatement
-	*/ 
-    private Joueur trouver( String sql, Object... objets ) throws DAOException {
+    
+    private Joueur trouver( String sql, Object... objets ) throws DAOException {//DONE
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -147,27 +76,8 @@ public class JoueurDaoImpl implements JoueurDao {
         return joueur;
     }
 
-    /*
-     * Simple méthode utilitaire permettant de faire la correspondance (le
-     * mapping) entre une ligne issue de la table des utilisateurs (un
-     * ResultSet) et un bean Utilisateur.
-     */
-    /**
-	* Methode qui fait la correspondance entre une ligne de la table
-	* et un Joueur du modele
-	* 
-	* @param ResultSet
-	* le resultSet contenant la ligne de la table
-	*
-	* @return le joueur de la base de donnee transforme en joueur du modele
-	* 
-	* @throws SQLException s'il y a une erreur lors du traitement de la requete
-	* 
-	* @see Joueur
-	* @see SQLException
-	* @see ResultSet
-	*/ 
-    private static Joueur map( ResultSet resultSet ) throws SQLException {
+   
+    private static Joueur map( ResultSet resultSet ) throws SQLException {//DONE
         Joueur joueur = new Joueur();
         joueur.setLogin( resultSet.getString( "login" ) );
         joueur.setMotDePasse( resultSet.getString( "motDePasse" ) );
