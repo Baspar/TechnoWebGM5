@@ -22,7 +22,7 @@ public class BatimentCombat extends EntiteCombat{
             for(SoldatCombat soldat: soldats)
                     soldat.retirerPV(((Defense)batiment).getPuissanceDefense());
     }
-    public double distanceMin(int xo, int yo){//CHK
+    public double distanceMin(int xo, int yo){//DONE
         // Calcul de la ditance mini d'un point a un carre (#)
         // Division du calcul en 8 zones
         //
@@ -57,7 +57,7 @@ public class BatimentCombat extends EntiteCombat{
         else
             return 0;
     }
-    private Vector<SoldatCombat> trouverSoldatAPorteeLOCALISE(Vector<SoldatCombat> soldats){//CHK
+    private Vector<SoldatCombat> trouverSoldatAPorteeLOCALISE(Vector<SoldatCombat> soldats){//DONE
         int distance=5; //TODO: ajouter portee Defense dans leur carac
         Vector<SoldatCombat> out=new Vector<SoldatCombat>();
         for(SoldatCombat soldat:soldats)
@@ -67,7 +67,7 @@ public class BatimentCombat extends EntiteCombat{
             }
         return out;
     }
-    private Vector<SoldatCombat> trouverSoldatAPorteeZONE(Vector<SoldatCombat> soldats){//CHK
+    private Vector<SoldatCombat> trouverSoldatAPorteeZONE(Vector<SoldatCombat> soldats){//DONE
         int distance=5; //TODO: ajouter portee Defense dans leur carac
         Vector<SoldatCombat> out=new Vector<SoldatCombat>();
         Iterator<SoldatCombat> it = soldats.iterator();
