@@ -95,9 +95,11 @@ public class VillageDaoImpl implements VillageDao {
 
 
 	@Override
-	public void deplacerBatiment(String login, Batiment b) {
-		// TODO Auto-generated method stub
-		
+	public void deplacerBatiment(String login, Batiment b, int x, int y) {
+		if(b.getTypeBatiment()==TypeBatiment.CASERNE){
+			CaserneDaoImpl cas=new CaserneDaoImpl(daoFactory);
+			cas.deplacer(login, x, y);
+		}
 	}
 
 
