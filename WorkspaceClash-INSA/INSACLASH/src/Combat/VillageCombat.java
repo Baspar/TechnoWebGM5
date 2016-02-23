@@ -12,6 +12,7 @@ public class VillageCombat{
 
     public VillageCombat(Village village, int zoom){//DONE
         Set<TypeBatiment> typeBatiment=village.getBatiments().getSetNomBatiment();
+        batiments=new Vector<BatimentCombat>();
         for(TypeBatiment type : typeBatiment)
             for(Batiment batiment : village.getBatiment(type))
                 batiments.add(new BatimentCombat(batiment, zoom));

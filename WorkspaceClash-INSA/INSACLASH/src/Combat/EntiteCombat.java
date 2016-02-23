@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public abstract class EntiteCombat{
     protected static int cpt=0;
-    protected final int id=cpt++;
+    protected int id;
     protected int x;
     protected int y;
     protected int PV;

@@ -15,6 +15,7 @@ public class BatimentCombat extends EntiteCombat{
         this.y        = batiment.getY();
         this.batiment = batiment;
         this.taille   = zoom;
+        id=cpt++;
     }
     public void attaquer(Vector<SoldatCombat> soldats){//DONE
         TypeBatiment type = batiment.getTypeBatiment();

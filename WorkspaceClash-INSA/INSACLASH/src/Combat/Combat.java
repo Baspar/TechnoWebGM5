@@ -13,7 +13,7 @@ public class Combat{
     private ArmeeCombat armee;
     private Vector<Vector<Hashtable<Integer, EntiteCombat>>> terrain;
     private int tailleVillage;
-    private int zoom=5;
+    private int zoom=2;
     private Vector<Vector<SimpleEntry<Integer, BatimentCombat>>> terrainDistance;
 
     // Note terrain :
@@ -26,15 +26,15 @@ public class Combat{
         village=new VillageCombat(tVillage, zoom);
 
         //Recuperation taillevillage
-        tailleVillage=tVillage.getTailleVillage();
+        tailleVillage=tVillage.getTailleVillage()*zoom;
 
         //Creation terrain vierge
         terrain=new Vector<Vector<Hashtable<Integer, EntiteCombat>>>();
         terrainDistance=new Vector<Vector<SimpleEntry<Integer, BatimentCombat>>>();
-        for(int i=0; i<tailleVillage*zoom+2; i++){
+        for(int i=0; i<tailleVillage+2; i++){
             terrain.add(new Vector<Hashtable<Integer, EntiteCombat>>());
             terrainDistance.add(new Vector<SimpleEntry<Integer, BatimentCombat>>());
-            for(int j=0; j<tailleVillage*zoom+2; j++){
+            for(int j=0; j<tailleVillage+2; j++){
                 terrain.get(i).add(new Hashtable<Integer, EntiteCombat>());
                 terrainDistance.get(i).add(new SimpleEntry<Integer, BatimentCombat>(-1, null));
             }
@@ -50,9 +50,9 @@ public class Combat{
     private void updateTerrainDistance(){//DONE
         //Remise a zero terrain distance
         terrainDistance=new Vector<Vector<SimpleEntry<Integer, BatimentCombat>>>();
-        for(int i=0; i<tailleVillage*zoom+2; i++){
+        for(int i=0; i<tailleVillage+2; i++){
             terrainDistance.add(new Vector<SimpleEntry<Integer, BatimentCombat>>());
-            for(int j=0; j<tailleVillage*zoom+2; j++)
+            for(int j=0; j<tailleVillage+2; j++)
                 terrainDistance.get(i).add(new SimpleEntry<Integer, BatimentCombat>(-1, null));
         }
 
@@ -85,10 +85,8 @@ public class Combat{
                         for(int dy=-1; dy<2; dy+=2)
                             if( x+dx >= 0
                                 && y+dy >= 0
-                                && x+dx < tailleVillage*zoom
-                                && y+dy < tailleVillage*zoom
-                                && (terrain.get(x+dx).get(y+dy).size() == 0
-                                    || terrain.get(x+dx).get(y+dy).get(0).getType() != TypeEntite.BATIMENT)
+                                && x+dx < tailleVillage
+                                && y+dy < tailleVillage
                                 && (terrainDistance.get(x+dx).get(y+dy).getKey() == -1
                                     || dist < terrainDistance.get(x+dx).get(y+dy).getKey()
                                     )
@@ -147,13 +145,14 @@ public class Combat{
             }
         }
     }
-    private void checkMorts(){//DONE
+    private void checkMorts(){//WIP
         for(int i=0; i<armee.getSoldats().size(); i++)
             if(armee.getSoldats().get(i).estATuer()){
                 armee.getSoldats().get(i).tuer();
                 int x = armee.getSoldats().get(i).getX();
                 int y = armee.getSoldats().get(i).getY();
                 int id = armee.getSoldats().get(i).getId();
+             //   System.out.println(id);
                 terrain.get(x).get(y).remove(id);
             }
 
