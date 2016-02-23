@@ -159,10 +159,10 @@ sortFunction() {
     fi
 }
 getFunctionColor() {
-    if [[ $(echo "$2" | grep abstract ) != "" ]] 
+    if [[ $(echo "$3" | grep interface ) != "" ]] 
     then
         color="grey"
-    elif [[ $(echo "$3" | grep abstract ) != "" || $(echo "$3" | grep interface ) != "" ]] 
+    elif [[ $(echo "$2" | grep abstract ) != "" ]] 
     then
         color="grey"
     elif [[ "$1" == "" ]]
