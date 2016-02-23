@@ -1,6 +1,7 @@
 package Combat;
 
 import java.util.Vector;
+import java.util.AbstractMap.SimpleEntry;
 
 import Model.Soldat;
 
@@ -34,10 +35,34 @@ public class SoldatCombat extends EntiteCombat{
     public Soldat getSoldat(){//DONE
         return soldat;
     }
-    public Vector<Integer> ouAller(Vector<BatimentCombat> batiments){//TODO
+    public Vector<Integer> ouAller(Vector<BatimentCombat> batiments, Vector<Vector<SimpleEntry<Integer, BatimentCombat>>> terrainDistance){//WIP
         Vector<Integer> out = new Vector<Integer>();
-        out.add(0);
-        out.add(0);
+
+        int deplacementMax = soldat.getVitesseDeplacement();
+
+        int newX = -1;
+        int newY = -1;
+        int distMin = -1;
+        int trueTailleCarte = terrainDistance.size();
+
+        for(int dx=-deplacementMax; dx<=deplacementMax; dx++)
+            for(int dy=-deplacementMax; dy<=deplacementMax; dy++){
+                if( y+dy>=0
+                    && y+dy<trueTailleCarte
+                    && y+dy>=0
+                    && y+dy<trueTailleCarte
+                    && terrainDistance.get(x+dx).get(y+dy).getKey() != -1
+                    && ( distMin == -1
+                        || distMin > terrainDistance.get(x).get(y).getKey()
+                        )
+                    ){
+                        newX=x+dx;
+                        newY=y+dy;
+                        distMin=terrainDistance.get(x).get(y).getKey();
+                    }
+                }
+        out.add(newX);
+        out.add(newY);
         return out;
     }
 }

@@ -83,10 +83,10 @@ public class Combat{
                     dist++;
                     for(int dx=-1; dx<2; dx+=2)
                         for(int dy=-1; dy<2; dy+=2)
-                            if( y+dy>=0
-                                && y+dy<tailleVillage*zoom
-                                && y+dy>=0
-                                && y+dy<tailleVillage*zoom
+                            if( x+dx >= 0
+                                && y+dy >= 0
+                                && x+dx < tailleVillage*zoom
+                                && y+dy < tailleVillage*zoom
                                 && (terrain.get(x+dx).get(y+dy).size() == 0
                                     || terrain.get(x+dx).get(y+dy).get(0).getType() != TypeEntite.BATIMENT)
                                 && (terrainDistance.get(x+dx).get(y+dy).getKey() == -1
