@@ -10,6 +10,7 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import Model.Joueur;
 import dao.DAOException;
 import dao.JoueurDao;
+import dao.VillageDao;
 
 
 public final class InscriptionForm {
@@ -20,12 +21,15 @@ public final class InscriptionForm {
     private String              resultat;
     private Map<String, String> erreurs;
     private JoueurDao      joueurDao;
+    private VillageDao village;
 
 
-    public InscriptionForm( JoueurDao joueurDao ) {
+    public InscriptionForm( JoueurDao joueurDao, VillageDao villageDao ) {
         erreurs=new HashMap<String, String>();
         this.joueurDao = joueurDao;
+        village=villageDao;
     }
+    
     public Map<String, String> getErreurs() {
         return erreurs;
     }
@@ -43,6 +47,7 @@ public final class InscriptionForm {
             traiterMotsDePasse( motDePasse, confirmation, joueur );
             if ( erreurs.isEmpty() ) {
                 joueurDao.creer( joueur );
+                village.creerVillage(joueur.getVillage(), login);
                 resultat = "Succès de l'inscription.";
             } else {
                 resultat = "Échec de l'inscription.";

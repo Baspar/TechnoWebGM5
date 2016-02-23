@@ -8,6 +8,8 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import Model.Joueur;
 import dao.DAOException;
 import dao.JoueurDao;
+import dao.VillageDao;
+import dao.VillageDaoImpl;
 
 public final class ConnexionForm {
     private static final String CHAMP_LOGIN = "login";
@@ -16,6 +18,7 @@ public final class ConnexionForm {
     private String resultat;
     private Map<String, String> erreurs;
     private JoueurDao joueurDao;
+    private VillageDao village;
 
 
     public String getResultat() {
@@ -24,9 +27,10 @@ public final class ConnexionForm {
     public Map<String, String> getErreurs() {
         return erreurs;
     }
-    public ConnexionForm( JoueurDao joueur){
+    public ConnexionForm( JoueurDao joueur, VillageDao villageDao){
         erreurs= new HashMap<String, String>();
         this.joueurDao=joueur;
+        village=villageDao;
     }
     public Joueur connecterJoueur( HttpServletRequest request ) {
         /* Récupération des champs du formulaire */
@@ -40,6 +44,8 @@ public final class ConnexionForm {
 
             /* Initialisation du résultat global de la validation. */
             if ( erreurs.isEmpty() ) {
+            	joueur.setLogin(login);
+            	joueur.setVillage(village.chargerVillage(login));
                 resultat = "Succès de la connexion.";
             } else {
                 resultat = "Échec de la connexion.";
