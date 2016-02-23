@@ -155,7 +155,6 @@ public class DAOFactory {
 		return new HDVDaoImpl( this );
 	}
 
-
 	public CaserneDao getCaserneDao() {
 		// TODO Auto-generated method stub
 		return new CaserneDaoImpl(this);
@@ -167,5 +166,9 @@ public class DAOFactory {
 	
 	public RessourceDao getRessourceDao(){
 		return new RessourceDaoImpl(this);
+	}
+	
+	public VillageDao getVillageDao(){
+		return new VillageDaoImpl(this);
 	}
 } 

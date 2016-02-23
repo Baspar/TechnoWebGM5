@@ -9,8 +9,17 @@ public abstract class Batiment{
     protected int niveau;
     protected int tempsConstruction;
     protected int coutUpdate;
+    protected int id;
+    
+    
 
-    public TypeBatiment getTypeBatiment(){//DONE
+    public int getId(){//DONE
+		return id;
+	}
+	public void setId(int id){//DONE
+		this.id = id;
+	}
+	public TypeBatiment getTypeBatiment(){//DONE
         return this.typeBatiment;
     }
     public void setPointsDeVie(int in){//DONE
