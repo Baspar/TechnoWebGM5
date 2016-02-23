@@ -57,6 +57,7 @@ public final class ConnexionForm {
 
         return joueur;
     }
+    
     private void traiterLogin( String login, Joueur joueur ) {
         try {
             validationLogin( login );
@@ -65,6 +66,7 @@ public final class ConnexionForm {
         }
         joueur.setLogin( login );
     }
+    
     private void validationLogin( String login ) throws FormValidationException {
         if ( login != null && login.length() > 3 ) {
             if (joueurDao.trouver(login)==null){

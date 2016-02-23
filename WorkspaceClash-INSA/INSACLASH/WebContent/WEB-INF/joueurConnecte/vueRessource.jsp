@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Page de gestion des ressources</title>
 </head>
 <body>
 <c:import url="/inc/menuConnecte.jsp" />
+
+<c:forEach begin="0" end="${joueur.getVillage().getBatiments().getModeleBatiments().get(MineOr).size()}" var="i">
+<c:out value="joueur.getVillage().getBatiments().getModeleBatiments().get(MineOr).size()"/><br>
+</c:forEach>
+
 </body>
 </html>
