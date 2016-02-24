@@ -1,6 +1,8 @@
 package Combat;
 
+import java.util.Iterator;
 import java.util.Vector;
+import java.util.Map;
 import java.util.Hashtable;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.LinkedList;
@@ -27,7 +29,7 @@ public class Combat{
         village=new VillageCombat(tVillage, zoom);
 
         //Recuperation taillevillage
-        tailleVillage=tVillage.getTailleVillage()*zoom;
+        tailleVillage=tVillage.getTailleVillage()*zoom+2;
 
         //Creation terrain vierge
         terrain=new Vector<Vector<Hashtable<Integer, EntiteCombat>>>();
@@ -44,8 +46,9 @@ public class Combat{
         //Placement batiments sur terrain
         for(BatimentCombat batiment:village.getBatiments()){
             for(int i=0; i<zoom; i++)
-                for(int j=0; j<zoom; j++)
+                for(int j=0; j<zoom; j++){
                     terrain.get(batiment.getX()*zoom+i+1).get(batiment.getY()*zoom+j+1).put(batiment.getId(), batiment);
+                }
         }
     }
     private void updateTerrainDistance(){//DONE
@@ -137,13 +140,19 @@ public class Combat{
     }
     private void tourSoldat(){//DONE
         for(SoldatCombat soldat : armee.getSoldats()){
+            System.out.print("Soldat n°"+soldat.getId()+", fais tu quelque chose ?");
             if(!soldat.estMort()){
-                Vector<BatimentCombat> batiments = soldat.trouverBatimentAPortee(village.getBatiments());
-                if(batiments.size()!=0)
+                System.out.println("  Oui!");
+                Vector<BatimentCombat> batiments = soldat.trouverBatimentAPortee(village.getBatiments(), zoom);
+                if(batiments.size()>0){
+                    System.out.println("  J'attaque!");
                     soldat.attaquer(batiments);
-                else
-                    deplacementSoldat(soldat);
-            }
+                } else {
+                    System.out.println("  Je bouge!");
+                    //deplacementSoldat(soldat);
+                }
+            } else
+                System.out.println("  Non...");
         }
     }
     private void checkMorts(){//WIP
@@ -168,9 +177,9 @@ public class Combat{
     }
     public void combattre(){//DONE
         while(!estTermine()){
-            tourBatiment();
             tourSoldat();
-            checkMorts();
+            //tourBatiment();
+            //checkMorts();
             updateTerrainDistance();
             afficherCombat();
         }
@@ -185,6 +194,8 @@ public class Combat{
 
         for(int x=0; x<tailleVillage; x++){
             out +="+";
+            //
+            // Soldat
             for(int y=0; y<tailleVillage; y++){
                 int nbSol=0;
                 for(SoldatCombat soldat : armee.getSoldats())
@@ -193,18 +204,29 @@ public class Combat{
                 if(nbSol != 0)
                     out +=" "+nbSol+" ";
                 else{
-                    TypeBatiment typeBat=null;
-                    for(BatimentCombat bat : village.getBatiments())
-                        if (bat.getX() == x && bat.getY() == y)
-                            typeBat = bat.getBatiment().getTypeBatiment();
-                    if(typeBat != null)
-                        out+= typeBat==TypeBatiment.CASERNE?"CAS":typeBat==TypeBatiment.HDV?"HDV":typeBat==TypeBatiment.MORTIER?"MOR": typeBat==TypeBatiment.MINEOR?"MiO": typeBat==TypeBatiment.MINECHARBON?"MiC":"   ";
+                    // Batiment
+                    Iterator<Map.Entry<Integer, EntiteCombat>> it = terrain.get(x).get(y).entrySet().iterator();
+                    Integer id = -1;
+                    if(it.hasNext()){
+                        id = it.next().getKey();
+                        if(id!=-1){
+                            TypeBatiment typeBat = ((BatimentCombat)terrain.get(x).get(y).get(id)).getBatiment().getTypeBatiment();
+                            out+=   typeBat==TypeBatiment.CASERNE?"CAS":
+                                    typeBat==TypeBatiment.HDV?"HDV":
+                                    typeBat==TypeBatiment.CANON?"CAN":
+                                    typeBat==TypeBatiment.MORTIER?"MOR":
+                                    typeBat==TypeBatiment.MINEOR?"MiO":
+                                    typeBat==TypeBatiment.MINECHARBON?"MiC":
+                                    "XXX";
+                        } else
+                            out += "   ";
+                    } else
+                        out += "   ";
                 }
                 out +="+";
             }
             out += "\n";
         }
-
         out +="+";
         for(int i=0; i<tailleVillage; i++)
             out += "---+";

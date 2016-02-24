@@ -10,8 +10,6 @@ public abstract class EntiteCombat{
     protected int PV;
     protected TypeEntite type;
     protected int taille;
-
-
     public int getTaille(){//DONE
         return taille;
     }
