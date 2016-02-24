@@ -12,6 +12,7 @@ import dao.VillageDao;
 import form.ConnexionForm;
 import dao.DAOFactory;
 import Model.Joueur;
+import Model.TypeBatiment;
 
 public class Connexion extends HttpServlet {
 	public static final String CONF_DAO_FACTORY = "daofactory";
@@ -19,6 +20,8 @@ public class Connexion extends HttpServlet {
 	public static final String ATT_FORM = "form";
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur"; 
 	public static final String VUE = "/WEB-INF/connexion.jsp";
+	public static final String VUECONNECTE="/WEB-INF/joueurConnecte/vueRessource.jsp";
+
 	private JoueurDao joueurDao;
 	private VillageDao villageDao;
 
@@ -44,16 +47,19 @@ public class Connexion extends HttpServlet {
 		Joueur joueur = form.connecterJoueur( request );
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
-		
 		if ( form.getErreurs().isEmpty() ) {
 			session.setAttribute( ATT_SESSION_JOUEUR, joueur );
-		} else {
+		}  else {
 			session.setAttribute( ATT_SESSION_JOUEUR, null );
 		}
 		/* Stockage du formulaire et du bean dans l'objet request */
 		request.setAttribute( ATT_FORM, form );
 		request.setAttribute( ATT_JOUEUR, joueur );
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		if(session.getAttribute(ATT_SESSION_JOUEUR)==null)
+			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		else
+			this.getServletContext().getRequestDispatcher( VUECONNECTE ).forward( request, response );
+
 	}
 
 }
