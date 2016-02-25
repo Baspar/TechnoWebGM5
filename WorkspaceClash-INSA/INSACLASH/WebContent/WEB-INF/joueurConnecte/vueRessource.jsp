@@ -10,14 +10,28 @@
 </head>
 <body>
 <c:import url="/inc/menuConnecte.jsp" />
-<c:if test="${!empty sessionScope.sessionJoueur}">
-		<%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
-		<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionJoueur.login}</p>
-	    <p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionJoueur.village.getHDV().quotaBatiments}</p>
-	    <p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionJoueur.getVillage().getBatiments().getBatiments(TypeBatiment.HDV)}</p>
-
+<h1> Gestion des mines d'or </h1>
+<c:if test="${sessionScope.sessionJoueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINEOR).size() < sessionScope.sessionJoueur.village.getHDV().quotaBatiments.get(TypeBatiment.MINEOR)}">
+		<form method="post" action="<c:url value="/AjoutMine" />">
+			<fieldset>
+				<legend>Ajout d'une mine d'or</legend>
+				<input border=0 src="<c:url value="/inc/MineOr.png"/>" type=image value=submit align="middle" > 
+			</fieldset>
+		</form>
+		
 </c:if> 
 
 
+<c:if test="${sessionScope.sessionJoueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINEOR).size() !=0}">
+	Vos mines sont les suivantes 
+	<table> 
+	<c:forEach items="${sessionScope.sessionJoueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINEOR)}" var="item" >
+		<tr> 
+	  <td> Mine niveau <c:out value="${item.getNiveau()}"/> <br> <img src="<c:url value="/inc/MineOr.png"/>" width="100" height="100"alt="image de ma mine" /> </td> 
+	  <td>Améliorer  <br> Vider <br> <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> <c:out value="${item.calculProduction()}"/></td> 
+      </tr>
+    </c:forEach>
+    </table>
+</c:if>
 </body>
 </html>

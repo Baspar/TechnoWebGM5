@@ -56,43 +56,47 @@ public class VillageDaoImpl implements VillageDao {
 		Vector<Batiment> bati=new Vector<Batiment>();
 		bati.add(hdv.trouverHDV(login));
 		h.put(TypeBatiment.HDV, bati);
-		bati.clear();
+		Vector<Batiment> bati2=new Vector<Batiment>();
 		//On recupere la caserne
 		CaserneDaoImpl cas=new CaserneDaoImpl(daoFactory);
 		Caserne c =cas.trouverCaserne(login);
 		v.setArmee(c.getArmee());
-		bati.add(c);
-		h.put(TypeBatiment.CASERNE, bati);
+		bati2.add(c);
+		h.put(TypeBatiment.CASERNE, bati2);
 		//ON recupere les defenses
 		DefenseDaoImpl def=new DefenseDaoImpl(daoFactory);
-		bati.clear();
+		Vector<Batiment> bati3=new Vector<Batiment>();
 		//Les mortiers
 		Vector<Mortier> d= def.trouverMortier(login);
 		for(int i=0; i<d.size(); i++)
-			bati.add(d.get(i));
-		h.put(TypeBatiment.MORTIER, bati );
-		bati.clear();
+			bati3.add(d.get(i));
+		h.put(TypeBatiment.MORTIER, bati3 );
+		Vector<Batiment> bati4=new Vector<Batiment>();
 		//Les canons
 		Vector<Canon> d2= def.trouverCanon(login);
-		for(int i=0; i<d.size(); i++)
-			bati.add(d.get(i));
-		h.put(TypeBatiment.CANON, bati );
+		for(int i=0; i<d2.size(); i++)
+			bati4.add(d2.get(i));
+		h.put(TypeBatiment.CANON, bati4 );
 		//On recupere les ressources
 		RessourceDaoImpl r=new RessourceDaoImpl(daoFactory);
-		bati.clear();
+		Vector<Batiment> bati5=new Vector<Batiment>();
 		//MineCharbon
 		Vector<MineCharbon> res= r.trouverMineCharbon(login);
-		for(int i=0; i<d.size(); i++)
-			bati.add(res.get(i));
-		h.put(TypeBatiment.MINECHARBON, bati );
-		bati.clear();
+		for(int i=0; i<res.size(); i++)
+			bati5.add(res.get(i));
+		h.put(TypeBatiment.MINECHARBON, bati5 );
+		Vector<Batiment> bati6=new Vector<Batiment>();
 		//MineOr
 		Vector<MineOr> res2= r.trouverMineOr(login);
-		for(int i=0; i<d.size(); i++)
-			bati.add(res2.get(i));
-		h.put(TypeBatiment.MINEOR, bati );
+		//System.out.println(res2.size());
+		for(int i=0; i<res2.size(); i++)
+			bati6.add(res2.get(i));
+		//System.out.println(bati6.size());
+		h.put(TypeBatiment.MINEOR, bati6 );
+		//System.out.println(h);
+		b.setBatiments(h);
 		v.setBatiments(b);
-		//System.out.println(v.getBatiments().getBatiments(TypeBatiment.HDV));
+	//	System.out.println(v.getBatiments().getBatiments(TypeBatiment.MINEOR));
 		return v;
 	}
 

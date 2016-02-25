@@ -53,6 +53,7 @@ public class Connexion extends HttpServlet {
 		}  else {
 			session.setAttribute( ATT_SESSION_JOUEUR, null );
 		}
+		//System.out.println(joueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINEOR));
 		/* Stockage du formulaire et du bean dans l'objet request */
 		request.setAttribute( ATT_FORM, form );
 		request.setAttribute( ATT_JOUEUR, joueur );

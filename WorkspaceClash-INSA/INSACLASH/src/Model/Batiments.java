@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class Batiments{
     private Hashtable<TypeBatiment,Vector<Batiment>> batiments;
-    private Hashtable<TypeBatiment,Batiment> modeleBatiments;
+	private Hashtable<TypeBatiment,Batiment> modeleBatiments;
 
     public Batiments(){//DONE
         //Init
@@ -35,6 +35,10 @@ public class Batiments{
         return modeleBatiments.keySet();
     }
 
+    public void setBatiments(Hashtable<TypeBatiment, Vector<Batiment>> batiments) {//DONE
+  		this.batiments = batiments;
+  	}
+    
     public Vector<Batiment> getBatiments(TypeBatiment type){//DONE
     	Vector<Batiment> b=null;
     	try{

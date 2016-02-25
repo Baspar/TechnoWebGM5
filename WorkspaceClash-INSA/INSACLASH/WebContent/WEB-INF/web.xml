@@ -8,9 +8,13 @@
     <servlet-name>Connexion</servlet-name>
     <servlet-class>Controleur.Connexion</servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>Controleur.Deconnexion</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ajoutMine</servlet-name>
+    <servlet-class>Controleur.ajoutMine</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
@@ -20,9 +24,13 @@
     <servlet-name>Connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>Deconnexion</servlet-name>
     <url-pattern>/deconnexion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ajoutMine</servlet-name>
+    <url-pattern>/AjoutMine</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>
@@ -43,15 +51,15 @@
   <listener>
     <listener-class>config.InitialisationDaoFactory</listener-class>
   </listener>
- <filter>
-  	<filter-name>RestrictionFilter</filter-name>
-  	<filter-class>filtre.RestrictionFilter</filter-class>
+  <filter>
+    <filter-name>RestrictionFilter</filter-name>
+    <filter-class>filtre.RestrictionFilter</filter-class>
   </filter>
   <filter-mapping>
-  	<filter-name>RestrictionFilter</filter-name>
-  	<url-pattern>/WEB-INF/joueurConnecte/*</url-pattern>
-  	<dispatcher>REQUEST</dispatcher>
-  	<dispatcher>FORWARD</dispatcher>
-  	<dispatcher>INCLUDE</dispatcher>
+    <filter-name>RestrictionFilter</filter-name>
+    <url-pattern>/WEB-INF/joueurConnecte/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
   </filter-mapping>
 </web-app>

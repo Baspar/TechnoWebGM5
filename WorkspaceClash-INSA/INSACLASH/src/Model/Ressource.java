@@ -13,6 +13,8 @@ public abstract class Ressource extends Batiment{
 
 	public int calculProduction(){//DONE
         Date dateActuelle=new Date();
+        //System.out.println(dateDerniereLevee);
+        //System.out.println(dateActuelle);
         //Avec GetTime
         long date1= dateActuelle.getTime();
         //  System.out.println(date1);

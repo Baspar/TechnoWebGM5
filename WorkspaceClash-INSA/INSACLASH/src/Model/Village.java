@@ -122,6 +122,16 @@ public class Village{
         }
 		return false;
     }
+    
+    public boolean ajouterBatiment(TypeBatiment type){//DONE
+        if(!quantiteBatimentAtteinte(type) ){
+        	//Essai de construction de batiment.
+        	//Peut ne pas marcher si fonds insuffisants.
+            boolean constructionOK=batiments.addNewBuilding(type);
+            return true;
+        }
+		return false;
+    }
 
     public boolean deplacerBatiment(TypeBatiment type, int i, int x, int y){//DONE
     	int oldX=getBatiment(type, i).getX();

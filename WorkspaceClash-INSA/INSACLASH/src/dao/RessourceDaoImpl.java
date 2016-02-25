@@ -217,7 +217,7 @@ public class RessourceDaoImpl implements RessourceDao {
 		for(int i=0;i<lvl; i++)
 			r.upgrade();
 		//Date d=new Date(res.getInt("YEAR(derniereLevee)"), res.getInt("MONTH(derniereLevee)"), res.getInt("DAY(derniereLevee)"), res.getInt("HOUR(derniereLevee)"), res.getInt("MINUTE(derniereLevee)"),res.getInt("SECOND(derniereLevee)") );
-		Date d=new Date(res.getInt(1),res.getInt(2)-1,res.getInt(3),res.getInt(4),res.getInt(5),res.getInt(6));
+		Date d=new Date(res.getInt(1)-1900,res.getInt(2)-1,res.getInt(3),res.getInt(4),res.getInt(5),res.getInt(6));
 		//System.err.println(res.getInt(3));
 		r.setDateDerniereLevee(d);
 		r.setX(res.getInt("x"));
