@@ -5,8 +5,8 @@ import java.util.Set;
 import java.util.Vector;
 
 public class Batiments{
-    public Hashtable<TypeBatiment,Vector<Batiment>> batiments;
-    public Hashtable<TypeBatiment,Batiment> modeleBatiments;
+    private Hashtable<TypeBatiment,Vector<Batiment>> batiments;
+    private Hashtable<TypeBatiment,Batiment> modeleBatiments;
 
     public Batiments(){//DONE
         //Init
@@ -36,7 +36,15 @@ public class Batiments{
     }
 
     public Vector<Batiment> getBatiments(TypeBatiment type){//DONE
-        return batiments.get(type);
+    	Vector<Batiment> b=null;
+    	try{
+        b=batiments.get(type); }
+    	catch (Exception e){
+    		System.out.println(batiments.size()+"teeeeeeeeeessssssssssssssst");
+    		System.out.println(batiments.get(TypeBatiment.HDV)+"teeeeeeeeeessssssssssssssst");
+    		System.out.println(type);
+    	}
+    	return b;
     }
 
     public boolean addNewBuilding(TypeBatiment type){//DONE

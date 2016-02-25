@@ -45,6 +45,7 @@ public class Connexion extends HttpServlet {
 		ConnexionForm form = new ConnexionForm(joueurDao, villageDao);
 		/* Traitement de la requête et récupération du bean en résultant */
 		Joueur joueur = form.connecterJoueur( request );
+		//System.out.println(joueur.getVillage().getBatiments().getBatiments(TypeBatiment.HDV));
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
 		if ( form.getErreurs().isEmpty() ) {

@@ -92,6 +92,7 @@ public class VillageDaoImpl implements VillageDao {
 			bati.add(res2.get(i));
 		h.put(TypeBatiment.MINEOR, bati );
 		v.setBatiments(b);
+		//System.out.println(v.getBatiments().getBatiments(TypeBatiment.HDV));
 		return v;
 	}
 
