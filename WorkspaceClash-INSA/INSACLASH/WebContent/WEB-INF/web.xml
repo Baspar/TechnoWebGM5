@@ -12,9 +12,13 @@
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>Controleur.Deconnexion</servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>GestionRessource</servlet-name>
     <servlet-class>Controleur.GestionRessource</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GestionHDV</servlet-name>
+    <servlet-class>Controleur.GestionHDV</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
@@ -31,6 +35,10 @@
   <servlet-mapping>
     <servlet-name>GestionRessource</servlet-name>
     <url-pattern>/gestionRessource</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>GestionHDV</servlet-name>
+    <url-pattern>/gestionHDV</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>

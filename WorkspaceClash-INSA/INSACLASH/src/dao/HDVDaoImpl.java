@@ -136,7 +136,6 @@ public class HDVDaoImpl implements HDVDao {
 	public void miseAJourOr(String login, int qte) {//DONE
 		Connection connexion = null;
 	    PreparedStatement preparedStatement = null;
-	    
 	    try{
 	    	connexion =daoFactory.getConnection();
 	    	preparedStatement=initialisationRequetePreparee(connexion, SQL_MAJ_OR, false, qte, login);

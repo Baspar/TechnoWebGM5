@@ -29,8 +29,8 @@ public class HDV extends Batiment{
         for(TypeBatiment t : TypeBatiment.values()){
             niveauMaxBatiment.put(t, 1);
         }
-        quantiteMax.put(TypeRessource.OR, 100000);
-        quantiteMax.put(TypeRessource.CHARBON, 100000);
+        quantiteMax.put(TypeRessource.OR, 50000);
+        quantiteMax.put(TypeRessource.CHARBON, 50000);
 
         quantiteActuelle.put(TypeRessource.OR,100000);
         quantiteActuelle.put(TypeRessource.CHARBON, 100000);
@@ -78,8 +78,11 @@ public class HDV extends Batiment{
     }
 
     public int crediter(TypeRessource type, int nb){//DONE
-        int temp=quantiteActuelle.get(type)+nb;
+   // 	System.out.println(quantiteActuelle);
+        int temp= quantiteActuelle.get(type)+nb;
+   //     System.out.println(quantiteActuelle);
         temp=Math.min(temp, quantiteMax.get(type));
+   //     System.out.println(quantiteMax);
         quantiteActuelle.put(type, temp);
         return temp;
     }

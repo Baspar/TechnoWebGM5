@@ -128,6 +128,9 @@ public class Village{
         	//Essai de construction de batiment.
         	//Peut ne pas marcher si fonds insuffisants.
             boolean constructionOK=batiments.addNewBuilding(type);
+            HDV h=this.getHDV();
+           // System.out.println("ok");
+            h.utiliser(batiments.getModeleBatiments().get(type).getRessourceNecessaire(), batiments.getModeleBatiments().get(type).getCoutUpdate());
             return true;
         }
 		return false;
