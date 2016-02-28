@@ -17,7 +17,7 @@
 		<form method="post" action="<c:url value="/gestionRessource" />">
 			<fieldset>
 				<legend>Ajout d'une mine d'or</legend>
-				<input border=0 src="<c:url value="/inc/MineOr.png"/>" type=image value=submit name="ajouteror" align="middle" > <br>
+				<input border=0 src="<c:url value="/inc/MineOr.png" />" width="100" height="100" type=image value=submit name="ajouteror" align="middle" > <br>
 				Cout de construction : <br> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getBatiments().getModeleBatiments().get(TypeBatiment.MINEOR).coutUpdate}"/>
 			</fieldset>
 		</form>
