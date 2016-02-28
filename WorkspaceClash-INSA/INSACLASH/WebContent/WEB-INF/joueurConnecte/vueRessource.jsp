@@ -17,7 +17,8 @@
 		<form method="post" action="<c:url value="/gestionRessource" />">
 			<fieldset>
 				<legend>Ajout d'une mine d'or</legend>
-				<input border=0 src="<c:url value="/inc/MineOr.png"/>" type=image value=submit name="ajouteror" align="middle" > 
+				<input border=0 src="<c:url value="/inc/MineOr.png"/>" type=image value=submit name="ajouteror" align="middle" > <br>
+				Cout de construction : <br> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getBatiments().getModeleBatiments().get(TypeBatiment.MINEOR).coutUpdate}"/>
 			</fieldset>
 		</form>
 		
@@ -39,8 +40,9 @@
 			<c:forEach items="${sessionScope.sessionJoueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINEOR)}" var="item" >
 				<td> <c:if test="${item.getNiveau()<sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.MINEOR)}">
 				<input type="submit" value="Ameliorer" name="ameliorer${item.getId()}"> </c:if>  <br> 
-				<input type="submit" value="Vider" name="vider${item.getId()}"> <br> 
-				<img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> <c:out value="${item.calculProduction()}"/></td>       			
+				Cout de l'amélioration : <br> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${item.coutUpdate}"/> <br>
+				Quantite stockee : <br> <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> <c:out value="${item.calculProduction()}"/><br>
+				<input type="submit" value="Vider" name="vider${item.getId()}"> </td>      			
   		  </c:forEach>
   		  </tr>
    		 </table>
@@ -53,7 +55,8 @@
 		<form method="post" action="<c:url value="/gestionRessource" />">
 			<fieldset>
 				<legend>Ajout d'une mine de charbon</legend>
-				<input border=0 src="<c:url value="/inc/MineCharbon.png"/>" type=image value=submit name="ajoutercharbon" align="middle" > 
+				<input border=0 src="<c:url value="/inc/MineCharbon.png"/>" type=image value=submit name="ajoutercharbon" align="middle" > <br>
+				Cout de construction : <br> <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getBatiments().getModeleBatiments().get(TypeBatiment.MINECHARBON).coutUpdate}"/>
 			</fieldset>
 		</form>
 		
@@ -75,8 +78,9 @@
 			<c:forEach items="${sessionScope.sessionJoueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINECHARBON)}" var="item" >
 				<td> <c:if test="${item.getNiveau()<sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.MINECHARBON)}">
 				<input type="submit" value="Ameliorer" name="ameliorer${item.getId()}"> </c:if>  <br> 
-				<input type="submit" value="Vider" name="vider${item.getId()}"> <br> 
-				<img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${item.calculProduction()}"/></td>       			
+				Cout de l'amélioration : <br> <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> <c:out value="${item.coutUpdate}"/> <br>
+				Quantite stockee : <br> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${item.calculProduction()}"/><br>
+				<input type="submit" value="Vider" name="vider${item.getId()}"> </td>  
   		  </c:forEach>
   		  </tr>
    		 </table>
