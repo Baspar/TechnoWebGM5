@@ -31,6 +31,28 @@ public class Batiments{
         addNewBuilding(TypeBatiment.CASERNE);
     }
 
+    public Ressource getRessource(int id){//DONE
+    	for(int i=0; i<batiments.get(TypeBatiment.MINEOR).size(); i++)
+    		if(batiments.get(TypeBatiment.MINEOR).get(i).id==id)
+    			return (Ressource) batiments.get(TypeBatiment.MINEOR).get(i);
+    	for(int i=0; i<batiments.get(TypeBatiment.MINECHARBON).size(); i++)
+    		if(batiments.get(TypeBatiment.MINECHARBON).get(i).id==id)
+    			return (Ressource) batiments.get(TypeBatiment.MINECHARBON).get(i);
+    	return null;
+    }
+    
+    
+    public Defense getDefense(int id){//DONE
+    	for(int i=0; i<batiments.get(TypeBatiment.CANON).size(); i++)
+    		if(batiments.get(TypeBatiment.CANON).get(i).id==id)
+    			return (Defense) batiments.get(TypeBatiment.CANON).get(i);
+    	for(int i=0; i<batiments.get(TypeBatiment.MORTIER).size(); i++)
+    		if(batiments.get(TypeBatiment.MORTIER).get(i).id==id)
+    			return (Defense) batiments.get(TypeBatiment.MORTIER).get(i);
+    	return null;
+    }
+    
+    
     public Set<TypeBatiment> getSetNomBatiment(){//DONE
         return modeleBatiments.keySet();
     }
@@ -44,9 +66,9 @@ public class Batiments{
     	try{
         b=batiments.get(type); }
     	catch (Exception e){
-    		System.out.println(batiments.size()+"teeeeeeeeeessssssssssssssst");
-    		System.out.println(batiments.get(TypeBatiment.HDV)+"teeeeeeeeeessssssssssssssst");
-    		System.out.println(type);
+    		//System.out.println(batiments.size()+"teeeeeeeeeessssssssssssssst");
+    		//System.out.println(batiments.get(TypeBatiment.HDV)+"teeeeeeeeeessssssssssssssst");
+    		//System.out.println(type);
     	}
     	return b;
     }

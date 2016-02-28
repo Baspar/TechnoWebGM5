@@ -12,9 +12,9 @@
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>Controleur.Deconnexion</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>ajoutMine</servlet-name>
-    <servlet-class>Controleur.ajoutMine</servlet-class>
+   <servlet>
+    <servlet-name>GestionRessource</servlet-name>
+    <servlet-class>Controleur.GestionRessource</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
@@ -29,8 +29,8 @@
     <url-pattern>/deconnexion</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ajoutMine</servlet-name>
-    <url-pattern>/AjoutMine</url-pattern>
+    <servlet-name>GestionRessource</servlet-name>
+    <url-pattern>/gestionRessource</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>
