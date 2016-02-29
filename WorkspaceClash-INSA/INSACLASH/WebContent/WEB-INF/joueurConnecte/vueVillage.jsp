@@ -14,34 +14,36 @@
 <c:import url="/inc/menuConnecte.jsp" />
 <h1> Plan de votre village </h1>
 
-<c:forEach items="${sessionScope.sessionJoueur.getVillage().getCarte()}" var="item">
-    <c:forEach items="${item}" var="item2">
+<form method="post" action="<c:url value="/gestionVillage" />">
+<c:forEach begin="0" end="${sessionScope.sessionJoueur.getVillage().getCarte().size()-1}" var="i">
+	<c:forEach begin="0" end="${sessionScope.sessionJoueur.getVillage().getCarte().get(i).size()-1}" var="j">
    		<c:choose>
-    		<c:when test="${item2==null}">
-       			<img src="<c:url value="/inc/carreHerbe.png"/>" width="30" height="30"/> 
+    		<c:when test="${sessionScope.sessionJoueur.getVillage().getCarte().get(i).get(j)==null}">
+    			<input src="<c:url value="/inc/carreHerbe.png" />" width="30" height="30" type=image value=submit name="case${j*sessionScope.sessionJoueur.getVillage().getTailleVillage()+i}"> 
     		</c:when>
-    		<c:when test="${item2.getTypeBatiment()==TypeBatiment.HDV}">
+    		<c:when test="${sessionScope.sessionJoueur.getVillage().getCarte().get(i).get(j).getTypeBatiment()==TypeBatiment.HDV}">
     		    <img src="<c:url value="/inc/HotelDeVille.png"/>" width="30" height="30"/> 
     		</c:when>
-    		<c:when test="${item2.getTypeBatiment()==TypeBatiment.CASERNE}">
+    		<c:when test="${sessionScope.sessionJoueur.getVillage().getCarte().get(i).get(j).getTypeBatiment()==TypeBatiment.CASERNE}">
     		    <img src="<c:url value="/inc/Caserne.png"/>" width="30" height="30"/> 
     		</c:when>
-    		<c:when test="${item2.getTypeBatiment()==TypeBatiment.MINEOR}">
+    		<c:when test="${sessionScope.sessionJoueur.getVillage().getCarte().get(i).get(j).getTypeBatiment()==TypeBatiment.MINEOR}">
     		    <img src="<c:url value="/inc/MineOr.png"/>" width="30" height="30"/> 
     		</c:when>
-    		<c:when test="${item2.getTypeBatiment()==TypeBatiment.MINECHARBON}">
+    		<c:when test="${sessionScope.sessionJoueur.getVillage().getCarte().get(i).get(j).getTypeBatiment()==TypeBatiment.MINECHARBON}">
     		    <img src="<c:url value="/inc/MineCharbon.png"/>" width="30" height="30"/> 
     		</c:when>
-    		<c:when test="${item2.getTypeBatiment()==TypeBatiment.CANON}">
+    		<c:when test="${sessionScope.sessionJoueur.getVillage().getCarte().get(i).get(j).getTypeBatiment()==TypeBatiment.CANON}">
     		    <img src="<c:url value="/inc/Canon.png"/>" width="30" height="30"/> 
     		</c:when>
-    		<c:when test="${item2.getTypeBatiment()==TypeBatiment.MORTIER}">
+    		<c:when test="${sessionScope.sessionJoueur.getVillage().getCarte().get(i).get(j).getTypeBatiment()==TypeBatiment.MORTIER}">
     		    <img src="<c:url value="/inc/Mortier.png"/>" width="30" height="30"/> 
     		</c:when>
 		</c:choose>
 	</c:forEach>
 	<br>
 </c:forEach>
+</form>
 
 <h1> Batiments non place </h1>
 <table>

@@ -48,6 +48,11 @@ public class GestionVillage extends HttpServlet {
 		Joueur joueur = (Joueur) session.getAttribute(ATT_SESSION_JOUEUR);
 		String t= (String) session.getAttribute(ATT_SESSION_MANQUE_RESSOURCE);
 		t=null;
+		for(int i=0;i<14; i++)
+			for(int j=0; j<14;j++)
+		if (request.getParameter("case"+String.valueOf(14*j+i))!=null){
+			System.out.println("ok"+i+j);
+		}
 		session.setAttribute(ATT_SESSION_JOUEUR, joueur);
 		session.setAttribute(ATT_SESSION_MANQUE_RESSOURCE, t);
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
