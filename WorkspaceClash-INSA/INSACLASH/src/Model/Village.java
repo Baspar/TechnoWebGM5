@@ -3,7 +3,7 @@ package Model;
 import java.util.Vector;
 
 public class Village{
-    private final static int tailleVillage=10;
+    private final static int tailleVillage=14;
     private String nom;
     private Batiments batiments;
     private Armee armee;
@@ -28,8 +28,12 @@ public class Village{
         this();
         nom=n;
     }
+    
+    public Vector<Vector<Batiment>> getCarte() {//DONE
+		return carte;
+	}
 
-    public HDV getHDV(){//DONE
+	public HDV getHDV(){//DONE
         return (HDV) batiments.getBatiments(TypeBatiment.HDV).get(0);
     }
 

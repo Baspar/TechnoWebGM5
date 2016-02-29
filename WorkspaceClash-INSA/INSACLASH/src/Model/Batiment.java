@@ -12,8 +12,7 @@ public abstract class Batiment{
     protected int id;
 
 
-
-    public int getId(){//DONE
+	public int getId(){//DONE
 		return id;
 	}
 	public void setId(int id){//DONE

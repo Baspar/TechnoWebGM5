@@ -60,7 +60,9 @@ public class GestionDefense extends HttpServlet {
 		if (request.getParameter("ajoutercanon")!=null){
 			Canon c= new Canon();
 			c.upgrade();
+		//	System.out.println("ok");
 			if (joueur.getVillage().ajouterBatiment(TypeBatiment.CANON)){
+			//	System.out.println("ok");
 				villageDao.ajouterBatiment(joueur.getLogin(), c);
 				joueur.getVillage().getBatiments().getBatiments(TypeBatiment.CANON).get(joueur.getVillage().getBatiments().getBatiments(TypeBatiment.CANON).size()-1).setId(c.getId());
 				villageDao.miseAJourRessource(joueur.getLogin(), TypeRessource.OR, joueur.getVillage().getHDV().getQuantiteActuelle().get(TypeRessource.OR));

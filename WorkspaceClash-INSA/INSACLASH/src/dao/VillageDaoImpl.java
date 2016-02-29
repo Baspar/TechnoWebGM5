@@ -133,7 +133,7 @@ public class VillageDaoImpl implements VillageDao {
 			HDVDaoImpl hdv=new HDVDaoImpl(daoFactory);
 			hdv.upgrade(login);
 		}
-		if(b.getTypeBatiment()==TypeBatiment.CASERNE || b.getTypeBatiment()==TypeBatiment.MORTIER){
+		if(b.getTypeBatiment()==TypeBatiment.CANON|| b.getTypeBatiment()==TypeBatiment.MORTIER){
 			DefenseDaoImpl def=new DefenseDaoImpl(daoFactory);
 			def.upgradeDefense(login, b.getId());
 		}
@@ -146,7 +146,7 @@ public class VillageDaoImpl implements VillageDao {
 
 	@Override
 	public void ajouterBatiment(String login, Batiment b) {
-		if(b.getTypeBatiment()==TypeBatiment.CASERNE || b.getTypeBatiment()==TypeBatiment.MORTIER){
+		if(b.getTypeBatiment()==TypeBatiment.CANON || b.getTypeBatiment()==TypeBatiment.MORTIER){
 			DefenseDaoImpl def=new DefenseDaoImpl(daoFactory);
 			def.ajouterDefense(login, (Defense) b);
 		}
