@@ -20,8 +20,8 @@ public class Village{
             for(int j=0; j<tailleVillage; j++)
                 carte.get(i).add(null);
         }
-        deplacerBatiment(TypeBatiment.HDV, 0, 0, 0);
-        deplacerBatiment(TypeBatiment.CASERNE, 0, 0, 1);
+     //   deplacerBatiment(TypeBatiment.HDV, 0, 0, 0);
+     //   deplacerBatiment(TypeBatiment.CASERNE, 0, 0, 1);
     }
 
     public Village(String n){//DONE

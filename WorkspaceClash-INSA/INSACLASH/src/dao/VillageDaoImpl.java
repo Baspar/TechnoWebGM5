@@ -9,6 +9,7 @@ import Model.Batiments;
 import Model.Canon;
 import Model.Caserne;
 import Model.Defense;
+import Model.HDV;
 import Model.MineCharbon;
 import Model.MineOr;
 import Model.Mortier;
@@ -54,12 +55,17 @@ public class VillageDaoImpl implements VillageDao {
 		//On recupere l'hdv
 		HDVDaoImpl hdv=new HDVDaoImpl(daoFactory);
 		Vector<Batiment> bati=new Vector<Batiment>();
-		bati.add(hdv.trouverHDV(login));
+		HDV h2=hdv.trouverHDV(login);
+		if(h2.getX()!=-1 && h2.getY()!=-1)
+			v.getCarte().get(h2.getX()).set(h2.getY(), h2);
+		bati.add(h2);
 		h.put(TypeBatiment.HDV, bati);
 		Vector<Batiment> bati2=new Vector<Batiment>();
 		//On recupere la caserne
 		CaserneDaoImpl cas=new CaserneDaoImpl(daoFactory);
 		Caserne c =cas.trouverCaserne(login);
+		if(c.getX()!=-1 && c.getY()!=-1)
+			v.getCarte().get(c.getX()).set(c.getY(), c);
 		v.setArmee(c.getArmee());
 		bati2.add(c);
 		h.put(TypeBatiment.CASERNE, bati2);
@@ -68,29 +74,41 @@ public class VillageDaoImpl implements VillageDao {
 		Vector<Batiment> bati3=new Vector<Batiment>();
 		//Les mortiers
 		Vector<Mortier> d= def.trouverMortier(login);
-		for(int i=0; i<d.size(); i++)
+		for(int i=0; i<d.size(); i++){
+			if(d.get(i).getX()!=-1 && d.get(i).getY()!=-1)
+				v.getCarte().get(d.get(i).getX()).set(d.get(i).getY(), d.get(i));
 			bati3.add(d.get(i));
+		}	
 		h.put(TypeBatiment.MORTIER, bati3 );
 		Vector<Batiment> bati4=new Vector<Batiment>();
 		//Les canons
 		Vector<Canon> d2= def.trouverCanon(login);
-		for(int i=0; i<d2.size(); i++)
+		for(int i=0; i<d2.size(); i++){
+			if(d2.get(i).getX()!=-1 && d2.get(i).getY()!=-1)
+				v.getCarte().get(d2.get(i).getX()).set(d2.get(i).getY(), d2.get(i));
 			bati4.add(d2.get(i));
+		}	
 		h.put(TypeBatiment.CANON, bati4 );
 		//On recupere les ressources
 		RessourceDaoImpl r=new RessourceDaoImpl(daoFactory);
 		Vector<Batiment> bati5=new Vector<Batiment>();
 		//MineCharbon
 		Vector<MineCharbon> res= r.trouverMineCharbon(login);
-		for(int i=0; i<res.size(); i++)
+		for(int i=0; i<res.size(); i++){
+			if(res.get(i).getX()!=-1 && res.get(i).getY()!=-1)
+				v.getCarte().get(res.get(i).getX()).set(res.get(i).getY(), res.get(i));
 			bati5.add(res.get(i));
+		}	
 		h.put(TypeBatiment.MINECHARBON, bati5 );
 		Vector<Batiment> bati6=new Vector<Batiment>();
 		//MineOr
 		Vector<MineOr> res2= r.trouverMineOr(login);
 		//System.out.println(res2.size());
-		for(int i=0; i<res2.size(); i++)
+		for(int i=0; i<res2.size(); i++){
+			if(res2.get(i).getX()!=-1 && res2.get(i).getY()!=-1)
+				v.getCarte().get(res2.get(i).getX()).set(res2.get(i).getY(), res2.get(i));
 			bati6.add(res2.get(i));
+		}	
 		//System.out.println(bati6.size());
 		h.put(TypeBatiment.MINEOR, bati6 );
 		//System.out.println(h);
