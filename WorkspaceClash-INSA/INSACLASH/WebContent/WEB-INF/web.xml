@@ -24,9 +24,13 @@
     <servlet-name>GestionDefense</servlet-name>
     <servlet-class>Controleur.GestionDefense</servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>GestionCaserne</servlet-name>
     <servlet-class>Controleur.GestionCaserne</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>GestionVillage</servlet-name>
+    <servlet-class>Controleur.GestionVillage</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
@@ -55,6 +59,10 @@
   <servlet-mapping>
     <servlet-name>GestionCaserne</servlet-name>
     <url-pattern>/gestionCaserne</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>GestionVillage</servlet-name>
+    <url-pattern>/gestionVillage</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>
