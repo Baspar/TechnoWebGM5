@@ -20,6 +20,10 @@
     <servlet-name>GestionHDV</servlet-name>
     <servlet-class>Controleur.GestionHDV</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GestionDefense</servlet-name>
+    <servlet-class>Controleur.GestionDefense</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
@@ -36,9 +40,13 @@
     <servlet-name>GestionRessource</servlet-name>
     <url-pattern>/gestionRessource</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>GestionHDV</servlet-name>
     <url-pattern>/gestionHDV</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>GestionDefense</servlet-name>
+    <url-pattern>/gestionDefense</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>
