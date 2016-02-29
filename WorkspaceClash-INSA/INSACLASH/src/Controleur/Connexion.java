@@ -19,6 +19,7 @@ public class Connexion extends HttpServlet {
 	public static final String ATT_JOUEUR = "joueur";
 	public static final String ATT_FORM = "form";
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur"; 
+	public static final String ATT_SESSION_MANQUE_RESSOURCE="manqueRessource";
 	public static final String VUE = "/WEB-INF/connexion.jsp";
 	public static final String VUECONNECTE="/WEB-INF/joueurConnecte/vueRessource.jsp";
 
@@ -57,6 +58,7 @@ public class Connexion extends HttpServlet {
 		/* Stockage du formulaire et du bean dans l'objet request */
 		request.setAttribute( ATT_FORM, form );
 		request.setAttribute( ATT_JOUEUR, joueur );
+		session.setAttribute(ATT_SESSION_MANQUE_RESSOURCE, null);
 		if(session.getAttribute(ATT_SESSION_JOUEUR)==null)
 			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 		else

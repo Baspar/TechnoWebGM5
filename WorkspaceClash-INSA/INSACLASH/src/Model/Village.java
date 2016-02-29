@@ -80,6 +80,7 @@ public class Village{
             Batiment b=batiments.getBatiments(type).get(i);
             TypeRessource t=b.getRessourceNecessaire();
             if(h.getQuantiteActuelle().get(t)>=b.getCoutUpdate()){
+            	//System.out.println("ok");
                 h.utiliser(t, b.getCoutUpdate());
                 b.upgrade();
                 return true;

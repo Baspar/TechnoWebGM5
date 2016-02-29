@@ -36,6 +36,7 @@ public class HDV extends Batiment{
         quantiteActuelle.put(TypeRessource.CHARBON, 100000);
 
         ressourceNecessaire=TypeRessource.OR;
+        coutUpdate=1000;
     }
 
     public Integer getQuotaBatiment(TypeBatiment typeBatiment){//DONE

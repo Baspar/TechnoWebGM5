@@ -13,27 +13,32 @@
 <body>
 <c:import url="/inc/menuConnecte.jsp" />
 
-<h1> Descriptif de l'hotel de ville </h1>
-<table><tr>
-<td> <img src="<c:url value="/inc/HotelDeVille.png"/>" width="20" height="20"alt="or" /> Niveau <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveau()}"/></td>
-<td> <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuantiteActuelle().get(TypeRessource.OR)}"/>/<c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuantiteMax().get(TypeRessource.OR)}"/></td>
-<td> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuantiteActuelle().get(TypeRessource.CHARBON)}"/>/<c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuantiteMax().get(TypeRessource.CHARBON)}"/></td>
-<td> <img src="<c:url value="/inc/Archer.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNombreArcher()}"/></td>
-<td> <img src="<c:url value="/inc/trebuchet.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNombreTrebuchet()}"/></td>
-<td> <img src="<c:url value="/inc/Caserne.png"/>" width="20" height="20"alt="or" /> <c:out value="${5*sessionScope.sessionJoueur.village.getCaserne().getNombreTrebuchet()+sessionScope.sessionJoueur.village.getCaserne().getNombreArcher()}"/> /<c:out value="${sessionScope.sessionJoueur.village.getCaserne().getTailleTotaleArmee()}"/></td>
-
-</tr></table>
 
 <h1> Amélioration de l'hotel de ville </h1>
-
+<form method="post" action="<c:url value="/gestionHDV" />"> 
+<fieldset>
+<legend> Bonus en ameliorant l'hdv</legend>
 <table>
 <tr> <td> </td><td> Niveau actuel : <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveau()}"/></td> <td> Niveau suivant : <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveau()+1}"/></td></tr>
 <tr> <td> quota max Mine Or </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuotaBatiment(TypeBatiment.MINEOR)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuotaBatiment(TypeBatiment.MINEOR)*2}"/></td></tr>
 <tr> <td> quota max Mine Charbon </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuotaBatiment(TypeBatiment.MINECHARBON)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuotaBatiment(TypeBatiment.MINECHARBON)*2}"/></td></tr>
 <tr> <td> quota max Canon </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuotaBatiment(TypeBatiment.CANON)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuotaBatiment(TypeBatiment.CANON)*2}"/></td></tr>
 <tr> <td> quota max Mortier </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuotaBatiment(TypeBatiment.MORTIER)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuotaBatiment(TypeBatiment.MORTIER)*2}"/></td></tr>
+<tr> <td> niveau max Mine Or </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.MINEOR)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.MINEOR)+1}"/></td></tr>
+<tr> <td> niveau max Mine Charbon </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.MINECHARBON)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.MINECHARBON)+1}"/></td></tr>
+<tr> <td> niveau max Canon </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.CANON)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.CANON)+1}"/></td></tr>
+<tr> <td> niveau max Mortier </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.MORTIER)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.MORTIER)+1}"/></td></tr>
+<tr> <td> niveau max HDV </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.HDV)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.HDV)+1}"/></td></tr>
+<tr> <td> niveau max Caserne </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.CASERNE)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.CASERNE)+1}"/></td></tr>
+<tr> <td> quantite max Or </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuantiteMax().get(TypeRessource.OR)}"/> </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuantiteMax().get(TypeRessource.OR)*2}"/> </td></tr>
+<tr> <td> quantite max Charbon </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuantiteMax().get(TypeRessource.CHARBON)}"/> </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getHDV().getQuantiteMax().get(TypeRessource.OR)*2}"/> </td> </tr>
 </table>
-
-
+</fieldset>
+<fieldset> 
+<legend> Amelioration de l'hdv </legend>
+<input type="submit" value="Ameliorer" name="ameliorer"><br>
+Cout de l'amélioration : <br> <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getHDV().coutUpdate}"/>
+</fieldset>
+</form>
 </body>
 </html>
