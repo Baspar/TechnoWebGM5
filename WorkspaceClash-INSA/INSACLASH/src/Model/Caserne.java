@@ -71,6 +71,7 @@ public class Caserne extends Batiment{
         armee=new Armee();
         ressourceNecessaire=TypeRessource.CHARBON;
         tailleTotaleArmee=30;
+        coutUpdate=500;
     }
 
     public void upgrade(){//DONE

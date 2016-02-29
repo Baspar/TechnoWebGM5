@@ -180,6 +180,26 @@ public class Village{
         return false;
     }
 
+    public boolean supprimerSoldat(TypeSoldat type ){//DONE
+        Caserne c=this.getCaserne();
+        int nb;
+        if(type==TypeSoldat.ARCHER)
+        	nb=c.getNombreArcher();
+        else
+        	nb=c.getNombreTrebuchet();
+        if(nb<1)
+        return false;
+        else{
+        	boolean b=false;
+        	for(int i=0; i<c.getArmee().getSoldats().size() && b==false ;i++)
+        		if(c.getArmee().getSoldats().get(i).getType()==type){
+        			c.getArmee().getSoldats().remove(i);
+        			b=true;
+        		}	
+        	return true;
+        }
+    }
+    
     public Batiment getBatiment(int x, int y){//DONE
         return carte.get(x).get(y);
     }

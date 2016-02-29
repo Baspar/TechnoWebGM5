@@ -24,6 +24,10 @@
     <servlet-name>GestionDefense</servlet-name>
     <servlet-class>Controleur.GestionDefense</servlet-class>
   </servlet>
+   <servlet>
+    <servlet-name>GestionCaserne</servlet-name>
+    <servlet-class>Controleur.GestionCaserne</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
@@ -44,9 +48,13 @@
     <servlet-name>GestionHDV</servlet-name>
     <url-pattern>/gestionHDV</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>GestionDefense</servlet-name>
     <url-pattern>/gestionDefense</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GestionCaserne</servlet-name>
+    <url-pattern>/gestionCaserne</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>
