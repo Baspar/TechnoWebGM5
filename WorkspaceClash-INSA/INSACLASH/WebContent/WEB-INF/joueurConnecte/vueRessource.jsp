@@ -17,7 +17,7 @@
 		<form method="post" action="<c:url value="/gestionRessource" />">
 			<fieldset>
 				<legend>Ajout d'une mine d'or</legend>
-				<input border=0 src="<c:url value="/inc/MineOr.png" />" width="100" height="100" type=image value=submit name="ajouteror" align="middle" > <br>
+				<input border=0 src="<c:url value="/inc/MineOr.png" />" width="80" height="80" type=image value=submit name="ajouteror" align="middle" > <br>
 				Cout de construction : <br> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getBatiments().getModeleBatiments().get(TypeBatiment.MINEOR).coutUpdate}"/>
 			</fieldset>
 		</form>
@@ -33,7 +33,7 @@
 			<tr>
 			<c:forEach items="${sessionScope.sessionJoueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINEOR)}" var="item" >
 				  <td> Mine niveau <c:out value="${item.getNiveau()}"/> <br> 
-				  <img src="<c:url value="/inc/MineOr.png"/>" width="100" height="100"alt="image de ma mine" /> </td> 
+				  <img src="<c:url value="/inc/MineOr.png"/>" width="80" height="80"alt="image de ma mine" /> </td> 
   		  </c:forEach>
   		  </tr>
    		 <tr> 
@@ -55,7 +55,7 @@
 		<form method="post" action="<c:url value="/gestionRessource" />">
 			<fieldset>
 				<legend>Ajout d'une mine de charbon</legend>
-				<input border=0 src="<c:url value="/inc/MineCharbon.png"/>" type=image value=submit name="ajoutercharbon" align="middle" > <br>
+				<input border=0 src="<c:url value="/inc/MineCharbon.png"/>" width="90" height="90" type=image value=submit name="ajoutercharbon" align="middle" > <br>
 				Cout de construction : <br> <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getBatiments().getModeleBatiments().get(TypeBatiment.MINECHARBON).coutUpdate}"/>
 			</fieldset>
 		</form>
@@ -71,7 +71,7 @@
 			<tr>
 			<c:forEach items="${sessionScope.sessionJoueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINECHARBON)}" var="item" >
 				  <td> Mine niveau <c:out value="${item.getNiveau()}"/> <br> 
-				  <img src="<c:url value="/inc/MineCharbon.png"/>" width="100" height="100"alt="image de ma mine" /> </td> 
+				  <img src="<c:url value="/inc/MineCharbon.png"/>" width="90" height="90"alt="image de ma mine" /> </td> 
   		  </c:forEach>
   		  </tr>
    		 <tr> 

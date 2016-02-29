@@ -80,7 +80,11 @@ public class GestionRessource extends HttpServlet {
 						if(request.getParameter("ameliorer"+joueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINEOR).get(i).getId())!=null){
 							MineOr m= (MineOr) joueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINEOR).get(i);
 							//System.out.println(m.getId());
+							int qte= m.prelever(); 
 							if( joueur.getVillage().upgradeBatiment(TypeBatiment.MINEOR, i) ){
+								villageDao.viderRessource(joueur.getLogin(), m.getId(), new Date());
+								qte=joueur.getVillage().getHDV().crediter(TypeRessource.OR, qte);
+								villageDao.miseAJourRessource(joueur.getLogin(), TypeRessource.OR, qte);
 								villageDao.ameliorerBatiment(joueur.getLogin(), m);
 								villageDao.miseAJourRessource(joueur.getLogin(), TypeRessource.CHARBON, joueur.getVillage().getHDV().getQuantiteActuelle().get(TypeRessource.CHARBON));
 							}	
@@ -99,15 +103,17 @@ public class GestionRessource extends HttpServlet {
 						qte=joueur.getVillage().getHDV().crediter(TypeRessource.OR, qte);
 						villageDao.miseAJourRessource(joueur.getLogin(), TypeRessource.OR, qte);
 					}	
-					else 
-						t="true";
 				}
 				//on reg si on ameliore une mine de charbon
 				if(!trouve){
 					for(int i=0; i<joueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINECHARBON).size(); i++)
 						if(request.getParameter("ameliorer"+joueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINECHARBON).get(i).getId())!=null){
 							MineCharbon m= (MineCharbon) joueur.getVillage().getBatiments().getBatiments(TypeBatiment.MINECHARBON).get(i);
-							if( joueur.getVillage().upgradeBatiment(TypeBatiment.MINECHARBON, i) ){
+							int qte= m.prelever();
+							if( joueur.getVillage().upgradeBatiment(TypeBatiment.MINECHARBON, i) ){ 
+								villageDao.viderRessource(joueur.getLogin(), m.getId(), new Date());
+								qte=joueur.getVillage().getHDV().crediter(TypeRessource.CHARBON, qte);
+								villageDao.miseAJourRessource(joueur.getLogin(), TypeRessource.CHARBON, qte);
 								villageDao.ameliorerBatiment(joueur.getLogin(), m);
 								villageDao.miseAJourRessource(joueur.getLogin(), TypeRessource.OR, joueur.getVillage().getHDV().getQuantiteActuelle().get(TypeRessource.OR));
 
@@ -127,8 +133,6 @@ public class GestionRessource extends HttpServlet {
 							qte=joueur.getVillage().getHDV().crediter(TypeRessource.CHARBON, qte);
 							villageDao.miseAJourRessource(joueur.getLogin(), TypeRessource.CHARBON, qte);
 						}	
-						else 
-							t="true";
 				}
 			}
 			}
