@@ -8,7 +8,10 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.LinkedList;
 
 import Model.TypeBatiment;
+import Model.TypeRessource;
+import Model.Ressource;
 import Model.Armee;
+import Model.Batiment;
 import Model.Village;
 
 public class Combat{
@@ -16,8 +19,7 @@ public class Combat{
     private ArmeeCombat armee;
     private Vector<Vector<Hashtable<Integer, EntiteCombat>>> terrain;
     private int tailleVillage;
-    private int zoom=2;
-    private Vector<Vector<SimpleEntry<Integer, BatimentCombat>>> terrainDistance;
+    private int zoom=1;
 
     // Note terrain :
     // Si le Model.village a une taille de X, le terrain aura une taille de X*zoom, plus deux ligne et colonnes sur les bords permettant le placement des soldats
@@ -33,14 +35,10 @@ public class Combat{
 
         //Creation terrain vierge
         terrain=new Vector<Vector<Hashtable<Integer, EntiteCombat>>>();
-        terrainDistance=new Vector<Vector<SimpleEntry<Integer, BatimentCombat>>>();
         for(int i=0; i<tailleVillage+2; i++){
             terrain.add(new Vector<Hashtable<Integer, EntiteCombat>>());
-            terrainDistance.add(new Vector<SimpleEntry<Integer, BatimentCombat>>());
-            for(int j=0; j<tailleVillage+2; j++){
+            for(int j=0; j<tailleVillage+2; j++)
                 terrain.get(i).add(new Hashtable<Integer, EntiteCombat>());
-                terrainDistance.get(i).add(new SimpleEntry<Integer, BatimentCombat>(-1, null));
-            }
         }
 
         //Placement batiments sur terrain
@@ -51,72 +49,21 @@ public class Combat{
                 }
         }
     }
-    private void updateTerrainDistance(){//DONE
-        //Remise a zero terrain distance
-        terrainDistance=new Vector<Vector<SimpleEntry<Integer, BatimentCombat>>>();
-        for(int i=0; i<tailleVillage+2; i++){
-            terrainDistance.add(new Vector<SimpleEntry<Integer, BatimentCombat>>());
-            for(int j=0; j<tailleVillage+2; j++)
-                terrainDistance.get(i).add(new SimpleEntry<Integer, BatimentCombat>(-1, null));
-        }
-
-        // Boucle ajout batment sur carte (distance = 0)
-        for(BatimentCombat batiment : village.getBatiments()){
-            if(batiment.estATuer() || batiment.estMort()){
-                int xBat=batiment.getX()*zoom;
-                int yBat=batiment.getY()*zoom;
-                LinkedList<SimpleEntry<SimpleEntry<Integer, Integer>, Integer>> fifo = new LinkedList<SimpleEntry<SimpleEntry<Integer, Integer>, Integer>>();
-
-                // Ajout ligne haut et bas
-                for(int i=0; i<zoom; i++){
-                    fifo.add(new SimpleEntry<SimpleEntry<Integer, Integer>, Integer>(new SimpleEntry<Integer, Integer>(xBat+i, yBat), 0));
-                    fifo.add(new SimpleEntry<SimpleEntry<Integer, Integer>, Integer>(new SimpleEntry<Integer, Integer>(xBat+i, yBat+zoom-1), 0));
-                }
-
-                // Ajout colonne droite et gauche
-                for(int i=1; i<zoom-1; i++){
-                    fifo.add(new SimpleEntry<SimpleEntry<Integer, Integer>, Integer>(new SimpleEntry<Integer, Integer>(xBat, yBat+i), 0));
-                    fifo.add(new SimpleEntry<SimpleEntry<Integer, Integer>, Integer>(new SimpleEntry<Integer, Integer>(xBat+zoom-1, yBat+i), 0));
-                }
-
-                while(!fifo.isEmpty()){
-                    SimpleEntry<SimpleEntry<Integer, Integer>, Integer> cell = fifo.removeFirst();
-                    int x = cell.getKey().getKey();
-                    int y = cell.getKey().getValue();
-                    int dist = cell.getValue();
-                    dist++;
-                    for(int dx=-1; dx<2; dx+=2)
-                        for(int dy=-1; dy<2; dy+=2)
-                            if( x+dx >= 0
-                                && y+dy >= 0
-                                && x+dx < tailleVillage
-                                && y+dy < tailleVillage
-                                && (terrainDistance.get(x+dx).get(y+dy).getKey() == -1
-                                    || dist < terrainDistance.get(x+dx).get(y+dy).getKey()
-                                    )
-                              ){
-                                    terrainDistance.get(x+dx).set(y+dy, new SimpleEntry<Integer, BatimentCombat>(dist, batiment));
-                                    fifo.add(new SimpleEntry<SimpleEntry<Integer, Integer>, Integer>(new SimpleEntry<Integer, Integer>(x+dx, y+dy), dist));
-                              }
-                }
-            }
-        }
-    }
     private boolean estTermine(){//DONE
         boolean resteSoldats=(armee.getSoldats().size()>0);
         boolean resteBatiments=false;
         for(BatimentCombat batiment : village.getBatiments())
-            if(batiment.getPV()>0){
+            if(!batiment.estMort() && !batiment.estATuer()){
                 resteBatiments=true;
                 break;
             }
-        return (resteBatiments && resteSoldats);
+        return (!resteBatiments || !resteSoldats);
     }
     private double distance(int x1, int y1, int x2, int y2){//DONE
         return Math.sqrt( Math.pow((y1-y2), 2) + Math.pow((y1-y2), 2));
     }
     private void deplacementSoldat(SoldatCombat soldat){//DONE
-        Vector<Integer> result = soldat.ouAller(village.getBatiments(), terrainDistance);
+        Vector<Integer> result = soldat.ouAller(village.getBatiments(), tailleVillage);
 
         int id = soldat.getId();
         int newX = result.get(0);
@@ -162,7 +109,6 @@ public class Combat{
                 int x = armee.getSoldats().get(i).getX();
                 int y = armee.getSoldats().get(i).getY();
                 int id = armee.getSoldats().get(i).getId();
-             //   System.out.println(id);
                 terrain.get(x).get(y).remove(id);
             }
 
@@ -175,14 +121,48 @@ public class Combat{
                 terrain.get(x).get(y).remove(id);
             }
     }
-    public void combattre(){//DONE
-        while(!estTermine()){
-            tourSoldat();
+    private Hashtable<TypeRessource, Integer> combattreTmp(){//DONE
+        Hashtable<TypeRessource, Integer> out = new Hashtable<TypeRessource, Integer>();
+
+        //Division par 2 de l'amree
+        int nbSoldat=armee.getSoldats().size();
+        for(int i=0; i<nbSoldat/2; i++)
+            armee.getSoldats().remove(i);
+
+
+        for(BatimentCombat batCom : village.getBatiments()){
+            Batiment bat = batCom.getBatiment();
+            if( bat.getTypeBatiment() == TypeBatiment.MINEOR
+                || bat.getTypeBatiment() == TypeBatiment.MINECHARBON){
+
+                TypeRessource typeRes = ((Ressource)bat).getTypeRessource();
+                Integer prelevement = ((Ressource)bat).prelever();
+
+                Integer dejaPresent = 0;
+
+                prelevement=60;
+
+                if(!out.contains(typeRes))
+                    out.put(typeRes, 0);
+                else
+                    dejaPresent = out.get(typeRes);
+
+                out.put(typeRes, dejaPresent+prelevement);
+            }
+        }
+        return out;
+    }
+    public Hashtable<TypeRessource, Integer> combattre(){//DONE
+        //while(!estTermine()){
+            //tourSoldat();
             //tourBatiment();
             //checkMorts();
-            updateTerrainDistance();
-            afficherCombat();
-        }
+            //afficherCombat();
+            //try{
+                //Thread.sleep(4000);
+            //} catch (Exception e){}
+        //}
+        return combattreTmp();
     }
     private void afficherCombat(){//DONE
         String out="";

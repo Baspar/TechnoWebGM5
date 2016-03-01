@@ -1,6 +1,11 @@
 package test;
 
+import java.util.Hashtable;
+import java.util.Map.Entry;
+
 import Combat.Combat;
+
+import Model.TypeRessource;
 import Model.Armee;
 import Model.TypeBatiment;
 import Model.TypeSoldat;
@@ -8,7 +13,7 @@ import Model.Village;
 
 public class testCombat {
 
-	
+
 	public static void main(String[] args){
         Village v=new Village("blaine");
 
@@ -39,14 +44,19 @@ public class testCombat {
         }
         v.upgradeSoldat(TypeSoldat.ARCHER);
         v.upgradeSoldat(TypeSoldat.ARCHER);
-     
+
         Armee armee =new Armee();
         for(int i=0; i<5; i++)
         	armee.ajouterSoldat(TypeSoldat.ARCHER, 2);
         armee.ajouterSoldat(TypeSoldat.TREBUCHET, 3);
-        
+
         Combat combat=new Combat(v, armee);
-        combat.combattre();
-        
-	}    
+        Hashtable<TypeRessource, Integer> result =  combat.combattre();
+
+        if(result.size() != 0){
+            System.out.println("Vous avez gagne! Vos gains sont:");
+            for(Entry<TypeRessource,Integer> ent:result.entrySet())
+                System.out.println("  "+ent.getValue()+" "+ent.getKey());
+        }
+    }
 }
