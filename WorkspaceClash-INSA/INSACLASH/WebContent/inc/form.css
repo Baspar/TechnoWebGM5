@@ -34,3 +34,38 @@ color: #900;
 form .succes {
 color: #090;
 } 
+
+
+/* Tableaux -----------------------------------------------------------------------------------------------*/
+#mytable
+{
+border-collapse:collapse;
+width:100%;
+max-width:700px;
+min-width:400px;
+text-align:center;
+}
+
+
+#mytable,#myth, #mytd
+{
+border: 1px solid gray;
+}
+
+#myth, #mytd
+{
+height: 24px;
+padding:4px;
+vertical-align:middle;
+}
+
+#myth
+{
+background: #9CF;
+font-weight:bold;
+}
+
+#mytable tr:nth-child(odd) #mytd
+{
+  background-color: #E8E8FF;
+}

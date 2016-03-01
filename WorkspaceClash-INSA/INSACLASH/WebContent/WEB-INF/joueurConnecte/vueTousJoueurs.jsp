@@ -17,12 +17,12 @@
 
 <form method="post" action="<c:url value="/gestionTousJoueurs" />">
 
-<table>
-<tr> <td> Login </td> <td> Niveau Hotel de Ville</td> <td> Quantite Or <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> </td> <td> Quantite Charbon <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /></td> </tr>
+<table id="mytable">
+<tr> <th id="myth"> Login </th> <th id="myth"> Niveau Hotel de Ville</th> <th id="myth"> Quantite Or <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> </th> <th id="myth"> Quantite Charbon <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /></th> </tr>
 <c:forEach begin="0" end="${sessionScope.sessionListeJoueur.size()-1}" var="i">
 	<tr>
 	<c:forEach begin="0" end="${sessionScope.sessionListeJoueur.get(i).size()-1}" var="j">
-		<td>
+		<td id="mytd">
 		<c:if test="${j==0}">
 			<input type="submit" value="${sessionScope.sessionListeJoueur.get(i).get(j)}" name="${sessionScope.sessionListeJoueur.get(i).get(j)}">
 		</c:if>

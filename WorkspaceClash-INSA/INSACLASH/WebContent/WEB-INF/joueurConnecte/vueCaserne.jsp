@@ -19,10 +19,10 @@
 <form method="post" action="<c:url value="/gestionCaserne" />"> 
 <fieldset>
 <legend> Bonus en ameliorant la caserne</legend>
-<table>
-<tr> <td> </td><td> Niveau actuel : <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNiveau()}"/></td> <td> Niveau suivant : <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNiveau()+1}"/></td></tr>
-<tr> <td> niveau max Archer </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.ARCHER)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.ARCHER)+1}"/></td></tr>
-<tr> <td> niveau max Trebuchet </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.TREBUCHET)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.TREBUCHET)+1}"/></td></tr>
+<table id="mytable">
+<tr> <td> </td><th id="myth"> Niveau actuel : <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNiveau()}"/></th> <th id="myth"> Niveau suivant : <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNiveau()+1}"/></th></tr>
+<tr> <th id="myth"> niveau max Archer </th> <td id="mytd"> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.ARCHER)}"/></td>  <td id="mytd"> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.ARCHER)+1}"/></td></tr>
+<tr> <th id="myth"> niveau max Trebuchet </th> <td id="mytd"> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.TREBUCHET)}"/></td>  <td id="mytd"> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.TREBUCHET)+1}"/></td></tr>
 </table>
 </fieldset>
 <c:if test="${sessionScope.sessionJoueur.village.getCaserne().getNiveau()<sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.CASERNE)}">
@@ -39,28 +39,28 @@ Cout de l'amélioration : <br> <img src="<c:url value="/inc/charbon.png"/>" widt
 <form method="post" action="<c:url value="/gestionCaserne" />"> 
 <fieldset>
 <legend> Gestion de l'armée</legend>
-<table>
-<tr> <td> </td> <td> Archer <img src="<c:url value="/inc/Archer.png"/>" width="20" height="20"alt="or" /> </td> <td> Trebuchet <img src="<c:url value="/inc/trebuchet.png"/>" width="20" height="20"alt="or" /> </td> </tr>
-<tr> <td> Niveau actuel </td> 
-<td><c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauActuel.get(TypeSoldat.ARCHER)}"/> </td>
-<td> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauActuel.get(TypeSoldat.TREBUCHET)}"/> </td> </tr> 
-<tr> <td> Cout de l'amelioration </td>  
-<td> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getCaserne().calculCoutUpgrade(TypeSoldat.ARCHER)}"/> <br> 
+<table id="mytable">
+<tr> <td> </td> <th id="myth"> Archer <img src="<c:url value="/inc/Archer.png"/>" width="20" height="20"alt="or" /> </th> <th id="myth"> Trebuchet <img src="<c:url value="/inc/trebuchet.png"/>" width="20" height="20"alt="or" /> </th> </tr>
+<tr> <th id="myth"> Niveau actuel </th> 
+<td id="mytd"><c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauActuel.get(TypeSoldat.ARCHER)}"/> </td>
+<td id="mytd"> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauActuel.get(TypeSoldat.TREBUCHET)}"/> </td> </tr> 
+<tr> <th id="myth"> Cout de l'amelioration </th>  
+<td id="mytd"> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getCaserne().calculCoutUpgrade(TypeSoldat.ARCHER)}"/> <br> 
 <c:if test="${sessionScope.sessionJoueur.village.getCaserne().niveauActuel.get(TypeSoldat.ARCHER)<sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.ARCHER)}"> 
 <input type="submit" value="Ameliorer" name="ameliorerarcher"> </c:if> </td> 
-<td> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getCaserne().calculCoutUpgrade(TypeSoldat.TREBUCHET)}"/> <br> 
+<td id="mytd"> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getCaserne().calculCoutUpgrade(TypeSoldat.TREBUCHET)}"/> <br> 
 <c:if test="${sessionScope.sessionJoueur.village.getCaserne().niveauActuel.get(TypeSoldat.TREBUCHET)<sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.TREBUCHET)}"> 
 <input type="submit" value="Ameliorer" name="ameliorertrebuchet"> </c:if> </td> </tr>
-<tr> <td> Nombre </td> 
-<td> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNombreArcher()}"/> </td>
-<td> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNombreTrebuchet()}"/> </td> </tr>
-<tr> <td> Cout de formation </td>
-<td> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getCaserne().calculCoutFormation(TypeSoldat.ARCHER)}"/> <br> 
+<tr> <th id="myth"> Nombre </th> 
+<td id="mytd"> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNombreArcher()}"/> </td>
+<td id="mytd"> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().getNombreTrebuchet()}"/> </td> </tr>
+<tr> <th id="myth"> Cout de formation </th>
+<td id="mytd"> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getCaserne().calculCoutFormation(TypeSoldat.ARCHER)}"/> <br> 
 <c:if test="${sessionScope.sessionJoueur.village.getCaserne().getArmee().calculNbSoldat()<sessionScope.sessionJoueur.village.getCaserne().getTailleTotaleArmee()}"> 
 <input type="submit" value="Ajouter" name="ajouterarcher"> </c:if> <br> 
 <c:if test="${sessionScope.sessionJoueur.village.getCaserne().getNombreArcher()>0}"> 
 <input type="submit" value="Supprimer" name="supprimerarcher"> </c:if> </td> 
-<td> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getCaserne().calculCoutFormation(TypeSoldat.TREBUCHET)}"/> <br> 
+<td id="mytd"> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getCaserne().calculCoutFormation(TypeSoldat.TREBUCHET)}"/> <br> 
 <c:if test="${sessionScope.sessionJoueur.village.getCaserne().getArmee().calculNbSoldat()+4<sessionScope.sessionJoueur.village.getCaserne().getTailleTotaleArmee()}"> 
 <input type="submit" value="Ajouter" name="ajoutertrebuchet"> </c:if> <br> 
 <c:if test="${sessionScope.sessionJoueur.village.getCaserne().getNombreTrebuchet()>0}"> 
