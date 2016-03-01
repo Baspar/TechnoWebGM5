@@ -13,7 +13,7 @@
 
 <h1> Accueil </h1>
 
-	<c:import url="/inc/menuDebut.jsp" />
+<c:import url="/inc/menuDebut.jsp" />
 
 </body>
 </html>
