@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,7 @@ import form.ConnexionForm;
 public class JoueurDaoImpl implements JoueurDao { 
     private static final String SQL_SELECT_PAR_LOGIN = "SELECT login, motDePasse FROM Joueur WHERE login = ?";
     private static final String SQL_INSERT           = "INSERT INTO Joueur (login, motDePasse) VALUES (?, ?)";
+    private static final String SQL_SELECT_ALL = "SELECT login FROM Joueur";
     private DAOFactory daoFactory;
     
     JoueurDaoImpl( DAOFactory daoFactory ) {//DONE
@@ -83,5 +85,34 @@ public class JoueurDaoImpl implements JoueurDao {
         joueur.setMotDePasse( resultSet.getString( "motDePasse" ) );
         return joueur;
     }
+
+	@Override
+	public Vector<String> trouverTousLesJoueurs() throws DAOException {
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Vector<String> joueur = new Vector<String>();
+
+        try {
+            /* Récupération d'une connexion depuis la Factory */
+            connexion = daoFactory.getConnection();
+            /*
+             * Préparation de la requête avec les objets passés en arguments
+             * (ici, uniquement une adresse email) et exécution.
+             */
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL, false );
+            resultSet = preparedStatement.executeQuery();
+            /* Parcours de la ligne de données retournée dans le ResultSet */
+            while ( resultSet.next() ) {
+                joueur.add( resultSet.getString("login") );
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+        }
+
+        return joueur;
+	}
 
 }

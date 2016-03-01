@@ -129,7 +129,7 @@ public class VillageDaoImpl implements VillageDao {
 			HDVDaoImpl hdv=new HDVDaoImpl(daoFactory);
 			hdv.deplacer(login, x, y);
 		}
-		if(b.getTypeBatiment()==TypeBatiment.CASERNE || b.getTypeBatiment()==TypeBatiment.MORTIER){
+		if(b.getTypeBatiment()==TypeBatiment.CANON || b.getTypeBatiment()==TypeBatiment.MORTIER){
 			DefenseDaoImpl def=new DefenseDaoImpl(daoFactory);
 			def.deplacerDefense(login, b.getId(), x, y);
 		}
