@@ -13,8 +13,16 @@
 <body>
 <c:import url="/inc/menuConnecte.jsp" />
 <h1> Plan de votre village </h1>
-
 <form method="post" action="<c:url value="/gestionVillage" />">
+
+<c:if test="${sessionScope.b!=sessionbatiment}">
+   		Vous êtes en train de deplacer (placer) un batiment de type <c:out value="${sessionScope.sessionbatiment.getTypeBatiment()}"/> <input type="submit" value="Annuler" name="annuler"><br> <br>
+</c:if>
+
+<c:if test="${sessionScope.b==sessionbatiment}">
+   		Supprimer tout votre plan actuel <input type="submit" value="Supprimer" name="supprimer"><br> <br>
+</c:if>
+
 <c:forEach begin="0" end="${sessionScope.sessionJoueur.getVillage().getCarte().size()-1}" var="i">
 	<c:forEach begin="0" end="${sessionScope.sessionJoueur.getVillage().getCarte().get(i).size()-1}" var="j">
    		<c:choose>
@@ -45,7 +53,9 @@
 </c:forEach>
 </form>
 
+<c:if test="${sessionScope.b==sessionbatiment}">
 <h1> Batiments non place </h1>
+<form method="post" action="<c:url value="/gestionVillage" />">
 <table>
 <tr> <td> Hotel de Ville </td> 
 <td> <c:forEach items="${sessionScope.sessionJoueur.getVillage().getBatiments().getBatiments(TypeBatiment.HDV)}" var="item2">
@@ -84,6 +94,7 @@
 		</c:if>
 </c:forEach> </td> </tr>
 </table>
-
+</form>
+</c:if>
 </body>
 </html>

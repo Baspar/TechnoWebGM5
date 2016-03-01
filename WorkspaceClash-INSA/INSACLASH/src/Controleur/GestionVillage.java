@@ -51,8 +51,21 @@ public class GestionVillage extends HttpServlet {
 		Joueur joueur = (Joueur) session.getAttribute(ATT_SESSION_JOUEUR);
 		Batiment b= (Batiment) session.getAttribute(ATT_SESSION_BATIMENT_A_DEPLACER);
 		if(b==null){
-			System.out.println("ok");
+			//System.out.println("ok");
 			boolean bol=false;
+			if (request.getParameter("supprimer")!=null){
+				for(int i=0;i<14; i++){
+					for(int j=0; j<14;j++){
+							if(joueur.getVillage().getCarte().get(i).get(j)!=null){
+									Batiment b2=joueur.getVillage().getBatiment(i, j);
+									joueur.getVillage().deplacerBatiment(b2, -1, -1);
+									villageDao.deplacerBatiment(joueur.getLogin(), b2, -1, -1);
+							}
+						}	
+					}
+				bol=true;	
+			}
+			if(!bol)
 			for(int i=0;i<14; i++){
 				for(int j=0; j<14;j++){
 					if (request.getParameter("case"+String.valueOf(14*j+i))!=null){
@@ -80,21 +93,21 @@ public class GestionVillage extends HttpServlet {
 						}
 						if(!bol)
 						for(int i=0; i<joueur.getVillage().getBatiment(TypeBatiment.MORTIER).size();i++){
-							if(request.getParameter("canon"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.MORTIER, i).getId()))!=null){
+							if(request.getParameter("mortier"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.MORTIER, i).getId()))!=null){
 								b=joueur.getVillage().getBatiment(TypeBatiment.MORTIER, i);
 								bol=true;
 							}
 						}
 						if(!bol)
 						for(int i=0; i<joueur.getVillage().getBatiment(TypeBatiment.MINEOR).size();i++){
-							if(request.getParameter("canon"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.MINEOR, i).getId()))!=null){
+							if(request.getParameter("mineor"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.MINEOR, i).getId()))!=null){
 								b=joueur.getVillage().getBatiment(TypeBatiment.MINEOR, i);
 								bol=true;
 							}
 						}
 						if(!bol)
 						for(int i=0; i<joueur.getVillage().getBatiment(TypeBatiment.MINECHARBON).size();i++){
-							if(request.getParameter("canon"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.MINECHARBON, i).getId()))!=null){
+							if(request.getParameter("minecharbon"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.MINECHARBON, i).getId()))!=null){
 								b=joueur.getVillage().getBatiment(TypeBatiment.MINECHARBON, i);
 								bol=true;
 							}
@@ -103,6 +116,9 @@ public class GestionVillage extends HttpServlet {
 				}
 			}
 		}else{
+			if (request.getParameter("annuler")!=null){
+				b=null;
+			}else
 			for(int i=0;i<14; i++){
 				for(int j=0; j<14;j++){
 					if (request.getParameter("case"+String.valueOf(14*j+i))!=null){
@@ -110,10 +126,10 @@ public class GestionVillage extends HttpServlet {
 								joueur.getVillage().deplacerBatiment(b, i, j);
 								villageDao.deplacerBatiment(joueur.getLogin(), b, i, j);
 						}
+						b=null;
 					}	
 				}
 			}
-			
 		}
 		session.setAttribute(ATT_SESSION_JOUEUR, joueur);
 		session.setAttribute(ATT_SESSION_BATIMENT_A_DEPLACER, b);

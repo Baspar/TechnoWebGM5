@@ -36,6 +36,7 @@
 </fieldset>
 <fieldset> 
 <legend> Amelioration de l'hdv </legend>
+<img src="<c:url value="/inc/HotelDeVille.png"/>" width="90" height="90" /> <br>
 <input type="submit" value="Ameliorer" name="ameliorer"><br>
 Cout de l'amélioration : <br> <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getHDV().coutUpdate}"/>
 </fieldset>
