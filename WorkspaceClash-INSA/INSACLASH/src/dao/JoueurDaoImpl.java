@@ -17,7 +17,7 @@ import form.ConnexionForm;
 public class JoueurDaoImpl implements JoueurDao { 
     private static final String SQL_SELECT_PAR_LOGIN = "SELECT login, motDePasse FROM Joueur WHERE login = ?";
     private static final String SQL_INSERT           = "INSERT INTO Joueur (login, motDePasse) VALUES (?, ?)";
-    private static final String SQL_SELECT_ALL = "SELECT login FROM Joueur";
+    private static final String SQL_SELECT_ALL = "SELECT login FROM Joueur WHERE login != ?";
     private DAOFactory daoFactory;
     
     JoueurDaoImpl( DAOFactory daoFactory ) {//DONE
@@ -87,7 +87,7 @@ public class JoueurDaoImpl implements JoueurDao {
     }
 
 	@Override
-	public Vector<String> trouverTousLesJoueurs() throws DAOException {
+	public Vector<String> trouverTousLesJoueurs(String login) throws DAOException {
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -100,7 +100,7 @@ public class JoueurDaoImpl implements JoueurDao {
              * Préparation de la requête avec les objets passés en arguments
              * (ici, uniquement une adresse email) et exécution.
              */
-            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL, false );
+            preparedStatement = initialisationRequetePreparee( connexion, SQL_SELECT_ALL, false, login );
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données retournée dans le ResultSet */
             while ( resultSet.next() ) {

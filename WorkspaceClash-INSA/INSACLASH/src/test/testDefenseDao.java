@@ -41,7 +41,7 @@ public class testDefenseDao {
 		System.out.println(d.getX());
 		System.out.println(d.getY());*/
 		JoueurDao jou=(JoueurDaoImpl) fac.getJoueurDao();
-		System.out.println(jou.trouverTousLesJoueurs());
+		System.out.println(jou.trouverTousLesJoueurs("test"));
 		
 	}
 }
