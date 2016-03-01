@@ -6,7 +6,7 @@ public class Mortier extends Defense{
 
         //Héritage Defense
         typeDefense=TypeAttaque.ZONE;
-        puissanceDefense=0;
+        puissanceDefense=10;
         attaqueParSeconde=0.7;
 
         //HéritageBatiment

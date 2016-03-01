@@ -77,7 +77,6 @@ public class Combat{
         terrain.get(oldX).get(oldY).remove(id);
         terrain.get(newX).get(newY).put(id, soldat);
     }
-
     private void deplacementSoldat(SoldatCombat soldat, int newX, int newY){//DONE
         Vector<Integer> result = soldat.ouAller(village.getBatiments(), tailleVillage);
 
@@ -102,19 +101,13 @@ public class Combat{
     }
     private void tourSoldat(){//DONE
         for(SoldatCombat soldat : armee.getSoldats()){
-            System.out.print("Soldat n°"+soldat.getId()+", fais tu quelque chose ?");
             if(!soldat.estMort()){
-                System.out.println("  Oui!");
                 Vector<BatimentCombat> batiments = soldat.trouverBatimentAPortee(village.getBatiments(), zoom);
-                if(batiments.size()>0){
-                    System.out.println("  J'attaque!");
+                if(batiments.size()>0)
                     soldat.attaquer(batiments);
-                } else {
-                    System.out.println("  Je bouge!");
+                //else
                     //deplacementSoldat(soldat);
-                }
-            } else
-                System.out.println("  Non...");
+            }
         }
     }
     private void checkMorts(){//WIP
@@ -124,16 +117,19 @@ public class Combat{
                 int x = armee.getSoldats().get(i).getX();
                 int y = armee.getSoldats().get(i).getY();
                 int id = armee.getSoldats().get(i).getId();
+                armee.getSoldats().remove(i);
                 terrain.get(x).get(y).remove(id);
             }
 
         for(int i=0; i<village.getBatiments().size(); i++)
             if(village.getBatiments().get(i).estATuer()){
                 village.getBatiments().get(i).tuer();
-                int x = village.getBatiments().get(i).getX();
-                int y = village.getBatiments().get(i).getY();
+                int x = village.getBatiments().get(i).getX()*zoom+1;
+                int y = village.getBatiments().get(i).getY()*zoom+1;
                 int id = village.getBatiments().get(i).getId();
-                terrain.get(x).get(y).remove(id);
+                for(int dx=0; dx<zoom; dx++)
+                    for(int dy=0; dy<zoom; dy++)
+                        terrain.get(x+dx).get(y+dy).remove(id);
             }
     }
     private Hashtable<TypeRessource, Integer> combattreTmp(){//DONE
@@ -168,18 +164,16 @@ public class Combat{
         return out;
     }
     public Hashtable<TypeRessource, Integer> combattre(){//DONE
-        //placerSoldat(true, true, true, true);
-        placerSoldat(false, false, true, true);
-        afficherCombat();
-        //while(!estTermine()){
-            //tourSoldat();
-            //tourBatiment();
-            //checkMorts();
-            //afficherCombat();
-            //try{
-                //Thread.sleep(4000);
-            //} catch (Exception e){}
-        //}
+        placerSoldat(true, true, true, true);
+        while(!estTermine()){
+            tourSoldat();
+            tourBatiment();
+            checkMorts();
+            afficherCombat();
+            try{
+                Thread.sleep(1000);
+            } catch (Exception e){}
+        }
         return combattreTmp();
     }
     private void afficherCombat(){//DONE
@@ -252,7 +246,6 @@ public class Combat{
                 while(rand<1 || rand>tailleVillage+1)
                     rand = (r.nextGaussian()+1)/2*tailleVillage;
                 int pos = (int)Math.floor(rand);
-                System.out.println(pos);
                 deplacementSoldat(armee.getSoldats().get(id), 0, pos);
                 id++;
             }
@@ -262,7 +255,6 @@ public class Combat{
                 while(rand<1 || rand>tailleVillage+1)
                     rand = (r.nextGaussian()+1)/2*tailleVillage;
                 int pos = (int)Math.floor(rand);
-                System.out.println(pos);
                 deplacementSoldat(armee.getSoldats().get(id), tailleVillage+1, pos);
                 id++;
             }
@@ -272,7 +264,6 @@ public class Combat{
                 while(rand<1 || rand>tailleVillage+1)
                     rand = (r.nextGaussian()+1)/2*tailleVillage;
                 int pos = (int)Math.floor(rand);
-                System.out.println(pos);
                 deplacementSoldat(armee.getSoldats().get(id), pos, tailleVillage+1);
                 id++;
             }
@@ -282,7 +273,6 @@ public class Combat{
                 while(rand<1 || rand>tailleVillage+1)
                     rand = (r.nextGaussian()+1)/2*tailleVillage;
                 int pos = (int)Math.floor(rand);
-                System.out.println(pos);
                 deplacementSoldat(armee.getSoldats().get(id), pos, 0);
                 id++;
             }
