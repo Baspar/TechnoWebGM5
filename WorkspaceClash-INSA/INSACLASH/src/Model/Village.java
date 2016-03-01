@@ -28,7 +28,7 @@ public class Village{
         this();
         nom=n;
     }
-    
+
     public Vector<Vector<Batiment>> getCarte() {//DONE
 		return carte;
 	}
@@ -127,7 +127,7 @@ public class Village{
         }
 		return false;
     }
-    
+
     public boolean ajouterBatiment(TypeBatiment type){//DONE
         if(!quantiteBatimentAtteinte(type) ){
         	//Essai de construction de batiment.
@@ -141,6 +141,16 @@ public class Village{
 		return false;
     }
 
+    public boolean deplacerBatiment(Batiment bat, int x, int y){//DONE
+        TypeBatiment typeBat = bat.getTypeBatiment();
+        int myId = bat.getId();
+
+        for(int i=0; i<getBatiment(typeBat).size(); i++)
+            if(myId == getBatiment(typeBat, i).getId())
+                return deplacerBatiment(typeBat, i, x, y);
+
+        return false;
+    }
     public boolean deplacerBatiment(TypeBatiment type, int i, int x, int y){//DONE
     	int oldX=getBatiment(type, i).getX();
     	int oldY=getBatiment(type, i).getY();
@@ -199,11 +209,11 @@ public class Village{
         		if(c.getArmee().getSoldats().get(i).getType()==type){
         			c.getArmee().getSoldats().remove(i);
         			b=true;
-        		}	
+        		}
         	return true;
         }
     }
-    
+
     public Batiment getBatiment(int x, int y){//DONE
         return carte.get(x).get(y);
     }
