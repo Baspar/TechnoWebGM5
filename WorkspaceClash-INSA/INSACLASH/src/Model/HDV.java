@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.Hashtable;
+import java.util.Map;
 
 public class HDV extends Batiment{
     private Hashtable<TypeBatiment,Integer> quotaBatiments;
@@ -10,7 +11,7 @@ public class HDV extends Batiment{
 
     public HDV(){//DONE
     	id=1;
-    	
+
         typeBatiment=TypeBatiment.HDV;
 
         quotaBatiments = new Hashtable<TypeBatiment, Integer>();
@@ -76,6 +77,17 @@ public class HDV extends Batiment{
     public void utiliser(TypeRessource type, int nb){//DONE
         int temp=quantiteActuelle.get(type)-nb;
         quantiteActuelle.put(type, temp);
+    }
+
+    public Hashtable<TypeRessource, Integer> perteRessource(){//WIP
+        Hashtable<TypeRessource, Integer> out = new Hashtable<TypeRessource, Integer>();
+        for(Map.Entry<TypeRessource, Integer> ent : quantiteActuelle.entrySet()){
+            Integer qtActuelle = quantiteActuelle.get(ent.getKey());
+            qtActuelle /= 3;
+            out.put(ent.getKey(), qtActuelle);
+            quantiteActuelle.put(ent.getKey(), quantiteActuelle.get(ent.getKey()) -qtActuelle);
+        }
+        return out;
     }
 
     public int crediter(TypeRessource type, int nb){//DONE
