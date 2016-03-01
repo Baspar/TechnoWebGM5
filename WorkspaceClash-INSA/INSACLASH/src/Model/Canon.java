@@ -6,7 +6,7 @@ public class Canon extends Defense{
 
         //Héritage Defense
         typeDefense=TypeAttaque.LOCALISE;
-        puissanceDefense=0;
+        puissanceDefense=10;
         attaqueParSeconde=0.7;
 
         //HéritageBatiment
