@@ -10,8 +10,8 @@ public class SoldatCombat extends EntiteCombat{
     private Soldat soldat;
 
     public SoldatCombat(Soldat soldat){//DONE
-        this.x      = 3;
-        this.y      = 1;
+        this.x      = -1;
+        this.y      = -1;
         this.soldat = soldat;
         this.taille = 1;
         this.PV     = soldat.getPointsDeVie();
