@@ -21,6 +21,7 @@ public class Combat{
     private Vector<Vector<Hashtable<Integer, EntiteCombat>>> terrain;
     private int tailleVillage;
     private int zoom=2;
+    private Hashtable<TypeRessource, Integer> gains;
 
     // Note terrain :
     // Si le Model.village a une taille de X, le terrain aura une taille de X*zoom, plus deux ligne et colonnes sur les bords permettant le placement des soldats
@@ -72,14 +73,14 @@ public class Combat{
         int oldX = soldat.getX();
         int oldY = soldat.getY();
 
+        /*
         soldat.setX(newX);
         soldat.setY(newY);
         terrain.get(oldX).get(oldY).remove(id);
         terrain.get(newX).get(newY).put(id, soldat);
+        */
     }
     private void deplacementSoldat(SoldatCombat soldat, int newX, int newY){//DONE
-        Vector<Integer> result = soldat.ouAller(village.getBatiments(), tailleVillage);
-
         int id = soldat.getId();
         int oldX = soldat.getX();
         int oldY = soldat.getY();
@@ -105,8 +106,8 @@ public class Combat{
                 Vector<BatimentCombat> batiments = soldat.trouverBatimentAPortee(village.getBatiments(), zoom);
                 if(batiments.size()>0)
                     soldat.attaquer(batiments);
-                //else
-                    //deplacementSoldat(soldat);
+                else
+                    deplacementSoldat(soldat);
             }
         }
     }
