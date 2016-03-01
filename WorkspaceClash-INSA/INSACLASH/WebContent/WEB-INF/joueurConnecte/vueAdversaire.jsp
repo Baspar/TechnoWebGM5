@@ -11,9 +11,17 @@
 <title>Page de gestion du village</title>
 </head>
 <body>
+
 <h1> Plan du village adverse : <c:out value="${sessionScope.sessionAdversaire.getLogin()}"/></h1>
-
-
+<form method="post" action="<c:url value="/gestionCombat" />">
+<input type="submit" value="Retour a la liste des joueurs " name="retour"> <br> 
+Selectionner les directions ou placer les soldats au debut de l'attaque <br>
+<INPUT type="checkbox" name="choix1" value="1"> EST
+<INPUT type="checkbox" name="choix2" value="2"> OUEST
+<INPUT type="checkbox" name="choix3" value="3"> NORD
+<INPUT type="checkbox" name="choix4" value="4"> SUD
+<input type="submit" value="Attaquer" name="attaquer">
+</form>
 <c:forEach begin="0" end="${sessionScope.sessionAdversaire.getVillage().getCarte().size()-1}" var="i">
 	<c:forEach begin="0" end="${sessionScope.sessionAdversaire.getVillage().getCarte().get(i).size()-1}" var="j">
    		<c:choose>
