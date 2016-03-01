@@ -10,7 +10,7 @@
 <a href="<c:url value="/gestionDefense"/>" > GestionDefense </a> 
 <a href="<c:url value="/gestionCaserne"/>" > GestionCaserne </a> 
 <a href="<c:url value="/gestionVillage"/>" > GestionVillage </a> 
-
+<a href="<c:url value="/gestionTousJoueurs"/>" > RechercheAdversaire </a> 
 <a href="<c:url value="/deconnexion"/>" > <img src="<c:url value="/inc/deconnecter.png"/>" width="200" height="50" alt="Deconnexion" /> </a> 
 <br>
 <table><tr>

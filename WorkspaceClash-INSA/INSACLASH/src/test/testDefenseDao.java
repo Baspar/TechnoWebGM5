@@ -6,6 +6,8 @@ import Model.Defense;
 import Model.Mortier;
 import dao.DAOFactory;
 import dao.DefenseDaoImpl;
+import dao.JoueurDao;
+import dao.JoueurDaoImpl;
 
 public class testDefenseDao {
 
@@ -16,7 +18,7 @@ public class testDefenseDao {
 		//Fonction mais faire attention a ce que l'id soit bien dans la table joueur et 
 		// qu'il n'y a pas deja un caserne pour ce joueur
 		//caserne.creerCaserne(casernetest, "test");
-		System.out.println("Affichage de la taille des vecteurs");
+	/*	System.out.println("Affichage de la taille des vecteurs");
 		System.out.println(def.trouverCanon("test").size());
 		System.out.println(def.trouverMortier("test").size());
 		System.out.println("ajout d'un canon et d'un mortier");
@@ -37,6 +39,9 @@ public class testDefenseDao {
 		System.out.println(d.getId());
 		System.out.println(d.getNiveau());
 		System.out.println(d.getX());
-		System.out.println(d.getY());
+		System.out.println(d.getY());*/
+		JoueurDao jou=(JoueurDaoImpl) fac.getJoueurDao();
+		System.out.println(jou.trouverTousLesJoueurs("test"));
+		
 	}
 }
