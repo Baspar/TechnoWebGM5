@@ -1,6 +1,8 @@
 package Controleur;
 
 import java.io.IOException;
+import java.util.Vector;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Model.Batiment;
+import Model.Canon;
 import Model.HDV;
 import Model.Joueur;
 import Model.TypeBatiment;
@@ -26,7 +30,8 @@ public class GestionVillage extends HttpServlet {
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String VUE="/WEB-INF/joueurConnecte/vueVillage.jsp";
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";  
-	public static final String ATT_SESSION_MANQUE_RESSOURCE="manqueRessource";
+	public static final String ATT_SESSION_BATIMENT_A_DEPLACER="sessionbatiment";
+	
 	private JoueurDao joueurDao;
 	private VillageDao villageDao;
 	
@@ -37,8 +42,6 @@ public class GestionVillage extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.setAttribute(ATT_SESSION_MANQUE_RESSOURCE, null);
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response); 
 	}
 
@@ -46,15 +49,90 @@ public class GestionVillage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Joueur joueur = (Joueur) session.getAttribute(ATT_SESSION_JOUEUR);
-		String t= (String) session.getAttribute(ATT_SESSION_MANQUE_RESSOURCE);
-		t=null;
-		for(int i=0;i<14; i++)
-			for(int j=0; j<14;j++)
-		if (request.getParameter("case"+String.valueOf(14*j+i))!=null){
-			System.out.println("ok"+i+j);
+		Batiment b= (Batiment) session.getAttribute(ATT_SESSION_BATIMENT_A_DEPLACER);
+		if(b==null){
+			//System.out.println("ok");
+			boolean bol=false;
+			if (request.getParameter("supprimer")!=null){
+				for(int i=0;i<14; i++){
+					for(int j=0; j<14;j++){
+							if(joueur.getVillage().getCarte().get(i).get(j)!=null){
+									Batiment b2=joueur.getVillage().getBatiment(i, j);
+									joueur.getVillage().deplacerBatiment(b2, -1, -1);
+									villageDao.deplacerBatiment(joueur.getLogin(), b2, -1, -1);
+							}
+						}	
+					}
+				bol=true;	
+			}
+			if(!bol)
+			for(int i=0;i<14; i++){
+				for(int j=0; j<14;j++){
+					if (request.getParameter("case"+String.valueOf(14*j+i))!=null){
+						if(joueur.getVillage().getCarte().get(i).get(j)!=null){
+								b=joueur.getVillage().getCarte().get(i).get(j);
+								bol=true;
+						}
+					}	
+				}
+			}
+			if(!bol){
+				if(request.getParameter("hdv")!=null){
+					b=joueur.getVillage().getBatiment(TypeBatiment.HDV, 0);
+					bol=true;
+				} else {
+					if (request.getParameter("caserne")!=null){
+						b=joueur.getVillage().getBatiment(TypeBatiment.CASERNE, 0);
+						bol=true;
+					} else{
+						for(int i=0; i<joueur.getVillage().getBatiment(TypeBatiment.CANON).size();i++){
+							if(request.getParameter("canon"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.CANON, i).getId()))!=null){
+								b=joueur.getVillage().getBatiment(TypeBatiment.CANON, i);
+								bol=true;
+							}
+						}
+						if(!bol)
+						for(int i=0; i<joueur.getVillage().getBatiment(TypeBatiment.MORTIER).size();i++){
+							if(request.getParameter("mortier"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.MORTIER, i).getId()))!=null){
+								b=joueur.getVillage().getBatiment(TypeBatiment.MORTIER, i);
+								bol=true;
+							}
+						}
+						if(!bol)
+						for(int i=0; i<joueur.getVillage().getBatiment(TypeBatiment.MINEOR).size();i++){
+							if(request.getParameter("mineor"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.MINEOR, i).getId()))!=null){
+								b=joueur.getVillage().getBatiment(TypeBatiment.MINEOR, i);
+								bol=true;
+							}
+						}
+						if(!bol)
+						for(int i=0; i<joueur.getVillage().getBatiment(TypeBatiment.MINECHARBON).size();i++){
+							if(request.getParameter("minecharbon"+String.valueOf(joueur.getVillage().getBatiment(TypeBatiment.MINECHARBON, i).getId()))!=null){
+								b=joueur.getVillage().getBatiment(TypeBatiment.MINECHARBON, i);
+								bol=true;
+							}
+						}
+					}
+				}
+			}
+		}else{
+			if (request.getParameter("annuler")!=null){
+				b=null;
+			}else
+			for(int i=0;i<14; i++){
+				for(int j=0; j<14;j++){
+					if (request.getParameter("case"+String.valueOf(14*j+i))!=null){
+						if(joueur.getVillage().getCarte().get(i).get(j)==null){
+								joueur.getVillage().deplacerBatiment(b, i, j);
+								villageDao.deplacerBatiment(joueur.getLogin(), b, i, j);
+						}
+						b=null;
+					}	
+				}
+			}
 		}
 		session.setAttribute(ATT_SESSION_JOUEUR, joueur);
-		session.setAttribute(ATT_SESSION_MANQUE_RESSOURCE, t);
+		session.setAttribute(ATT_SESSION_BATIMENT_A_DEPLACER, b);
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 

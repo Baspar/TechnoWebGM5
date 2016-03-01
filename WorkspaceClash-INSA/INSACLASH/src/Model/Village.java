@@ -155,7 +155,7 @@ public class Village{
     	int oldX=getBatiment(type, i).getX();
     	int oldY=getBatiment(type, i).getY();
 
-        if(getBatiment(x, y)==null){
+        if(x==-1 || y==-1 || getBatiment(x, y)==null){
         	//Modification coords au niveau du batiment
             this.getBatiment(type, i).setX(x);
             this.getBatiment(type, i).setY(y);
@@ -165,6 +165,7 @@ public class Village{
 				carte.get(oldX).set(oldY, null);
 
             //Placement batiment nouvelles coords
+            if(x!=-1 && y!=-1)
             carte.get(x).set(y, getBatiment(type, i));
 
             return true;
