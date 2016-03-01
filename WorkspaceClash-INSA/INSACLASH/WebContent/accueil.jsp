@@ -7,7 +7,7 @@
 <link rel=stylesheet title="style" href="style.css" >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Plateforme</title>
+<title>INSACLASH</title>
 </head>
 <body>
 
