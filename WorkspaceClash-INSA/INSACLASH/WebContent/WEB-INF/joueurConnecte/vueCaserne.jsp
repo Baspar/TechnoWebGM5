@@ -25,12 +25,14 @@
 <tr> <td> niveau max Trebuchet </td> <td> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.TREBUCHET)}"/></td>  <td> <c:out value="${sessionScope.sessionJoueur.village.getCaserne().niveauMax.get(TypeSoldat.TREBUCHET)+1}"/></td></tr>
 </table>
 </fieldset>
+<c:if test="${sessionScope.sessionJoueur.village.getCaserne().getNiveau()<sessionScope.sessionJoueur.village.getHDV().getNiveauMaxBatiment(TypeBatiment.CASERNE)}">
 <fieldset> 
 <legend> Amelioration de la caserne </legend>
 <img src="<c:url value="/inc/Caserne.png"/>" width="90" height="90" /> <br>
 <input type="submit" value="Ameliorer" name="ameliorercaserne"><br>
 Cout de l'amélioration : <br> <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /> <c:out value="${sessionScope.sessionJoueur.getVillage().getCaserne().coutUpdate}"/>
 </fieldset>
+</c:if>
 </form>
 
 <h1> Gestion de l'armée </h1>

@@ -13,6 +13,9 @@
 </head>
 <body>
 <c:import url="/inc/menuConnecte.jsp" />
+<h1> Affichage des adversaires </h1>
+
+<form method="post" action="<c:url value="/gestionTousJoueurs" />">
 
 <table>
 <tr> <td> Login </td> <td> Niveau Hotel de Ville</td> <td> Quantite Or <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /> </td> <td> Quantite Charbon <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /></td> </tr>
@@ -20,13 +23,19 @@
 	<tr>
 	<c:forEach begin="0" end="${sessionScope.sessionListeJoueur.get(i).size()-1}" var="j">
 		<td>
-   		<c:out value="${sessionScope.sessionListeJoueur.get(i).get(j)}"/>
+		<c:if test="${j==0}">
+			<input type="submit" value="${sessionScope.sessionListeJoueur.get(i).get(j)}" name="${sessionScope.sessionListeJoueur.get(i).get(j)}">
+		</c:if>
+		<c:if test="${j!=0}">
+		   	<c:out value="${sessionScope.sessionListeJoueur.get(i).get(j)}"/>
+		</c:if>
    		</td>
    	</c:forEach>
    	</tr>
 </c:forEach>
 </table>
 
+</form>
 
 </body>
 </html>

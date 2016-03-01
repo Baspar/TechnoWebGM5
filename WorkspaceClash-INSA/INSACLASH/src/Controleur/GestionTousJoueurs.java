@@ -29,7 +29,9 @@ public class GestionTousJoueurs extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String VUE="/WEB-INF/joueurConnecte/vueTousJoueurs.jsp";
+	public static final String VUE_ADVERSAIRE="/WEB-INF/joueurConnecte/vueAdversaire.jsp";
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";  
+	public static final String ATT_SESSION_ADVERSAIRE ="sessionAdversaire";
 	public static final String ATT_SESSION_MANQUE_RESSOURCE="manqueRessource";
 	public static final String ATT_SESSION_LISTE_JOUEUR="sessionListeJoueur";
 	private JoueurDao joueurDao;
@@ -56,14 +58,14 @@ public class GestionTousJoueurs extends HttpServlet {
 				MineOr m= (MineOr) v2.getBatiment(TypeBatiment.MINEOR, j);
 				qte+=m.calculProduction();
 			}
-			qte+=v2.getHDV().getQuantiteActuelle().get(TypeRessource.OR)/4;
+			qte+=v2.getHDV().getQuantiteActuelle().get(TypeRessource.OR)/3;
 			attribut.get(i).add(String.valueOf(qte));
 			int qte2=0;
 			for(int j=0; j<v2.getBatiment(TypeBatiment.MINECHARBON).size();j++){
 				MineCharbon m= (MineCharbon) v2.getBatiment(TypeBatiment.MINECHARBON, j);
 				qte2+=m.calculProduction();
 			}
-			qte2+=v2.getHDV().getQuantiteActuelle().get(TypeRessource.CHARBON)/4;
+			qte2+=v2.getHDV().getQuantiteActuelle().get(TypeRessource.CHARBON)/3;
 			attribut.get(i).add(String.valueOf(qte2));
 		}
 		session.setAttribute(ATT_SESSION_LISTE_JOUEUR, attribut);
@@ -74,22 +76,20 @@ public class GestionTousJoueurs extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Joueur joueur = (Joueur) session.getAttribute(ATT_SESSION_JOUEUR);
-		String t= (String) session.getAttribute(ATT_SESSION_MANQUE_RESSOURCE);
-		t=null;
-	//	System.out.println(t);
-		//on doit ameliorer l'hdv
-		if(request.getParameter("ameliorer")!=null){
-			HDV h=(HDV) joueur.getVillage().getHDV();
-			if( joueur.getVillage().upgradeBatiment(TypeBatiment.HDV, 0) ){
-				villageDao.ameliorerBatiment(joueur.getLogin(), h);
-				villageDao.miseAJourRessource(joueur.getLogin(), TypeRessource.OR, joueur.getVillage().getHDV().getQuantiteActuelle().get(TypeRessource.OR));
-			}	
-			else
-				t="true";
+		Joueur joueurAdverse;
+		Vector<String> v=joueurDao.trouverTousLesJoueurs(joueur.getLogin());
+		for(int i=0; i<v.size();i++){
+			if(request.getParameter(v.get(i))!=null){
+				joueurAdverse=new Joueur();
+				joueurAdverse.setLogin(v.get(i));
+				joueurAdverse.setVillage(villageDao.chargerVillage(v.get(i)));
+				session.setAttribute(ATT_SESSION_ADVERSAIRE, joueurAdverse);
+				this.getServletContext().getRequestDispatcher( VUE_ADVERSAIRE ).forward( request, response );
+				return ;
+			}				
 		}
 		//System.out.println(t);
 		session.setAttribute(ATT_SESSION_JOUEUR, joueur);
-		session.setAttribute(ATT_SESSION_MANQUE_RESSOURCE, t);
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}
 
