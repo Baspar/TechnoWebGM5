@@ -63,12 +63,17 @@ public class SoldatCombat extends EntiteCombat{
             if(batProche==null || (getDistance(batiment, zoom)<getDistance(batProche, zoom) && !batiment.estMort() && !batiment.estATuer()))
                     batProche = batiment;
 
+        System.out.println("Soldat ("+x+"x"+y+"), je suis proche d'un "+batProche.getBatiment().getTypeBatiment()+" ("+batProche.getX()+"x"+batProche.getY()+")");
+
         int myX=-1;
         int myY=-1;
         for(int dx=-deplacementMax; dx<=deplacementMax; dx++){
             for(int dy=-deplacementMax; dy<=deplacementMax; dy++){
                 int tmpX=this.x+dx;
                 int tmpY=this.y+dy;
+                if( tmpX>=0 && tmpX<tailleVillage+2
+                        && tmpY>=0 && tmpY<tailleVillage+2){
+                        }
             }
         }
 
