@@ -169,7 +169,6 @@ public class Combat{
         return out;
     }
     public Hashtable<TypeRessource, Integer> combattre(){//DONE
-        placerSoldat(true, true, true, true);
         while(!estTermine()){
             tourSoldat();
             tourBatiment();
@@ -231,7 +230,7 @@ public class Combat{
 
         System.out.println(out);
     }
-    private void placerSoldat(boolean N, boolean S, boolean E, boolean W){//WIP
+    public void placerSoldats(boolean N, boolean S, boolean E, boolean W){//WIP
         int nb=0;
         if(N)
             nb++;
