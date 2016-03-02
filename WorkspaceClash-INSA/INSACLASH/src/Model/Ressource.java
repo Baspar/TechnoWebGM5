@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.Date;
+import java.util.Hashtable;
 
 public abstract class Ressource extends Batiment{
     protected TypeRessource typeRessource;
@@ -9,7 +10,12 @@ public abstract class Ressource extends Batiment{
     protected Date dateDerniereLevee;
     //Represente la quantite a partir de laquelle on considére que la mine est pleine
     protected int quantiteMaxStockee;
-    
+
+    public Hashtable<TypeRessource, Integer> perteBatiment(){//DONE
+        Hashtable<TypeRessource, Integer> out = new Hashtable<TypeRessource, Integer>();
+        out.put(getTypeRessource(), prelever());
+        return out;
+    }
 
 	public int calculProduction(){//DONE
         Date dateActuelle=new Date();

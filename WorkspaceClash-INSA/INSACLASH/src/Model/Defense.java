@@ -1,10 +1,16 @@
 package Model;
 
+import java.util.Hashtable;
+
 public abstract class Defense extends Batiment{
     protected TypeAttaque typeDefense;
     protected int puissanceDefense;
     protected double attaqueParSeconde; // On ne le prendra pas en compte dans les calculs juste au cas ou
- 
+
+    public Hashtable<TypeRessource, Integer> perteBatiment(){//DONE
+        Hashtable<TypeRessource, Integer> out = new Hashtable<TypeRessource, Integer>();
+        return out;
+    }
 
 	public void setTypeDefense(TypeAttaque t){//DONE
         typeDefense=t;

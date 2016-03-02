@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Hashtable;
+
 public abstract class Batiment{
     protected TypeRessource ressourceNecessaire;
     protected TypeBatiment typeBatiment;
@@ -78,6 +80,8 @@ public abstract class Batiment{
     }
 
     public abstract Batiment clone();
+
+    public abstract Hashtable<TypeRessource, Integer> perteBatiment();
 
     public void upgrade(){//DONE
         pointsDeVie+=40;

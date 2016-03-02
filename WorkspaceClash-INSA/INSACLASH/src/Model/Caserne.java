@@ -8,6 +8,10 @@ public class Caserne extends Batiment{
     private Hashtable<TypeSoldat,Integer> niveauActuel;
     private int tailleTotaleArmee;
 
+    public Hashtable<TypeRessource, Integer> perteBatiment(){//DONE
+        Hashtable<TypeRessource, Integer> out = new Hashtable<TypeRessource, Integer>();
+        return out;
+    }
     public int getNombreArcher(){
     	int nb=0;
     	for(int i=0; i<armee.getSoldats().size();i++)
@@ -15,7 +19,7 @@ public class Caserne extends Batiment{
     			nb++;
     	return nb;
     }
-    
+
     public int getNombreTrebuchet(){
     	int nb=0;
     	for(int i=0; i<armee.getSoldats().size();i++)
