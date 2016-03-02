@@ -258,13 +258,14 @@ isAlreadyTested() {
 }
 
 
-rm -rf uml/Classes.uml Classes.png
+rm -rf uml/Classes*.uml Classes.png
 for i in $*
 do
     [ "$i" == "clean" ] && rm -f uml/*Classe*.uml
     [ "$i" == "clear" ] && rm -f uml/*Classe*.uml && echo "UML files deleted" && exit 0
     [ "$i" == "noget" ] && noget='true'
     [ "$i" == "noset" ] && noset='true'
+    [ "$i" == "split" ] && split='true'
 done
 
 echo "@startuml" >> uml/Classes.uml
@@ -275,6 +276,11 @@ echo "!include skin.uml" >> uml/Classes.uml
 
 for package in $JAVA_PATH
 do
+    echo "@startuml" >> uml/Classes$package\.uml
+    echo "!include skin.uml" >> uml/Classes$package\.uml
+    echo "!include links.uml" >> uml/Classes$package\.uml
+    echo "hide empty members" >> uml/Classes$package\.uml
+
     echo "Package $package in analysis"
     nbFichier=$(ls $package/*.java |grep -v "Main" | wc -l)
     indic=0
@@ -291,14 +297,18 @@ do
         if [ "$noget" ] && [ "$noset" ]
         then
             echo "!include ngns.$package.Classe$name.uml"  >> uml/Classes.uml
+            echo "!include ngns.$package.Classe$name.uml"  >> uml/Classes$package\.uml
         elif [ "$noget" ]
         then
             echo "!include ng.$package.Classe$name.uml"  >> uml/Classes.uml
+            echo "!include ng.$package.Classe$name.uml"  >> uml/Classes$package\.uml
         elif [ "$noset" ]
         then
             echo "!include ns.$package.Classe$name.uml"  >> uml/Classes.uml
+            echo "!include ns.$package.Classe$name.uml"  >> uml/Classes$package\.uml
         else
             echo "!include $package.Classe$name.uml"  >> uml/Classes.uml
+            echo "!include $package.Classe$name.uml"  >> uml/Classes$package\.uml
         fi
 
 
@@ -348,15 +358,26 @@ do
         fi
     done
     echo "}" >> uml/Classes.uml
+    echo "@enduml" >> uml/Classes$package\.uml
 done
 
 
 echo "!include links.uml" >> uml/Classes.uml
 echo "@enduml" >> uml/Classes.uml
-echo "UML created. PNG rendering in progress"
-java -jar uml/plantuml.jar uml/Classes.uml
-mv uml/Classes.png .
+if [ "$split" ]
+then
+    echo "UML created. PNG rendering in progress"
+    for package in $JAVA_PATH
+    do
+        echo "  Package $package PNG rendering in progress"
+        java -jar uml/plantuml.jar uml/Classes$package\.uml
+    done
+else
+    echo "UML created. PNG rendering in progress"
+    java -jar uml/plantuml.jar uml/Classes.uml
+fi
+mv uml/Classes*.png .
 
 rm -rf uml/ngns.* uml/ng.* uml/ns.*
 
-[ -e Classes.png ] && eog Classes.png || xdg-open Classes.png
+[ -e Classes.png ] && eog Classes.png
