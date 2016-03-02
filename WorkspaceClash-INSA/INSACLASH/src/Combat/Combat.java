@@ -50,6 +50,8 @@ public class Combat{
                     terrain.get(batiment.getX()*zoom+i+1).get(batiment.getY()*zoom+j+1).put(batiment.getId(), batiment);
                 }
         }
+
+        gains = new Hashtable<TypeRessource, Integer>();
     }
     private boolean estTermine(){//DONE
         boolean resteSoldats=false;
@@ -117,7 +119,7 @@ public class Combat{
     }
     private void checkMorts(){//WIP
         for(int i=0; i<armee.getSoldats().size(); i++)
-            if(armee.getSoldats().get(i).estATuer()){
+            if(armee.getSoldats().get(i).getX()==-1 || armee.getSoldats().get(i).estATuer()){
                 armee.getSoldats().get(i).tuer();
                 int x = armee.getSoldats().get(i).getX();
                 int y = armee.getSoldats().get(i).getY();
@@ -135,38 +137,19 @@ public class Combat{
                 for(int dx=0; dx<zoom; dx++)
                     for(int dy=0; dy<zoom; dy++)
                         terrain.get(x+dx).get(y+dy).remove(id);
+
+
+                Hashtable<TypeRessource, Integer> ressource = village.getBatiments().get(i).getBatiment().perteBatiment();
+                Iterator<Map.Entry<TypeRessource, Integer>> it = ressource.entrySet().iterator();
+                while(it.hasNext()){
+                    Map.Entry<TypeRessource, Integer> ent = it.next();
+                    int qtite = ent.getValue();
+                    if(gains.contains(ent.getKey()))
+                        qtite += gains.get(ent.getKey());
+
+                    gains.put(ent.getKey(), qtite);
+                }
             }
-    }
-    private Hashtable<TypeRessource, Integer> combattreTmp(){//DONE
-        Hashtable<TypeRessource, Integer> out = new Hashtable<TypeRessource, Integer>();
-
-        //Division par 2 de l'amree
-        int nbSoldat=armee.getSoldats().size();
-        for(int i=0; i<nbSoldat/2; i++)
-            armee.getSoldats().remove(i);
-
-
-        for(BatimentCombat batCom : village.getBatiments()){
-            Batiment bat = batCom.getBatiment();
-            if( bat.getTypeBatiment() == TypeBatiment.MINEOR
-                || bat.getTypeBatiment() == TypeBatiment.MINECHARBON){
-
-                TypeRessource typeRes = ((Ressource)bat).getTypeRessource();
-                Integer prelevement = ((Ressource)bat).prelever();
-
-                Integer dejaPresent = 0;
-
-                prelevement=60;
-
-                if(!out.contains(typeRes))
-                    out.put(typeRes, 0);
-                else
-                    dejaPresent = out.get(typeRes);
-
-                out.put(typeRes, dejaPresent+prelevement);
-            }
-        }
-        return out;
     }
     public Hashtable<TypeRessource, Integer> combattre(){//DONE
         while(!estTermine()){
@@ -178,7 +161,7 @@ public class Combat{
                 Thread.sleep(1000);
             } catch (Exception e){}
         }
-        return combattreTmp();
+        return gains;
     }
     private void afficherCombat(){//DONE
         String out="";
