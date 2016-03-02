@@ -23,10 +23,10 @@ public class BatimentCombat extends EntiteCombat{
     public void attaquer(Vector<SoldatCombat> soldats){//DONE
         TypeBatiment type = batiment.getTypeBatiment();
         if(type==TypeBatiment.CANON || type==TypeBatiment.MORTIER){
-            System.out.println("J'attaque, moi "+type+" ! ("+(x*zoom+1)+"x"+(y*zoom+1)+")");
+            //System.out.println("J'attaque, moi "+type+" ! ("+(x*zoom+1)+"x"+(y*zoom+1)+")");
             for(SoldatCombat soldat: soldats){
-                    System.out.println("  "+soldat.getSoldat().getType()+" ["+soldat.getPV()+"] ("+soldat.getX()+"x"+soldat.getY()+")");
-                    System.out.println(((Defense)batiment).getPuissanceDefense());
+                    //System.out.println("  "+soldat.getSoldat().getType()+" ["+soldat.getPV()+"] ("+soldat.getX()+"x"+soldat.getY()+")");
+                    //System.out.println(((Defense)batiment).getPuissanceDefense());
                     soldat.retirerPV(((Defense)batiment).getPuissanceDefense());
             }
         }

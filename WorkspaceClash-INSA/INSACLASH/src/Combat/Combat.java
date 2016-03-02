@@ -52,7 +52,13 @@ public class Combat{
         }
     }
     private boolean estTermine(){//DONE
-        boolean resteSoldats=(armee.getSoldats().size()>0);
+        boolean resteSoldats=false;
+        for(SoldatCombat soldat : armee.getSoldats())
+            if(soldat.getX()!=-1 && !soldat.estMort() && !soldat.estATuer()){
+                resteSoldats=true;
+                break;
+            }
+
         boolean resteBatiments=false;
         for(BatimentCombat batiment : village.getBatiments())
             if(!batiment.estMort() && !batiment.estATuer()){
@@ -65,7 +71,7 @@ public class Combat{
         return Math.sqrt( Math.pow((y1-y2), 2) + Math.pow((y1-y2), 2));
     }
     private void deplacementSoldat(SoldatCombat soldat){//DONE
-        Vector<Integer> result = soldat.ouAller(village.getBatiments(), tailleVillage);
+    Vector<Integer> result = soldat.ouAller(village.getBatiments(), tailleVillage, zoom);
 
         int id = soldat.getId();
         int newX = result.get(0);
@@ -73,12 +79,10 @@ public class Combat{
         int oldX = soldat.getX();
         int oldY = soldat.getY();
 
-        /*
         soldat.setX(newX);
         soldat.setY(newY);
         terrain.get(oldX).get(oldY).remove(id);
         terrain.get(newX).get(newY).put(id, soldat);
-        */
     }
     private void deplacementSoldat(SoldatCombat soldat, int newX, int newY){//DONE
         int id = soldat.getId();
@@ -102,7 +106,7 @@ public class Combat{
     }
     private void tourSoldat(){//DONE
         for(SoldatCombat soldat : armee.getSoldats()){
-            if(!soldat.estMort()){
+            if(soldat.getX()!=-1 && soldat.getY()!=-1 && !soldat.estMort()){
                 Vector<BatimentCombat> batiments = soldat.trouverBatimentAPortee(village.getBatiments(), zoom);
                 if(batiments.size()>0)
                     soldat.attaquer(batiments);
