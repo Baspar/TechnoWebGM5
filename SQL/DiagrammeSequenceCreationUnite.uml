@@ -1,0 +1,28 @@
+@startuml
+ activate Utilisateur
+            VueCaserne -> Utilisateur : AffichagUniteCreable
+            activate VueCaserne
+            Utilisateur -> VueCaserne : choixCaserne()
+            VueCaserne -> CaserneServlet :tentativeCreation()
+            activate CaserneServlet
+            CaserneServlet -> CaserneServlet : CreationUniteSession()
+            activate CaserneServlet
+            deactivate CaserneServlet
+            CaserneServlet -> CaserneDao : creationUnite()
+            activate CaserneDao
+            CaserneDao -> BDD : changementNombreUniteBDD() 
+            activate BDD
+            deactivate BDD
+            deactivate CaserneDao
+            CaserneServlet -> VillageDao : MiseAJourCharbon()
+            activate VillageDao
+            VillageDao -> BDD : miseAJourCharbon() 
+            activate BDD
+            deactivate BDD
+            deactivate VillageDao
+            CaserneServlet -> VueCaserne : erreur
+            deactivate CaserneServlet
+            VueCaserne -> Utilisateur : affichageVueCaserne()
+       deactivate VueCaserne   
+  deactivate Utilisateur
+@enduml
