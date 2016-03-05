@@ -1,0 +1,12 @@
+@startuml
+hide empty method 
+hide empty attribute 
+hide circle
+
+DeroulementAttaque -- ChoixAdversaire
+DeroulementAttaque -- ChoixTroupe
+DeroulementAttaque -- PlacementTroupe
+DeroulementAttaque -- CalculGagnant
+DeroulementAttaque -- CalculButin 
+
+@enduml
