@@ -32,6 +32,8 @@ activate Combat
                     end
                 deactivate Defense
                 Combat <-- Defense
+    activate Combat
+    deactivate Combat
             deactivate Defense
         end
         Combat -> Combat : checkMort()
