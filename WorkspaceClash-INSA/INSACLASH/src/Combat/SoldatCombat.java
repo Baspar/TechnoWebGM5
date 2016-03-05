@@ -18,8 +18,8 @@ public class SoldatCombat extends EntiteCombat{
         id=cpt++;
     }
     public Vector<BatimentCombat> trouverBatimentAPortee(Vector<BatimentCombat> batiments, int zoom){//CHK
-        int nbMaxBatiments=2;
-        int portee=3;//TODO: a mettre dans les classes
+        int nbMaxBatiments=1;
+        int portee=1;//TODO: a mettre dans les classes
 
         Vector<BatimentCombat> out = new Vector<BatimentCombat>();
         for(BatimentCombat batiment:batiments){
@@ -72,8 +72,8 @@ public class SoldatCombat extends EntiteCombat{
 
         int deplacementMax = soldat.getVitesseDeplacement();
 
-        int newX = 0;
-        int newY = 0;
+        int newX = -1;
+        int newY = -1;
         double distMin = -1;
 
         Vector<Vector<Boolean>> estLibre = new Vector<Vector<Boolean>>();
@@ -89,26 +89,29 @@ public class SoldatCombat extends EntiteCombat{
                     for(int j=0; j<zoom; j++)
                         estLibre.get(1+batiment.getX()*zoom+i).set(1+batiment.getY()*zoom+j, false);
 
-        for(BatimentCombat batiment: batiments){
-            if(!batiment.estMort() && !batiment.estATuer()){
-                for(int i=1; i<tailleVillage+1; i++){
-                    for(int j=1; j<tailleVillage+1; j++){
-                        if(getDistance(i, j) < deplacementMax && estLibre.get(i).get(j)){
+        for(BatimentCombat batiment: batiments)
+            if(!batiment.estMort() && !batiment.estATuer())
+                for(int i=1; i<tailleVillage+1; i++)
+                    for(int j=1; j<tailleVillage+1; j++)
+                        if(getDistance(i, j) < deplacementMax && estLibre.get(i).get(j))
                             if(distMin == -1 ||getDistance(batiment, i, j, zoom) < distMin){
                                 distMin = getDistance(batiment, i, j, zoom);
                                 newX = i;
                                 newY = j;
                             }
-                        }
-                    }
-                }
-            }
-        }
 
         //System.out.println("Soldat ("+x+"x"+y+"), je suis proche d'un "+batProche.getBatiment().getTypeBatiment()+" ("+batProche.getX()+"x"+batProche.getY()+")");
 
-        out.add(newX);
-        out.add(newY);
+        if(newX != -1)
+            out.add(newX);
+        else
+            out.add(x);
+
+        if(newY != -1)
+            out.add(newY);
+        else
+            out.add(y);
+
         return out;
     }
 }

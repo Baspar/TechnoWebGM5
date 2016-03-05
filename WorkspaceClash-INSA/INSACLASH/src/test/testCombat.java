@@ -51,7 +51,7 @@ public class testCombat {
         armee.ajouterSoldat(TypeSoldat.TREBUCHET, 3);
 
         Combat combat=new Combat(v, armee);
-        combat.placerSoldats(false, false, true, false);
+        combat.placerSoldats(true, true, true, true);
         Hashtable<TypeRessource, Integer> result =  combat.combattre();
 
         if(result.size() != 0){

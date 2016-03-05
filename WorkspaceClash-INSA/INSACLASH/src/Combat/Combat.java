@@ -119,7 +119,7 @@ public class Combat{
     }
     private void checkMorts(){//WIP
         for(int i=0; i<armee.getSoldats().size(); i++)
-            if(armee.getSoldats().get(i).getX()==-1 || armee.getSoldats().get(i).estATuer()){
+            if(armee.getSoldats().get(i).estATuer()){
                 armee.getSoldats().get(i).tuer();
                 int x = armee.getSoldats().get(i).getX();
                 int y = armee.getSoldats().get(i).getY();
@@ -153,18 +153,23 @@ public class Combat{
     }
     public Hashtable<TypeRessource, Integer> combattre(){//DONE
         while(!estTermine()){
+            afficherCombat();
             tourSoldat();
             tourBatiment();
             checkMorts();
-            afficherCombat();
             try{
                 Thread.sleep(1000);
             } catch (Exception e){}
         }
+        afficherCombat();
         return gains;
     }
     private void afficherCombat(){//DONE
         String out="";
+
+        for(SoldatCombat sol : armee.getSoldats())
+            if(!sol.estMort() && !sol.estATuer())
+                System.out.println("("+sol.getX()+"x"+sol.getY()+")");
 
         out +="+";
         for(int i=0; i<tailleVillage+2; i++)
@@ -213,8 +218,9 @@ public class Combat{
 
         System.out.println(out);
     }
-    public void placerSoldats(boolean N, boolean S, boolean E, boolean W){//WIP
-        int nb=0;
+    public void placerSoldats(boolean N, boolean S, boolean E, boolean W){//DONE
+        int nb=0, mod;
+        int nbN=0, nbS=0, nbE=0, nbW=0;
         if(N)
             nb++;
         if(S)
@@ -224,40 +230,73 @@ public class Combat{
         if(W)
             nb++;
 
+        mod = armee.getSoldats().size()%nb;
+
+        if(N){
+            nbN = armee.getSoldats().size()/nb;
+            if(mod != 0){
+                nbN++;
+                mod--;
+            }
+        }
+        if(S){
+            nbS = armee.getSoldats().size()/nb;
+            if(mod != 0){
+                nbS++;
+                mod--;
+            }
+        }
+        if(E){
+            nbE = armee.getSoldats().size()/nb;
+            if(mod != 0){
+                nbE++;
+                mod--;
+            }
+        }
+        if(W){
+            nbW = armee.getSoldats().size()/nb;
+            if(mod != 0){
+                nbW++;
+                mod--;
+            }
+        }
+
+        System.out.println("On a "+armee.getSoldats().size()+" soldats repartis en ("+nbN+","+nbS+","+nbE+","+nbW+")");
+
         Random r = new Random();
 
         int id=0;
         if(N)
-            for(int i=0; i<armee.getSoldats().size()/nb; i++){
+            for(int i=0; i<nbN; i++){
                 double rand=-1;
-                while(rand<1 || rand>tailleVillage+1)
+                while(rand<2 || rand>tailleVillage)
                     rand = (r.nextGaussian()+1)/2*tailleVillage;
                 int pos = (int)Math.floor(rand);
                 deplacementSoldat(armee.getSoldats().get(id), 0, pos);
                 id++;
             }
         if(S)
-            for(int i=0; i<armee.getSoldats().size()/nb; i++){
+            for(int i=0; i<nbS; i++){
                 double rand=-1;
-                while(rand<1 || rand>tailleVillage+1)
+                while(rand<2 || rand>tailleVillage)
                     rand = (r.nextGaussian()+1)/2*tailleVillage;
                 int pos = (int)Math.floor(rand);
                 deplacementSoldat(armee.getSoldats().get(id), tailleVillage+1, pos);
                 id++;
             }
         if(E)
-            for(int i=0; i<armee.getSoldats().size()/nb; i++){
+            for(int i=0; i<nbE; i++){
                 double rand=-1;
-                while(rand<1 || rand>tailleVillage+1)
+                while(rand<2 || rand>tailleVillage)
                     rand = (r.nextGaussian()+1)/2*tailleVillage;
                 int pos = (int)Math.floor(rand);
                 deplacementSoldat(armee.getSoldats().get(id), pos, tailleVillage+1);
                 id++;
             }
         if(W)
-            for(int i=0; i<armee.getSoldats().size()/nb; i++){
+            for(int i=0; i<nbW; i++){
                 double rand=-1;
-                while(rand<1 || rand>tailleVillage+1)
+                while(rand<2 || rand>tailleVillage)
                     rand = (r.nextGaussian()+1)/2*tailleVillage;
                 int pos = (int)Math.floor(rand);
                 deplacementSoldat(armee.getSoldats().get(id), pos, 0);
