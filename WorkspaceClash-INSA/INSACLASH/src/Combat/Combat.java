@@ -120,7 +120,7 @@ public class Combat{
             }
         }
     }
-    private void checkMorts(){//WIP
+    private void checkMorts(){//DONE
         for(int i=0; i<armee.getSoldats().size(); i++)
             if(armee.getSoldats().get(i).estATuer()){
                 armee.getSoldats().get(i).tuer();

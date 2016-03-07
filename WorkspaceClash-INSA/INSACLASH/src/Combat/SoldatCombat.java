@@ -17,7 +17,7 @@ public class SoldatCombat extends EntiteCombat{
         this.PV     = soldat.getPointsDeVie();
         id=cpt++;
     }
-    public Vector<BatimentCombat> trouverBatimentAPortee(Vector<BatimentCombat> batiments, int zoom){//CHK
+    public Vector<BatimentCombat> trouverBatimentAPortee(Vector<BatimentCombat> batiments, int zoom){//DONE
         int nbMaxBatiments=1;
         int portee=1;//TODO: a mettre dans les classes
 
@@ -67,7 +67,7 @@ public class SoldatCombat extends EntiteCombat{
 
         return dist;
     }
-    public Vector<Integer> ouAller(Vector<BatimentCombat> batiments, int tailleVillage, int zoom){//WIP
+    public Vector<Integer> ouAller(Vector<BatimentCombat> batiments, int tailleVillage, int zoom){//DONE
         Vector<Integer> out = new Vector<Integer>();
 
         int deplacementMax = soldat.getVitesseDeplacement();
