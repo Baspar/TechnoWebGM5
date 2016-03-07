@@ -21,11 +21,11 @@
     \section{Connexion}
 
     Lors de la connexion du joueur, la première étape est la saisie des données par l'utilisateur. Puis la servlet est lancée, elle demande la vérification du mot de passe au Formulaire de connexion. On vérifie grâce à Jasypt, bibliothéque java qui permet d'encrypter le mot de passe, que le mot de passe saisi par l'utilisateur correspond bien au mot de passe encrypté dans la base de donné. Puis on renvoie un joueur ou des erreurs dans la session. \\
-    Pour l'inscription le principe est similaire. 
+    Pour l'inscription le principe est similaire. \\
         \includegraphics[scale=0.4]{graph/DiagrammeSequenceConnexion.png}  
         
     \section{Creation Batiment}
-    Principe similaire a l'amelioration. On propose au joueur de créer les batiments possibles puis on met à jour le joueur en session et en base de données. 
+    Principe similaire a l'amelioration. On propose au joueur de créer les batiments possibles puis on met à jour le joueur en session et en base de données. \\
         \includegraphics[scale=0.4]{graph/DiagrammeSequenceCreationBatiment.png}  
         
    \section{Creation Unite}
@@ -35,7 +35,7 @@
         
    \section{Deplacement}
 
-    Pour le déplacement d'un batiment, on enregistre le batiment sur lequel joueur clique en session puis si la position ou il clique la deuxième est valide, on déplace le batiment en session et dans la bdd 
+    Pour le déplacement d'un batiment, on enregistre le batiment sur lequel joueur clique en session puis si la position ou il clique la deuxième est valide, on déplace le batiment en session et dans la bdd. \\ 
     
         \includegraphics[scale=0.4]{graph/DiagrammeSequenceDeplacement.png}    
         
