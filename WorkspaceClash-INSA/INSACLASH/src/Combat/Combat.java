@@ -19,6 +19,7 @@ public class Combat{
     private int tailleVillage;
     private int zoom=2;
     private Hashtable<TypeRessource, Integer> gains;
+    private boolean hasMove=false;
 
     // Note terrain :
     // Si le Model.village a une taille de X, le terrain aura une taille de X*zoom, plus deux ligne et colonnes sur les bords permettant le placement des soldats
@@ -108,8 +109,10 @@ public class Combat{
                 Vector<BatimentCombat> batiments = soldat.trouverBatimentAPortee(village.getBatiments(), zoom);
                 if(batiments.size()>0)
                     soldat.attaquer(batiments);
-                else
+                else{
+                    hasMove=true;
                     deplacementSoldat(soldat);
+                }
             }
         }
     }
@@ -122,6 +125,7 @@ public class Combat{
                 int id = armee.getSoldats().get(i).getId();
                 armee.getSoldats().remove(i);
                 terrain.get(x).get(y).remove(id);
+                hasMove=true;
             }
 
         for(int i=0; i<village.getBatiments().size(); i++)
@@ -133,6 +137,7 @@ public class Combat{
                 for(int dx=0; dx<zoom; dx++)
                     for(int dy=0; dy<zoom; dy++)
                         terrain.get(x+dx).get(y+dy).remove(id);
+                hasMove=true;
 
 
                 Hashtable<TypeRessource, Integer> ressource = village.getBatiments().get(i).getBatiment().perteBatiment();
@@ -150,19 +155,22 @@ public class Combat{
         int nbTour=0;
         while(!estTermine() & nbTour<120){
             System.err.println("Tour num "+nbTour);
-            String aff = afficherCombatHTML();
-            try {
-                PrintWriter writer = new PrintWriter("/tmp/tour"+nbTour+".txt", "UTF-8");
-                writer.println(aff);
-                writer.close();
-            } catch (Exception e) {
-                System.err.println("Problem writing to the file statsTest.txt");
-            }
-
+            hasMove=false;
             tourSoldat();
             tourBatiment();
             checkMorts();
-            nbTour++;
+
+            if(hasMove){
+                String aff = afficherCombatHTML();
+                try {
+                    PrintWriter writer = new PrintWriter("/tmp/tour"+nbTour+".txt", "UTF-8");
+                    writer.println(aff);
+                    writer.close();
+                } catch (Exception e) {
+                    System.err.println("Problem writing to the file statsTest.txt");
+                }
+                nbTour++;
+            }
         }
         System.err.println("Fini");
 
@@ -175,7 +183,7 @@ public class Combat{
         }
         return gains;
     }
- /*   private String afficherCombat(){//DONE
+    private String afficherCombat(){//DONE
         String out="";
 
         out +="+";
@@ -224,7 +232,7 @@ public class Combat{
         out += "\n";
 
         return out;
-    }*/
+    }
     private String afficherCombatHTML(){//DONE
         String out="";
 
