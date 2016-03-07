@@ -155,7 +155,7 @@ public class Combat{
     }
     public Hashtable<TypeRessource, Integer> combattre(){//DONE
         int nbTour=0;
-        while(!estTermine()){
+        while(!estTermine() & nbTour<120){
             System.err.println("Tour num "+nbTour);
             String aff = afficherCombatHTML();
             try {
@@ -173,13 +173,13 @@ public class Combat{
         }
         System.err.println("Fini");
 
-            try {
-                PrintWriter writer = new PrintWriter("/tmp/nbTour.txt", "UTF-8");
-                writer.println(nbTour);
-                writer.close();
-            } catch (Exception e) {
-                System.err.println("Problem writing to the file statsTest.txt");
-            }
+        try {
+            PrintWriter writer = new PrintWriter("/tmp/nbTour.txt", "UTF-8");
+            writer.println(nbTour);
+            writer.close();
+        } catch (Exception e) {
+            System.err.println("Problem writing to the file statsTest.txt");
+        }
         return gains;
     }
     private String afficherCombat(){//DONE
