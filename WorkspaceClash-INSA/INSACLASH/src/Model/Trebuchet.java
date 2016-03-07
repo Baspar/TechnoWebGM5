@@ -6,7 +6,7 @@ public class Trebuchet extends Soldat{
         type=TypeSoldat.TREBUCHET;
         pointsDeVie=300;
         puissanceAttaque=11;
-        vitesseDeplacement=1;
+        vitesseDeplacement=2;
         typeAttaque=TypeAttaque.ZONE;
         coutUpgrade=100000;
         coutUnite=500;

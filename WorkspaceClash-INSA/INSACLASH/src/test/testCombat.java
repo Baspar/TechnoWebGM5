@@ -46,9 +46,10 @@ public class testCombat {
         v.upgradeSoldat(TypeSoldat.ARCHER);
 
         Armee armee =new Armee();
-        for(int i=0; i<50; i++)
-        	armee.ajouterSoldat(TypeSoldat.ARCHER, 2);
-        armee.ajouterSoldat(TypeSoldat.TREBUCHET, 3);
+        for(int i=0; i<50; i++){
+            armee.ajouterSoldat(TypeSoldat.ARCHER, 4);
+            armee.ajouterSoldat(TypeSoldat.TREBUCHET, 5);
+        }
 
         Combat combat=new Combat(v, armee);
         combat.placerSoldats(true, true, true, true);
