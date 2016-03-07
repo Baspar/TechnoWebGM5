@@ -1,35 +1,34 @@
-\chapter{Diagrammes de classes}
-    Il existe deux version de diagrammes de classe pour ce projet:
-    \begin{itemize}
-        \item Une version schématique, réalisée lors de la conception préliminaire.
-        \item Une version finale, plus complète puisque comprenant le modèle, le modèle combat, les servlet, ...
-    \end{itemize}
-    \section{Diagramme de séquence}
-        À cette étape de la réalisation, nous n'avions qu'un diagramme représentant le modèle dans ses grandes lignes, sans prendre en compte tout l'aspect WEB.\\
-        Cet aspect a été ajouté par la suite, lors du développement.\\
+\chapter{Diagrammes de sequence}
+    Pour faciliter la compréhension de notre programme, nous avons réalisé les différents diagrammes de séquence suivants. 
 
-        \includegraphics[scale=0.7]{graph/Classes.png}
-    \section{Diagrammes finaux}
-        Pour des questions de lisibilité, le diagramme de classe est divisé en plusieurs sous diagrammes.\\
-        Pour chacun, un court descriptif expliquera le but de ce package.
-        \subsection{Diagramme package Combat}
-            Le package Combat modélise le combat entre un Village et une Armée.\\
-            Il est en charge de la simulation d'un combat, et dépend intégralement du modèle Model.\\
+    \section{Affichage Village}
 
-            \includegraphics[scale=0.4]{ressources/images/ClassesCombat.png}
-        \subsection{Diagramme package Controleur}
-        La package controleur permet la communication entre nos vues, d'une part, et le modèle et la base de données d'autres part. Le controleur vérifie les données en entrée de la requête et sauvegarde les informations nécessaires en session. \\
-            \includegraphics[scale=0.2]{ressources/images/ClassesControleur.png}
-        \subsection{Diagramme package DAO}
-            Le modèle DAO (Data Access Object) permet de faire le lien entre le modèle et la base de donnée. \\
-            Nous avons une interface dao par table puis une implémentation de notre interface. Nous avons choisi de stocker notre base de données sous SQL, nous pourrions facilement changer grâce à ce modèle. Nous avons ainsi une Dao factory qui nous fabrique chacun de nos différents objets et un dao utilitaire qui nous réalise les opérations importantes : fermeture des outils utilisés ainsi que l'initialisation de notre requête. \\
-            \includegraphics[scale=0.2]{ressources/images/Classesdao.png}
-        \subsection{Diagramme package Model}
-            Le package Model modélise l'intégralité du modèle, c'est à dire:
-            \begin{itemize}
-                \item L'ensemble des bâtiments.
-                \item L'armée.
-                \item Chacun des types de bâtiments.
-                \item Chacun des types de soldats.
-            \end{itemize}
-            \includegraphics[scale=0.3]{ressources/images/ClassesModel.png}
+        \includegraphics[scale=0.7]{graph/DiagrammeSequenceAffichageVillage.png}
+        
+    
+    \section{Amelioration Batiment}
+
+        \includegraphics[scale=0.7]{graph/DiagrammeSequenceAmeliorationBatiment.png}
+        
+    
+    \section{Combat}
+
+        \includegraphics[scale=0.7]{graph/DiagrammeSequenceCombat.png}    
+    
+    \section{Connexion}
+
+        \includegraphics[scale=0.7]{graph/DiagrammeSequenceConnexion.png}  
+        
+    \section{Creation Batiment}
+
+        \includegraphics[scale=0.7]{graph/DiagrammeSequenceCreationBatiment.png}  
+        
+   \section{Creation Unite}
+
+        \includegraphics[scale=0.7]{graph/DiagrammeSequenceCreationUnite.png}    
+        
+   \section{Deplacement}
+
+        \includegraphics[scale=0.7]{graph/DiagrammeSequenceDeplacement.png}    
+        
+ 
