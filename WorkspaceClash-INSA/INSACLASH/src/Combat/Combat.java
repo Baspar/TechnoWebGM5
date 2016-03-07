@@ -53,8 +53,8 @@ public class Combat{
         }
 
         gains = new Hashtable<TypeRessource, Integer>();
-        gain.put(TypeRessource.CHARBON, 0);
-        gain.put(TypeRessource.OR, 0);
+        gains.put(TypeRessource.CHARBON, 0);
+        gains.put(TypeRessource.OR, 0);
     }
     private boolean estTermine(){//DONE
         boolean resteSoldats=false;
@@ -158,13 +158,13 @@ public class Combat{
         int nbTour=0;
         while(!estTermine()){
             String aff = afficherCombatHTML();
-            try {
+          /*  try {
                 PrintWriter writer = new PrintWriter("../WebContent/inc/recordCombat/tour"+nbTour+".txt", "UTF-8");
                 writer.println(aff);
                 writer.close();
             } catch (Exception e) {
                 System.err.println("Problem writing to the file statsTest.txt");
-            }
+            }*/
 
             tourSoldat();
             tourBatiment();
@@ -173,7 +173,7 @@ public class Combat{
         }
 
             try {
-                PrintWriter writer = new PrintWriter("../WebContent/inc/recordCombat/nbTour.txt", "UTF-8");
+                PrintWriter writer = new PrintWriter("nbTour.txt", "UTF-8");
                 writer.println(nbTour);
                 writer.close();
             } catch (Exception e) {

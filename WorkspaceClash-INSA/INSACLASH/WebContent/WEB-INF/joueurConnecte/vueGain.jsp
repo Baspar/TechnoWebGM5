@@ -15,7 +15,7 @@
 <h1> Bonus de guerre </h1>
 <table id="mytable">
 <tr> <th id="myth"> Or <img src="<c:url value="/inc/or.png"/>" width="20" height="20"alt="or" /></th> <th id="mytd"> Charbon <img src="<c:url value="/inc/charbon.png"/>" width="20" height="20"alt="or" /></th> </tr>
-<tr> <td> <c:out value="${sessionScope.gain.get(TypeRessource.OR}"/> </td> <td> <c:out value="${sessionScope.gain.get(TypeRessource.CHARBON}"/> </td> </tr>
+<tr> <td> <c:out value="${sessionScope.gain.get(TypeRessource.OR)}"/> </td> <td> <c:out value="${sessionScope.gain.get(TypeRessource.CHARBON)}"/> </td> </tr>
 </table>
 
 <form method="post" action="<c:url value="/gestionGain" />"> 
