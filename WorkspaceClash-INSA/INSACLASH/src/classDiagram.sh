@@ -278,7 +278,10 @@ for package in $JAVA_PATH
 do
     echo "@startuml" >> uml/Classes$package\.uml
     echo "!include skin.uml" >> uml/Classes$package\.uml
-    echo "!include links.uml" >> uml/Classes$package\.uml
+    if [ -e uml/links$package".uml" ]
+    then
+        echo "!include links$package".uml >> uml/Classes$package\.uml
+    fi
     echo "hide empty members" >> uml/Classes$package\.uml
 
     echo "Package $package in analysis"

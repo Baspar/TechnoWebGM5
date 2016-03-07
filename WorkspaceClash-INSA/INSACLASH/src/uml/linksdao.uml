@@ -1,0 +1,6 @@
+CaserneDao <-- CaserneDaoImpl
+DefenseDao <-- DefenseDaoImpl
+HDVDao <-- HDVDaoImpl
+JoueurDao <-- JoueurDaoImpl
+RessourceDao <-- RessourceDaoImpl
+VillageDao <-- VillageDaoImpl
