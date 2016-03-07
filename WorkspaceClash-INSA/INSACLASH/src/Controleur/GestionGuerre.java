@@ -1,7 +1,6 @@
 package Controleur;
 
-import java.io.*;
-
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,18 +21,17 @@ import dao.JoueurDao;
 import dao.VillageDao;
 
 
-@WebServlet("/GestionGain")
-public class GestionGain extends HttpServlet {
+@WebServlet("/GestionGuerre")
+public class GestionGuerre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
 	public static final String CONF_DAO_FACTORY = "daofactory";
-	public static final String VUE_RETOUR="/WEB-INF/joueurConnecte/vueCaserne.jsp";
-	public static final String VUE="/WEB-INF/joueurConnecte/vueGain.jsp";
+	public static final String VUE_FIN="/WEB-INF/joueurConnecte/vueGain.jsp";
+	public static final String VUE="/WEB-INF/joueurConnecte/vueGuerre.jsp";
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";  
 	public static final String ATT_SESSION_ADVERSAIRE = "sessionAdversaire"; 
 	public static final String GAIN="gain";
-	public static final String VUE_GUERRE="/WEB-INF/joueurConnecte/vueGuerre.jsp";
 	private VillageDao villageDao;
 	
    @Override
@@ -42,37 +40,35 @@ public class GestionGain extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response); 
+		HttpSession session = request.getSession();
+
+		int i=(Integer) session.getAttribute("tourCourant");
+		int nbTour=(Integer) session.getAttribute("nbTour");
+		i++;
+		if(i<nbTour){
+			request.setAttribute("tourCourant", i);
+			session.setAttribute("tourCourant",i);
+			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response); 
+		}
+		else
+			this.getServletContext().getRequestDispatcher( VUE_FIN ).forward( request, response); 
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if(request.getParameter("caserne")!=null){
-			this.getServletContext().getRequestDispatcher( VUE_RETOUR ).forward( request, response );
-			return;
-		} else{
-			int nbTour=0;
-			try{		
-				String fichier ="/tmp/nbTour.txt";
-				
-				InputStream ips=new FileInputStream(fichier); 
-				InputStreamReader ipsr=new InputStreamReader(ips);
-				BufferedReader br=new BufferedReader(ipsr);
-				String ligne;
-				ligne=br.readLine();
-					nbTour=Integer.parseInt(ligne);
-					br.close(); 	
-			}		
-			catch (Exception e){
-				e.printStackTrace();
-			}
-			request.setAttribute("tourCourant", 0);
-			session.setAttribute("nbTour", nbTour);
-			session.setAttribute("tourCourant", 0);
-				this.getServletContext().getRequestDispatcher( VUE_GUERRE ).forward( request, response); 
-		}
 
+		int i=(Integer) session.getAttribute("tourCourant");
+		int nbTour=(Integer) session.getAttribute("nbTour");
+		i++;
+		System.out.println(i);
+		if(i<nbTour){
+			this.getServletContext().getRequestDispatcher( VUE ).forward( request, response); 
+		}
+		else
+			this.getServletContext().getRequestDispatcher( VUE_FIN ).forward( request, response); 
+
+			
 	}
 
 }
