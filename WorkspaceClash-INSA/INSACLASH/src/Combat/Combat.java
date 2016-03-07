@@ -53,6 +53,8 @@ public class Combat{
         }
 
         gains = new Hashtable<TypeRessource, Integer>();
+        gain.put(TypeRessource.CHARBON, 0);
+        gain.put(TypeRessource.OR, 0);
     }
     private boolean estTermine(){//DONE
         boolean resteSoldats=false;
@@ -155,7 +157,7 @@ public class Combat{
     public Hashtable<TypeRessource, Integer> combattre(){//DONE
         int nbTour=0;
         while(!estTermine()){
-            String aff = afficherCombat();
+            String aff = afficherCombatHTML();
             try {
                 PrintWriter writer = new PrintWriter("../WebContent/inc/recordCombat/tour"+nbTour+".txt", "UTF-8");
                 writer.println(aff);
@@ -226,6 +228,48 @@ public class Combat{
         for(int i=0; i<tailleVillage+2; i++)
             out += "---+";
         out += "\n";
+
+        return out;
+    }
+    private String afficherCombatHTML(){//DONE
+        String out="";
+
+        for(int x=0; x<tailleVillage+2; x++){
+            for(int y=0; y<tailleVillage+2; y++){
+                out += "    <img src=\"/INSACLASH/inc/";
+                int nbSol=0;
+                for(SoldatCombat soldat : armee.getSoldats())
+                    if (soldat.getX() == x && soldat.getY() == y)
+                        nbSol++;
+                if(nbSol != 0)
+                    if(nbSol < 11)
+                        out +="img"+nbSol;
+                    else
+                        out +="img10+";
+                else{
+                    // Batiment
+                    Iterator<Map.Entry<Integer, EntiteCombat>> it = terrain.get(x).get(y).entrySet().iterator();
+                    Integer id = -1;
+                    if(it.hasNext()){
+                        id = it.next().getKey();
+                        if(id!=-1){
+                            TypeBatiment typeBat = ((BatimentCombat)terrain.get(x).get(y).get(id)).getBatiment().getTypeBatiment();
+                            out+=   typeBat==TypeBatiment.CASERNE?"Caserne":
+                                    typeBat==TypeBatiment.HDV?"HotelDeVille":
+                                    typeBat==TypeBatiment.CANON?"Canon":
+                                    typeBat==TypeBatiment.MORTIER?"Mortier":
+                                    typeBat==TypeBatiment.MINEOR?"MineOr":
+                                    typeBat==TypeBatiment.MINECHARBON?"MineCharbon":
+                                    "XXX";
+                        } else
+                            out += "carreHerbe";
+                    } else
+                        out += "carreHerbe";
+                }
+                out+= ".png\" width=\"20\" height=\"20\">\n";
+            }
+            out += "<br>\n";
+        }
 
         return out;
     }
