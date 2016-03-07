@@ -157,23 +157,25 @@ public class Combat{
     public Hashtable<TypeRessource, Integer> combattre(){//DONE
         int nbTour=0;
         while(!estTermine()){
+            System.err.println("Tour num "+nbTour);
             String aff = afficherCombatHTML();
-          /*  try {
-                PrintWriter writer = new PrintWriter("../WebContent/inc/recordCombat/tour"+nbTour+".txt", "UTF-8");
+            try {
+                PrintWriter writer = new PrintWriter("/tmp/tour"+nbTour+".txt", "UTF-8");
                 writer.println(aff);
                 writer.close();
             } catch (Exception e) {
                 System.err.println("Problem writing to the file statsTest.txt");
-            }*/
+            }
 
             tourSoldat();
             tourBatiment();
             checkMorts();
             nbTour++;
         }
+        System.err.println("Fini");
 
             try {
-                PrintWriter writer = new PrintWriter("nbTour.txt", "UTF-8");
+                PrintWriter writer = new PrintWriter("/tmp/nbTour.txt", "UTF-8");
                 writer.println(nbTour);
                 writer.close();
             } catch (Exception e) {
