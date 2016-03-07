@@ -107,6 +107,7 @@ public class Combat{
         }
     }
     private void tourSoldat(){//DONE
+        System.out.println(armee.getSoldats().size());
         for(SoldatCombat soldat : armee.getSoldats()){
             if(soldat.getX()!=-1 && soldat.getY()!=-1 && !soldat.estMort()){
                 Vector<BatimentCombat> batiments = soldat.trouverBatimentAPortee(village.getBatiments(), zoom);
