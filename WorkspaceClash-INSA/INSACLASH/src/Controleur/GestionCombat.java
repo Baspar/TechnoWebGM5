@@ -44,8 +44,11 @@ public class GestionCombat extends HttpServlet {
 		if(request.getParameter("retour")!=null){
 			this.getServletContext().getRequestDispatcher( VUE_RETOUR ).forward( request, response );
 			return;
+		} else{
+			if (request.getParameter("attaquer")!=null){
+				
+			}
 		}
-		//System.out.println(t);
 		session.setAttribute(ATT_SESSION_JOUEUR, joueur);
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response); 
 
