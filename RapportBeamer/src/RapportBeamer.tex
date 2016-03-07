@@ -53,53 +53,13 @@
     \end{frame}
 
     \begin{frame}
-        \frametitle{Analyse descendante - 1}
-        \framesubtitle{Analyse descendante générale}
-        \begin{center}
-            \includegraphics[scale=0.3]{graph/analyseDescendante.png}
-        \end{center}
-    \end{frame}
-    \begin{frame}
-        \frametitle{Analyse descendante - 2}
-        \framesubtitle{Zoom: IHM}
-        \begin{center}
-            \includegraphics[scale=0.3]{graph/IHM.png}
-        \end{center}
-    \end{frame}
-    \begin{frame}
-        \frametitle{Analyse descendante - 3}
-        \framesubtitle{Zoom: Deroulement Attaque}
-        \begin{center}
-            \includegraphics[scale=0.3]{graph/DeroulementAttaque.png}
-        \end{center}
-    \end{frame}
-    \begin{frame}
-        \frametitle{Analyse descendante - 4}
-        \framesubtitle{Zoom: Gestion Village}
-        \begin{center}
-            \includegraphics[scale=0.2]{graph/GestionVillage.png}
-        \end{center}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Orient\'e objet}
-        \framesubtitle{Utilit\'e de l'orient\'e objet}
-        Est-il judicieux d'utiliser un paradigme objet ?
-    \end{frame}
-    \begin{frame}
-        \frametitle{Orient\'e objet}
-        \framesubtitle{Diagramme de classes}
-        \includegraphics[scale=0.4]{graph/Classes.png}
-    \end{frame}
-
-    \begin{frame}
         \frametitle{Technologies \& Méthodologies}
         \framesubtitle{Technologies}
         Technologies employées:
         \begin{itemize}
             \item Modèle : JAVA
             \item Interface Web : J2EE
-            \item Stockage: MySQL
+            \item Stockage: MySQL \textbf{+ DAO}
         \end{itemize}
     \end{frame}
     \begin{frame}
@@ -112,6 +72,54 @@
             \item Latex
             \item PlantUML
             \item Script BASH pour génération diagramme de classes
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Modèle}
+        \framesubtitle{Diagramme classes Modèle}
+        \begin{center}
+            \includegraphics[scale=0.13]{images/ClassesModel.png}
+        \end{center}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Modèle $\Leftrightarrow$ Stockage}
+        \framesubtitle{Solution}
+        \begin{center}
+            Comment stocker, modifier et accéder aux objets ? $\Rightarrow$ \textbf{DAO}
+        \end{center}
+    \end{frame}
+    \begin{frame}
+        \frametitle{Modèle $\Leftrightarrow$ Stockage}
+        \framesubtitle{Base de donnée}
+        \begin{center}
+            \includegraphics[scale=0.24]{images/bdd.png}
+        \end{center}
+    \end{frame}
+    \begin{frame}
+        \frametitle{Modèle $\Leftrightarrow$ Stockage}
+        \framesubtitle{Diagramme classes DAO}
+        \begin{center}
+            \includegraphics[scale=0.13]{images/Classesdao.png}
+        \end{center}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Combat}
+        \framesubtitle{Diagramme classes Combat}
+        \begin{center}
+            \includegraphics[scale=0.2]{images/ClassesCombat.png}
+        \end{center}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Amélioration}
+        \begin{itemize}
+            \item Amélioration 1
+            \item Amélioration 2
+            \item Amélioration 3
+            \item Amélioration 4
         \end{itemize}
     \end{frame}
 
