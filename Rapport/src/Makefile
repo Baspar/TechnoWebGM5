@@ -1,22 +1,22 @@
-all: graphs texCDC mvdoc pseudoclean
+all: graphs texRapport mvdoc pseudoclean
 
 graphs:
-	for i in srcCDC/graph/*.uml; do echo $$i; java -jar srcCDC/graph/plantuml.jar $$i; done
+	for i in srcRapport/graph/*.uml; do echo $$i; java -jar srcRapport/graph/plantuml.jar $$i; done
 
 toggle:
-	sed -i 's/Rapport/Pré-Rapport/g; s/Pré-Pré-//g' srcCDC/ressources/vocabulaire/vocabulaire.sty
+	sed -i 's/Rapport/Pré-Rapport/g; s/Pré-Pré-//g' srcRapport/ressources/vocabulaire/vocabulaire.sty
 
-texCDC:
-	cd srcCDC; pdflatex CDC.tex;pdflatex CDC.tex; cd ..
+texRapport:
+	cd srcRapport; pdflatex Rapport.tex;pdflatex Rapport.tex; cd ..
 
 mvdoc:
-	mv srcCDC/*.pdf doc/
+	mv srcRapport/*.pdf doc/
 
 cleangraph:
-	rm -rf srcCDC/graph/*.png
+	rm -rf srcRapport/graph/*.png
 
 pseudoclean:
-	rm -rf srcCDC/*.log srcCDC/*.aux srcCDC/*.toc srcCDC/*.out
+	rm -rf srcRapport/*.log srcRapport/*.aux srcRapport/*.toc srcRapport/*.out
 
 clean: pseudoclean cleangraph
 	rm -rf doc/*.pdf
