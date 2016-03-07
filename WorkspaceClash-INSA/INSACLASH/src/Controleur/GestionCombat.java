@@ -16,6 +16,7 @@ import Model.HDV;
 import Model.Joueur;
 import Model.TypeBatiment;
 import Model.TypeRessource;
+import Model.TypeSoldat;
 import dao.DAOFactory;
 import dao.JoueurDao;
 import dao.VillageDao;
@@ -81,6 +82,10 @@ public class GestionCombat extends HttpServlet {
 				int qte2=h.get(TypeRessource.CHARBON);
 				qte2=joueur.getVillage().getHDV().crediter(TypeRessource.CHARBON, qte2);
 				villageDao.miseAJourRessource(joueur.getLogin(), TypeRessource.CHARBON, qte2);
+				while(joueur.getVillage().supprimerSoldat(TypeSoldat.TREBUCHET))
+					villageDao.modifNbSoldat(joueur.getLogin(), TypeSoldat.TREBUCHET, -1);
+				while(joueur.getVillage().supprimerSoldat(TypeSoldat.ARCHER))
+					villageDao.modifNbSoldat(joueur.getLogin(), TypeSoldat.ARCHER, -1);	
 				session.setAttribute(ATT_SESSION_JOUEUR, joueur);
 				this.getServletContext().getRequestDispatcher( VUE_GAIN ).forward( request, response); 
 			}

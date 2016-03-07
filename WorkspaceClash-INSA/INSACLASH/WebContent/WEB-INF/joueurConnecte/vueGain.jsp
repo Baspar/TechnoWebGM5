@@ -21,8 +21,16 @@
 <form method="post" action="<c:url value="/gestionGain" />"> 
 <fieldset> 
 <legend> Suite des événements ... </legend>
-<input type="submit" value="Revenir a la caserne" name="caserne"><br>
-<input type="submit" value="Visionner l'attaque" name="attaque"><br>
+<table>
+<tr>
+<td> <img src="<c:url value="/inc/Caserne.png"/>" width="50" height="50"alt="or" /></td>
+<td> <img src="<c:url value="/inc/Combat.png"/>" width="50" height="50"alt="or" /></td>
+</tr>
+<tr>
+<td><input type="submit" value="Revenir a la caserne" name="caserne"></td>
+<td><input type="submit" value="Visionner l'attaque" name="attaque"></td>
+</tr>
+</table>
 </fieldset>
 </form>
 </body>
