@@ -6,11 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.http.HttpServletRequest;
-
-import Model.Joueur;
-import form.ConnexionForm;
-
 public final class DAOUtilitaire {
     private DAOUtilitaire() {
     }

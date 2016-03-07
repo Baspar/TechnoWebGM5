@@ -1,23 +1,11 @@
 package dao;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.GregorianCalendar;
 import java.util.Properties;
-import java.util.Vector;
-
-import javax.servlet.http.HttpServletRequest;
-
-import Model.Joueur;
-import Model.MineCharbon;
-import Model.MineOr;
-import Model.Ressource;
-import form.ConnexionForm;
-
 
 public class DAOFactory {
 	private static final String FICHIER_PROPERTIES = "dao.properties";

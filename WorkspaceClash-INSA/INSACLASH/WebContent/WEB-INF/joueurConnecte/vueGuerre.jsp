@@ -1,4 +1,4 @@
-</html><%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.io.*"%>
@@ -9,7 +9,7 @@
 <meta http-equiv="refresh" content="0, <c:url value="/gestionGuerre" />">
 
 <link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
-<title>Page d'affichage du gain</title>
+<title>Page d'affichage du combat</title>
 </head>
 <body>
 

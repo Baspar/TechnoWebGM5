@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.Properties;
 import java.util.Vector;
 
 import Model.Joueur;

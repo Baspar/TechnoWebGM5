@@ -9,13 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Model.Caserne;
-import Model.HDV;
 import Model.Joueur;
 import Model.TypeBatiment;
 import Model.TypeRessource;
 import Model.TypeSoldat;
 import dao.DAOFactory;
-import dao.JoueurDao;
 import dao.VillageDao;
 
 /**
@@ -28,12 +26,10 @@ public class GestionCaserne extends HttpServlet {
 	public static final String VUE="/WEB-INF/joueurConnecte/vueCaserne.jsp";
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";  
 	public static final String ATT_SESSION_MANQUE_RESSOURCE="manqueRessource";
-	private JoueurDao joueurDao;
 	private VillageDao villageDao;
 	
    @Override
 	public void init() throws ServletException {
-	   this.joueurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getJoueurDao();
 	   this.villageDao =( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getVillageDao();
 	}
 

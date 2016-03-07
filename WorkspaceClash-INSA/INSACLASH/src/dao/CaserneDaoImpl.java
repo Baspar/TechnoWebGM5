@@ -11,8 +11,6 @@ import java.util.Hashtable;
 
 import Model.Armee;
 import Model.Caserne;
-import Model.HDV;
-import Model.TypeRessource;
 import Model.TypeSoldat;
 
 public class CaserneDaoImpl implements CaserneDao {

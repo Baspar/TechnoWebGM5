@@ -14,6 +14,10 @@ import form.InscriptionForm;
 
 
 public class Inscription extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String ATT_USER = "joueur";
 	public static final String ATT_FORM = "form"; 

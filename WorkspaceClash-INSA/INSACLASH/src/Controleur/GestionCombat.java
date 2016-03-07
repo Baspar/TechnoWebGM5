@@ -8,17 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.util.Date;
 import java.util.Hashtable;
 
 import Combat.Combat;
-import Model.HDV;
 import Model.Joueur;
-import Model.TypeBatiment;
 import Model.TypeRessource;
 import Model.TypeSoldat;
 import dao.DAOFactory;
-import dao.JoueurDao;
 import dao.VillageDao;
 
 

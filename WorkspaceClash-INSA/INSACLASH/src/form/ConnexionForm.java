@@ -9,7 +9,6 @@ import Model.Joueur;
 import dao.DAOException;
 import dao.JoueurDao;
 import dao.VillageDao;
-import dao.VillageDaoImpl;
 
 public final class ConnexionForm {
     private static final String CHAMP_LOGIN = "login";

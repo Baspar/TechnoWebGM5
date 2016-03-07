@@ -1,7 +1,6 @@
 package Combat;
 
 import java.util.Vector;
-import java.util.Iterator;
 
 import Model.Batiment;
 import Model.Defense;
