@@ -15,7 +15,12 @@
         
     
     \section{Combat}
-
+        Lors de l'execution principale du combat, une boucle sera effectuée sur:
+        \begin{itemize}
+            \item Chacun des personnages (dont les points de vie sont supérieurs à zéro)
+            \item Chacun des batiments (dont les points de vie sont supérieurs à zéro)
+        \end{itemize}
+        Pour chacun d'entre eux, si une attaque est possible, ils attaqueront un enemi (Voire plus) s'il existe, et pour les soldats, se deplaceront le cas echéant.
         \includegraphics[scale=0.5]{graph/DiagrammeSequenceCombat.png}    
     
     \section{Connexion}
