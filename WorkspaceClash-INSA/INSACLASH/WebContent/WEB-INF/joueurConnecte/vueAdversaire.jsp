@@ -16,6 +16,7 @@
 <form method="post" action="<c:url value="/gestionCombat" />">
 <input type="submit" value="Retour a la liste des joueurs " name="retour"> <br> 
 Selectionner les directions ou placer les soldats au debut de l'attaque <br>
+Par defaut attaque de tout côté <br>
 <INPUT type="checkbox" name="choix1" value="1"> EST
 <INPUT type="checkbox" name="choix2" value="2"> OUEST
 <INPUT type="checkbox" name="choix3" value="3"> NORD
