@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="0, <c:url value="/gestionGuerre" />">
+<meta http-equiv="refresh" content="2, <c:url value="/gestionGuerre" />">
 
 <link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
 <title>Page d'affichage du combat</title>
@@ -14,10 +14,10 @@
 <body>
 
 <% try{
-
+	
 			int i=(Integer) request.getAttribute("tourCourant");
 			String fichier ="/tmp/tour"+i+".txt";
-
+			out.println(i);
 			InputStream ips=new FileInputStream(fichier); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
 			BufferedReader br=new BufferedReader(ipsr);
