@@ -147,8 +147,7 @@ public class Combat{
                 while(it.hasNext()){
                     Map.Entry<TypeRessource, Integer> ent = it.next();
                     int qtite = ent.getValue();
-                    if(gains.contains(ent.getKey()))
-                        qtite += gains.get(ent.getKey());
+                    qtite += gains.get(ent.getKey());
 
                     gains.put(ent.getKey(), qtite);
                 }
