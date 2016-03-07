@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.Hashtable;
 
 import Model.HDV;
-import Model.Joueur;
 import Model.TypeRessource;
 
 public class HDVDaoImpl implements HDVDao {

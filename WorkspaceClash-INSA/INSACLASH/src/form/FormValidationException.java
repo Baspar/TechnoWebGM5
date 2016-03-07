@@ -1,7 +1,9 @@
 package form;
 
 public class FormValidationException extends Exception {
-    public FormValidationException( String message ) {
+	private static final long serialVersionUID = 1L;
+
+	public FormValidationException( String message ) {
         super( message );
     }
 }

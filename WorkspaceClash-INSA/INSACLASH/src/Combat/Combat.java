@@ -6,14 +6,10 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.Map;
 import java.util.Hashtable;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.LinkedList;
 
 import Model.TypeBatiment;
 import Model.TypeRessource;
-import Model.Ressource;
 import Model.Armee;
-import Model.Batiment;
 import Model.Village;
 
 public class Combat{
@@ -71,9 +67,6 @@ public class Combat{
                 break;
             }
         return (!resteBatiments || !resteSoldats);
-    }
-    private double distance(int x1, int y1, int x2, int y2){//DONE
-        return Math.sqrt( Math.pow((y1-y2), 2) + Math.pow((y1-y2), 2));
     }
     private void deplacementSoldat(SoldatCombat soldat){//DONE
     Vector<Integer> result = soldat.ouAller(village.getBatiments(), tailleVillage, zoom);
@@ -182,7 +175,7 @@ public class Combat{
         }
         return gains;
     }
-    private String afficherCombat(){//DONE
+ /*   private String afficherCombat(){//DONE
         String out="";
 
         out +="+";
@@ -231,7 +224,7 @@ public class Combat{
         out += "\n";
 
         return out;
-    }
+    }*/
     private String afficherCombatHTML(){//DONE
         String out="";
 

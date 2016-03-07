@@ -1,7 +1,6 @@
 package Combat;
 
 import java.util.Vector;
-import java.util.AbstractMap.SimpleEntry;
 
 import Model.Soldat;
 

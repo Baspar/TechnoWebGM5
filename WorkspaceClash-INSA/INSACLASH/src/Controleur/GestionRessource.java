@@ -16,7 +16,6 @@ import Model.MineOr;
 import Model.TypeBatiment;
 import Model.TypeRessource;
 import dao.DAOFactory;
-import dao.JoueurDao;
 import dao.VillageDao;
 
 @WebServlet("/GestionRessource")
@@ -28,12 +27,10 @@ public class GestionRessource extends HttpServlet {
 	public static final String ATT_SESSION_JOUEUR = "sessionJoueur";   
 	public static final String ATT_SESSION_MANQUE_RESSOURCE="manqueRessource";
 
-	private JoueurDao joueurDao;
 	private VillageDao villageDao;
 	
    @Override
 	public void init() throws ServletException {
-	   this.joueurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getJoueurDao();
 	   this.villageDao =( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getVillageDao();
 	}
 

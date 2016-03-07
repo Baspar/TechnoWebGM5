@@ -1,6 +1,5 @@
 package Combat;
 
-import java.util.Vector;
 
 public abstract class EntiteCombat{
     protected static int cpt=0;

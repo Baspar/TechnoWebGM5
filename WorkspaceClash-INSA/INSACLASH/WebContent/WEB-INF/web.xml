@@ -44,6 +44,10 @@
     <servlet-name>GestionGain</servlet-name>
     <servlet-class>Controleur.GestionGain</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GestionGuerre</servlet-name>
+    <servlet-class>Controleur.GestionGuerre</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
@@ -87,6 +91,10 @@
   <servlet-mapping>
     <servlet-name>GestionGain</servlet-name>
     <url-pattern>/gestionGain</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>GestionGuerre</servlet-name>
+    <url-pattern>/gestionGuerre</url-pattern>
   </servlet-mapping>
   <filter>
     <filter-name>Set Character Encoding</filter-name>

@@ -1,24 +1,13 @@
 package Controleur;
 
-import java.io.IOException;
+import java.io.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import java.util.Date;
-import java.util.Hashtable;
-
-import Combat.Combat;
-import Model.HDV;
-import Model.Joueur;
-import Model.TypeBatiment;
-import Model.TypeRessource;
-import dao.DAOFactory;
-import dao.JoueurDao;
-import dao.VillageDao;
 
 
 @WebServlet("/GestionGain")
@@ -33,11 +22,9 @@ public class GestionGain extends HttpServlet {
 	public static final String ATT_SESSION_ADVERSAIRE = "sessionAdversaire"; 
 	public static final String GAIN="gain";
 	public static final String VUE_GUERRE="/WEB-INF/joueurConnecte/vueGuerre.jsp";
-	private VillageDao villageDao;
 	
    @Override
 	public void init() throws ServletException {
-	   this.villageDao =( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getVillageDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,6 +38,24 @@ public class GestionGain extends HttpServlet {
 			this.getServletContext().getRequestDispatcher( VUE_RETOUR ).forward( request, response );
 			return;
 		} else{
+			int nbTour=0;
+			try{		
+				String fichier ="/tmp/nbTour.txt";
+				
+				InputStream ips=new FileInputStream(fichier); 
+				InputStreamReader ipsr=new InputStreamReader(ips);
+				BufferedReader br=new BufferedReader(ipsr);
+				String ligne;
+				ligne=br.readLine();
+					nbTour=Integer.parseInt(ligne);
+					br.close(); 	
+			}		
+			catch (Exception e){
+				e.printStackTrace();
+			}
+			request.setAttribute("tourCourant", 0);
+			session.setAttribute("nbTour", nbTour);
+			session.setAttribute("tourCourant", 0);
 				this.getServletContext().getRequestDispatcher( VUE_GUERRE ).forward( request, response); 
 		}
 

@@ -9,10 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import javax.servlet.http.HttpServletRequest;
-
 import Model.Joueur;
-import form.ConnexionForm;
 
 public class JoueurDaoImpl implements JoueurDao { 
     private static final String SQL_SELECT_PAR_LOGIN = "SELECT login, motDePasse FROM Joueur WHERE login = ?";

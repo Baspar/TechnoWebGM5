@@ -10,11 +10,9 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import Model.Canon;
-import Model.Caserne;
 import Model.Defense;
 import Model.Mortier;
 import Model.TypeBatiment;
-import Model.TypeSoldat;
 
 public class DefenseDaoImpl implements DefenseDao {
 	private static final String SQL_FIND_DEFENSE_ID="SELECT * FROM Defense WHERE loginJoueur=? AND id=?";

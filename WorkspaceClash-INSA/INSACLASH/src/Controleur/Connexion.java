@@ -12,9 +12,9 @@ import dao.VillageDao;
 import form.ConnexionForm;
 import dao.DAOFactory;
 import Model.Joueur;
-import Model.TypeBatiment;
 
 public class Connexion extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String ATT_JOUEUR = "joueur";
 	public static final String ATT_FORM = "form";
