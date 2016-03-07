@@ -1,5 +1,6 @@
 package Combat;
 
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Iterator;
 import java.util.Vector;
@@ -107,7 +108,6 @@ public class Combat{
         }
     }
     private void tourSoldat(){//DONE
-        System.out.println(armee.getSoldats().size());
         for(SoldatCombat soldat : armee.getSoldats()){
             if(soldat.getX()!=-1 && soldat.getY()!=-1 && !soldat.estMort()){
                 Vector<BatimentCombat> batiments = soldat.trouverBatimentAPortee(village.getBatiments(), zoom);
@@ -153,24 +153,34 @@ public class Combat{
             }
     }
     public Hashtable<TypeRessource, Integer> combattre(){//DONE
+        int nbTour=0;
         while(!estTermine()){
-            afficherCombat();
+            String aff = afficherCombat();
+            try {
+                PrintWriter writer = new PrintWriter("../WebContent/inc/recordCombat/tour"+nbTour+".txt", "UTF-8");
+                writer.println(aff);
+                writer.close();
+            } catch (Exception e) {
+                System.err.println("Problem writing to the file statsTest.txt");
+            }
+
             tourSoldat();
             tourBatiment();
             checkMorts();
-            try{
-                Thread.sleep(1000);
-            } catch (Exception e){}
+            nbTour++;
         }
-        afficherCombat();
+
+            try {
+                PrintWriter writer = new PrintWriter("../WebContent/inc/recordCombat/nbTour.txt", "UTF-8");
+                writer.println(nbTour);
+                writer.close();
+            } catch (Exception e) {
+                System.err.println("Problem writing to the file statsTest.txt");
+            }
         return gains;
     }
-    private void afficherCombat(){//DONE
+    private String afficherCombat(){//DONE
         String out="";
-
-        for(SoldatCombat sol : armee.getSoldats())
-            if(!sol.estMort() && !sol.estATuer())
-                System.out.println("("+sol.getX()+"x"+sol.getY()+")");
 
         out +="+";
         for(int i=0; i<tailleVillage+2; i++)
@@ -217,7 +227,7 @@ public class Combat{
             out += "---+";
         out += "\n";
 
-        System.out.println(out);
+        return out;
     }
     public void placerSoldats(boolean N, boolean S, boolean E, boolean W){//DONE
         int nb=0, mod;
@@ -262,7 +272,6 @@ public class Combat{
             }
         }
 
-        System.out.println("On a "+armee.getSoldats().size()+" soldats repartis en ("+nbN+","+nbS+","+nbE+","+nbW+")");
 
         Random r = new Random();
 
