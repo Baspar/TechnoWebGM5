@@ -161,7 +161,15 @@ public class Combat{
             checkMorts();
 
             if(hasMove){
-                String aff = afficherCombatHTML();
+                String aff = afficherCombat();
+                try {
+                    PrintWriter writer = new PrintWriter("/tmp/ASCIItour"+nbTour+".txt", "UTF-8");
+                    writer.println(aff);
+                    writer.close();
+                } catch (Exception e) {
+                    System.err.println("Problem writing to the file statsTest.txt");
+                }
+                aff = afficherCombat();
                 try {
                     PrintWriter writer = new PrintWriter("/tmp/tour"+nbTour+".txt", "UTF-8");
                     writer.println(aff);
