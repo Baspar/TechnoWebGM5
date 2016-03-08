@@ -17,7 +17,7 @@
 	
 			int i=(Integer) request.getAttribute("tourCourant");
 			String fichier ="/tmp/tour"+i+".txt";
-			out.println(i);
+			out.println("Tour "+i+"<br");
 			InputStream ips=new FileInputStream(fichier); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
 			BufferedReader br=new BufferedReader(ipsr);

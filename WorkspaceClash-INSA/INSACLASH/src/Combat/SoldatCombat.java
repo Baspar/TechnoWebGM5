@@ -85,11 +85,13 @@ public class SoldatCombat extends EntiteCombat{
         for(BatimentCombat batiment: batiments)
             if(!batiment.estMort() && !batiment.estATuer())
                 for(int i=0; i<zoom; i++)
-                    for(int j=0; j<zoom; j++)
-                        estLibre.get(1+batiment.getX()*zoom+i).set(1+batiment.getY()*zoom+j, false);
+                    for(int j=0; j<zoom; j++){
+                    	if(batiment.getX()!=-1)
+                    		estLibre.get(1+batiment.getX()*zoom+i).set(1+batiment.getY()*zoom+j, false);
+                    }    
 
         for(BatimentCombat batiment: batiments)
-            if(!batiment.estMort() && !batiment.estATuer())
+            if(batiment.getX()!=-1 && !batiment.estMort() && !batiment.estATuer())
                 for(int i=1; i<tailleVillage+1; i++)
                     for(int j=1; j<tailleVillage+1; j++)
                         if(getDistance(i, j) < deplacementMax && estLibre.get(i).get(j))

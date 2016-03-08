@@ -45,6 +45,7 @@ public class Combat{
         for(BatimentCombat batiment:village.getBatiments()){
             for(int i=0; i<zoom; i++)
                 for(int j=0; j<zoom; j++){
+                	if(batiment.getX()!=-1)
                     terrain.get(batiment.getX()*zoom+i+1).get(batiment.getY()*zoom+j+1).put(batiment.getId(), batiment);
                 }
         }
@@ -154,7 +155,7 @@ public class Combat{
     public Hashtable<TypeRessource, Integer> combattre(){//DONE
         int nbTour=0;
         while(!estTermine() & nbTour<120){
-            System.err.println("Tour num "+nbTour);
+            //System.err.println("Tour num "+nbTour);
             hasMove=false;
             tourSoldat();
             tourBatiment();
@@ -169,10 +170,10 @@ public class Combat{
                 } catch (Exception e) {
                     System.err.println("Problem writing to the file statsTest.txt");
                 }
-                aff = afficherCombat();
+                String aff2 = afficherCombatHTML();
                 try {
                     PrintWriter writer = new PrintWriter("/tmp/tour"+nbTour+".txt", "UTF-8");
-                    writer.println(aff);
+                    writer.println(aff2);
                     writer.close();
                 } catch (Exception e) {
                     System.err.println("Problem writing to the file statsTest.txt");
@@ -180,7 +181,7 @@ public class Combat{
                 nbTour++;
             }
         }
-        System.err.println("Fini");
+        //System.err.println("Fini");
 
         try {
             PrintWriter writer = new PrintWriter("/tmp/nbTour.txt", "UTF-8");
