@@ -59,7 +59,7 @@
 </form>
 
 <c:if test="${sessionScope.b==sessionbatiment}">
-<h1> Batiments non place </h1>
+<h1> Batiments non places </h1>
 <form method="post" action="<c:url value="/gestionVillage" />">
 <table id="mytable">
 <tr> <th id="myth"> Hotel de Ville </th> 
