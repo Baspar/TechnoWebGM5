@@ -1,0 +1,90 @@
+@startuml
+''' Titre du schema
+Title Schema E/A Base de données INSACLASH 
+
+
+
+''' Legende
+package Legende <<Frame>>{
+    class Association<<(A, orchid)>> #White{
+        +Clef
+    }
+    class Entité<<(E, lightgreen)>>{
+        +<b>Clef primaire
+        +Clef
+    }
+    Association -- Entité : Cardinalité
+}
+
+
+
+''' Association
+class estComposeDefense <<(A, orchid)>> #White
+class estComposeRessource <<(A, orchid)>> #White
+class estComposeHDV <<(A, orchid)>> #White
+class estComposeCaserne <<(A, orchid)>> #White
+
+
+
+
+
+''' Entites
+class Joueur<<(E, lightgreen)>>{
+    +<b>Login
+    +motDePasse
+}
+class Defense<<(E, lightgreen)>>{
+    +<b>id
+    +niveau
+    +typeDefense
+    +x
+    +y
+}
+class Ressource<<(E, lightgreen)>>{
+    +<b>id
+    +niveau
+    +typeRessource
+    +derniereLevee
+    +x
+    +y
+}
+class HDV<<(E, lightgreen)>>{
+    +<b>id
+    +niveau
+    +quantiteOr
+    +quantiteCharbon
+    +x
+    +y
+}
+class Caserne<<(E, lightgreen)>>{
+    +<b>id
+    +niveau
+    +nombreArcher
+    +niveauArcher
+    +nombreTrebuchet
+    +niveauTrebuchet
+    +x
+    +y
+}
+
+
+
+
+''' Liaison
+Joueur -left estComposeHDV : 1,1
+estComposeHDV -left HDV: 1,1
+
+Joueur -right estComposeCaserne : 1,1
+estComposeCaserne -right Caserne: 1,1
+
+Joueur -up- estComposeRessource : 0,n
+estComposeRessource -up- Ressource: 1,1
+
+Joueur -down- estComposeDefense : 0,n
+estComposeDefense -down- Defense: 1,1
+
+
+
+hide empty attribute
+hide method
+@enduml

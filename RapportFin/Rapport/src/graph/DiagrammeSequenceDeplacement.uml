@@ -1,0 +1,27 @@
+@startuml
+ activate Utilisateur
+            VueVillage-> Utilisateur : AffichageVillage
+            activate VueVillage
+            loop tant que selection incorrection
+            Utilisateur -> VueVillage : choixBatiment()
+            VueVillage -> VillageServlet :miseEnSessionBatiment()
+            activate VillageServlet
+            VillageServlet -> VueVillage : redirection()
+            Utilisateur -> VueVillage : choixPosition()
+            VueVillage -> VillageServlet : tentativeDeplacement()
+            end
+            VillageServlet -> VillageServlet : deplacementSession()
+            activate VillageServlet
+            deactivate VillageServlet
+            VillageServlet -> BatimentDao : deplacementBatiment()
+            activate BatimentDao
+            BatimentDao -> BDD : deplacementBDD() 
+            activate BDD
+            deactivate BDD
+            deactivate BatimentDao
+            VillageServlet -> VueVillage
+            deactivate VillageServlet
+            VueVillage -> Utilisateur : affichageVillage()
+       deactivate VueVillage  
+  deactivate Utilisateur
+@enduml

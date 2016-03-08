@@ -1,0 +1,44 @@
+@startuml
+activate Combat
+    loop not termine
+        loop tous les soldats
+            Combat -> Soldat : getSoldat(id)
+            activate Soldat
+                Soldat -> Soldat : getBatimentsAPortee()
+                activate Soldat
+                    alt batiments a portee
+                        Soldat -> Soldat : attaquer(batiments a portee)
+                        activate Soldat
+                        deactivate Soldat
+                    else pas de batiment a portee
+                        Soldat -> Soldat : deplacer()
+                        activate Soldat
+                        deactivate Soldat
+                    end
+                deactivate Soldat
+                Combat <-- Soldat
+            deactivate Soldat
+        end
+
+        loop toutes les defenses
+            Combat -> Defense : getDefense(id)
+            activate Defense
+                Defense -> Defense : getSoldatsAPortee()
+                activate Defense
+                    alt soldats a portee
+                        Defense -> Defense : attaquer(soldats a portee)
+                        activate Defense
+                        deactivate Defense
+                    end
+                deactivate Defense
+                Combat <-- Defense
+    activate Combat
+    deactivate Combat
+            deactivate Defense
+        end
+        Combat -> Combat : checkMort()
+        activate Combat
+        deactivate Combat
+    end
+deactivate Combat
+@enduml
