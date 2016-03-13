@@ -1,7 +1,10 @@
-all: graphs texCDC mvdoc pseudoclean
+UML=$(wildcard src/graph/*.uml)
+PNG=$(UML:.uml=.png)
 
-graphs:
-	for i in src/graph/*.uml; do echo $$i; java -jar src/graph/plantuml.jar $$i; done
+all: $(PNG) texCDC mvdoc pseudoclean
+
+%.png: %.uml
+	java -jar src/graph/plantuml.jar $<
 
 toggle:
 	sed -i 's/Rapport/Pré-Rapport/g; s/Pré-Pré-//g' src/ressources/vocabulaire/vocabulaire.sty
